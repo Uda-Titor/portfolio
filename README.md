@@ -33,21 +33,25 @@ Ruby 2.6.5p114 rails5.2.4.3
 - お知らせ掲示板機能（管理者がお知らせを書くことができます）
 - コメント機能といいね機能はページ遷移なしで実行可能
 
-##カタログ設計<br>
+## カタログ設計<br>
 https://docs.google.com/spreadsheets/d/1SCTHp8nXC_ieGuNbFEBg1TDstzUigWyWO77LK7MQDDg/edit#gid=0
 
-##画面遷移図<br>
+## 画面遷移図<br>
 https://docs.google.com/spreadsheets/d/18N2iG-viN3q7usR3FhspYlFYF2ObiG7418x0PUsB9Ys/edit#gid=0
 
-##画面ワイヤーフレーム<br>
+## 画面ワイヤーフレーム<br>
 https://docs.google.com/spreadsheets/d/1i6w_WKBIz_PW9PrWvviHsScHt6MfP3jJl5EMSp1-7rg/edit#gid=0
 
-##使用予定gem<br>
+## データテーブル　ER図<br>
+https://docs.google.com/spreadsheets/d/1mrwzfg59_YZ_7o_6FQ5d5z4Qe7je0MNfFt-0vSVqpak/edit#gid=0
+
+
+## 使用予定gem<br>
 carrierwave<br>
 ・mini_magik<br>
 ・device<br>
 ・ransack<br>
 ・Geocoder<br>
 
-##使用予定API<br>
+## 使用予定API<br>
 ・Google Maps API
