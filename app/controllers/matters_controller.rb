@@ -3,7 +3,8 @@ class MattersController < ApplicationController
 
 
   def index
-    @matters = Matter.all
+    @search = Matter.ransack(params[:q])
+    @matters = @search.result
   end
 
   def show
