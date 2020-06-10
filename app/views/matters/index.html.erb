@@ -40,7 +40,7 @@
       <tr>
         <td><%= matter.title %></td>
         <td><%= matter.status %></td>
-        <td><%= matter.priority %></td>
+        <td id='priority_row'><%= matter.priority %></td>
         <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
         <td><%= link_to 'Show', matter %></td>
         <td><%= link_to 'Edit', edit_matter_path(matter) %></td>
