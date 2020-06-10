@@ -4,8 +4,16 @@
 <%= search_form_for @search do |f| %>
   <%= f.label :title_cont, 'タイトル' %>
   <%= f.text_field :title_cont %>
+
   <%= f.label :status_eq, 'ステータス' %>
   <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
+
+  <%= f.label :created_at_gteq, '日付' %>
+  <%= f.date_field :created_at_gteq %>
+
+  <%= f.label :created_at_lteq, '〜' %>
+  <%= f.date_field :created_at_lteq %>
+
   <div>
     <%= f.submit '検索する' %>
   </div>
@@ -33,7 +41,7 @@
         <td><%= matter.title %></td>
         <td><%= matter.status %></td>
         <td><%= matter.priority %></td>
-        <td><%= matter.created_at %></td>
+        <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
         <td><%= link_to 'Show', matter %></td>
         <td><%= link_to 'Edit', edit_matter_path(matter) %></td>
         <td><%= link_to 'Destroy', matter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
