@@ -1,8 +1,6 @@
 
 ActiveRecord::Schema.define(version: 2020_06_09_015224) do
->>>>>>> issues#2
 
-  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "matters", force: :cascade do |t|

@@ -1,20 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Matters</h1>
+<%= search_form_for @search do |f| %>
+  <%= f.label :title_cont, 'タイトル' %>
+  <%= f.text_field :title_cont %>
+
+  <%= f.label :status_eq, 'ステータス' %>
+  <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
+
+  <%= f.label :created_at_gteq, '日付' %>
+  <%= f.date_field :created_at_gteq %>
+
+  <%= f.label :created_at_lteq, '〜' %>
+  <%= f.date_field :created_at_lteq %>
+
+  <div>
+    <%= f.submit '検索する' %>
+  </div>
+<% end %>
+<%= search_form_for @search do |f| %>
+<div>
+  <%= f.submit 'リセット' %>
+</div>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Content</th>
-      <th>Address</th>
-      <th>Latitude</th>
-      <th>Longtitude</th>
       <th>Status</th>
-      <th>Priority</th>
-      <th>Start_date</th>
-      <th>Completion_date</th>
-      <th>Remark</th>
+      <th><%= sort_link(@search, :priority, '優先順位') %></th>
+      <th><%= sort_link(@search, :created_at, '作成日時') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,15 +39,9 @@
     <% @matters.each do |matter| %>
       <tr>
         <td><%= matter.title %></td>
-        <td><%= matter.content %></td>
-        <td><%= matter.address %></td>
-        <td><%= matter.latitude %></td>
-        <td><%= matter.longitude %></td>
         <td><%= matter.status %></td>
-        <td><%= matter.priority %></td>
-        <td><%= matter.start_date %></td>
-        <td><%= matter.completion_date %></td>
-        <td><%= matter.remark %></td>
+        <td id='priority_row'><%= matter.priority %></td>
+        <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
         <td><%= link_to 'Show', matter %></td>
         <td><%= link_to 'Edit', edit_matter_path(matter) %></td>
         <td><%= link_to 'Destroy', matter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
