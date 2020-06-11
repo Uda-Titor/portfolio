@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'ここ危険！', type: :system do
+RSpec.describe '案件周りの操作確認', type: :system do
   describe '案件一覧画面' do
     context '案件を作成した場合' do
       it '作成済みの案件が表示される' do
