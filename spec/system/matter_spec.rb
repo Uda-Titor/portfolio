@@ -1,18 +1,25 @@
 require 'rails_helper'
 RSpec.describe '案件周りの操作確認', type: :system do
+  before do
+    FactoryBot.create(:user)
+    visit new_user_session_path
+    fill_in 'Email', with: 'user@example.com'
+    fill_in 'Password', with: '00000000'
+    click_on 'Log in'
+  end
   describe '案件一覧画面' do
     context '案件を作成した場合' do
       it '作成済みの案件が表示される' do
-       new_matter = FactoryBot.create(:test1)
+       new_matter = FactoryBot.create(:test1, user_id: 1)
        visit matters_path
        expect(page).to have_content 'test1_title'
       end
     end
     context '検索をした場合' do
       before do
-        FactoryBot.create(:test1)
-        FactoryBot.create(:test2)
-        FactoryBot.create(:test3)
+        FactoryBot.create(:test1, user_id: 1)
+        FactoryBot.create(:test2, user_id: 1)
+        FactoryBot.create(:test3, user_id: 1)
       end
       it 'タイトルで検索できる' do
         visit matters_path
@@ -51,7 +58,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
   describe '案件詳細画面' do
      context '任意の案件詳細画面に遷移した場合' do
        it '該当案件の内容が表示されたページに遷移する' do
-        matter = FactoryBot.create(:test1)
+        matter = FactoryBot.create(:test1, user_id: 1)
         visit matters_path
         click_on "Show"
         expect(page).to have_content 'test1_title'
