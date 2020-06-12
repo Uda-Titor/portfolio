@@ -1,9 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_destroy :check_destroy
+  before_update :check_update
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)
     params.delete(:current_password)
 
@@ -15,5 +17,14 @@ class User < ApplicationRecord
     result = update_attributes(params, *options)
     clean_up_passwords
     result
+  end
+
+  private
+  def check_destroy
+    throw :abort if User.where(admin: true).count == 1 && admin == true
+  end
+
+  def check_update
+    throw :abort if User.where(admin: true).count == 1 && admin == false
   end
 end
