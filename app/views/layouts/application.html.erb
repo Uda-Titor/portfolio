@@ -12,6 +12,10 @@
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
       <li><%= link_to current_user.name, users_show_path(current_user.id) %></li>
+      <% if current_user.admin? %>
+          <li><%= link_to 'ユーザ一覧', admin_users_path %></li>
+          <li><%= link_to '案件一覧', admin_matters_path %></li>
+      <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
       <li><%= link_to 'サインアップ', new_user_registration_path %></li>

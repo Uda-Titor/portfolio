@@ -18,7 +18,7 @@ class MattersController < ApplicationController
   end
 
   def create
-    @matter = Matter.new(matter_params)
+    @matter = current_user.matters.build(matter_params)
 
     if @matter.save
       redirect_to @matter, notice: 'Matter was successfully created.'
