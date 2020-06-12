@@ -36,4 +36,8 @@ class Admin::UsersController < ApplicationController
   def set_user
      @user = User.find(params[:id])
   end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :name, :user_image, :phone_number, :user_address, :remark)
+  end
 end

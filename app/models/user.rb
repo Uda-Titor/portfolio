@@ -1,6 +1,6 @@
 class User < ApplicationRecord
+  #管理者がいなくならないようにコールバック
   before_destroy :check_destroy
-  before_update :check_update
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -21,10 +21,7 @@ class User < ApplicationRecord
 
   private
   def check_destroy
-    throw :abort if User.where(admin: true).count == 1 && admin == true
+    throw :abort if User.where(admin: true).count == 1 && self.admin == true
   end
 
-  def check_update
-    throw :abort if User.where(admin: true).count == 1 && admin == false
-  end
 end
