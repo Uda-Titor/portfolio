@@ -1,28 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Matters</h1>
-<%= search_form_for @search do |f| %>
-  <%= f.label :title_cont, 'タイトル' %>
-  <%= f.text_field :title_cont %>
-
-  <%= f.label :status_eq, 'ステータス' %>
-  <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
-
-  <%= f.label :created_at_gteq, '日付' %>
-  <%= f.date_field :created_at_gteq %>
-
-  <%= f.label :created_at_lteq, '〜' %>
-  <%= f.date_field :created_at_lteq %>
-
-  <div>
-    <%= f.submit '検索する' %>
-  </div>
-<% end %>
-<%= search_form_for @search do |f| %>
-<div>
-  <%= f.submit 'リセット' %>
-</div>
-<% end %>
+<%= render 'matter_search', search: @search %>
 
 <table>
   <thead>
@@ -34,7 +13,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @matters.each do |matter| %>
       <tr>
@@ -48,3 +26,4 @@
       </tr>
     <% end %>
   </tbody>
+</table>
