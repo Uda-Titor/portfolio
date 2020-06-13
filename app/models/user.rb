@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :matters
-
+  has_many :favorites, dependent: :destroy
 
   #user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)

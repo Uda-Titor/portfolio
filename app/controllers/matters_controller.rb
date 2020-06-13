@@ -8,6 +8,7 @@ class MattersController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(matter_id: @matter.id)
   end
 
   def new
