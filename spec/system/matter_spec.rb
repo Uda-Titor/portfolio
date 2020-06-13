@@ -2,6 +2,7 @@ require 'rails_helper'
 RSpec.describe '案件周りの操作確認', type: :system do
   before do
     FactoryBot.create(:user)
+    FactoryBot.create(:admin)
     visit new_user_session_path
     fill_in 'Email', with: 'user@example.com'
     fill_in 'Password', with: '00000000'
@@ -62,6 +63,16 @@ RSpec.describe '案件周りの操作確認', type: :system do
         visit matters_path
         click_on "Show"
         expect(page).to have_content 'test1_title'
+      end
+     end
+     context '任意の案件詳細画面に遷移した場合' do
+       it '該当案件にいいねができる' do
+        matter = FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+        click_on "Show"
+        click_on "お気に入りする"
+        click_on "Show"
+        expect(page).to have_content 'お気に入り解除する'
       end
      end
   end
