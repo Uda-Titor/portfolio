@@ -75,5 +75,40 @@ RSpec.describe '案件周りの操作確認', type: :system do
         expect(page).to have_content 'お気に入り解除する'
       end
      end
+     context '任意の案件詳細画面に遷移した場合' do
+       it 'コメントができる' do
+        matter = FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+        click_on "Show"
+        fill_in 'Content', with: 'さすがです'
+        click_on "登録する"
+        expect(page).to have_content 'さすがです'
+      end
+     end
+     context '任意の案件詳細画面に遷移した場合' do
+       it 'コメント後、コメントを削除できる' do
+        matter = FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+        click_on "Show"
+        fill_in 'Content', with: 'さすがです'
+        click_on "登録する"
+        click_on "コメント削除"
+        page.accept_confirm '本当に削除しますか?'
+        expect(page).not_to have_content 'さすがです'
+      end
+     end
+     context '任意の案件詳細画面に遷移した場合' do
+       it 'コメント後、コメントを編集できる' do
+        matter = FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+        click_on "Show"
+        fill_in 'Content', with: 'さすがです'
+        click_on "登録する"
+        click_on "コメント編集"
+        fill_in "comment_content_#{matter.id}", with: 'すばらしいです'
+        click_on "更新する"
+        expect(page).to have_content 'すばらしいです'
+      end
+     end
   end
 end

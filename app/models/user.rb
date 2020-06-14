@@ -5,7 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :matters
+  has_many :matters, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
   #user編集時にcurrent_passwordを入れないようにする処理関係

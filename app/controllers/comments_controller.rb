@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def create
     @matter = Matter.find(params[:matter_id])
     @comment = @matter.comments.build(comment_params)
+    @comment.user = current_user
     # クライアント要求に応じてフォーマットを変更
     respond_to do |format|
       if @comment.save
