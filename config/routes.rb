@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }#current_passwordを入れず、編集する
   get "users/show" => "users#show"
 
-  resources :matters
+  resources :matters do
+    resources :comments
+  end
   resources :favorites, only: [:create, :destroy]
 
   namespace :admin do

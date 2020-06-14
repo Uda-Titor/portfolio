@@ -9,6 +9,8 @@ class MattersController < ApplicationController
 
   def show
     @favorite = current_user.favorites.find_by(matter_id: @matter.id)
+    @comments = @matter.comments
+    @comment = @matter.comments.build
   end
 
   def new
