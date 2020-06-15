@@ -32,8 +32,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :longtitude %>
-    <%= form.text_field :longitude, {id: "target_longtitude"} %>
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, {id: "target_longitude"} %>
   </div>
 
   <div class="field">
@@ -92,8 +92,8 @@
             function(position) {
               // 緯度・経度を変数に格納
               var latitude = position.coords.latitude
-              var longtitude = position.coords.longitude
-              var mapLatLng = new google.maps.LatLng(latitude, longtitude);
+              var longitude = position.coords.longitude
+              var mapLatLng = new google.maps.LatLng(latitude, longitude);
               // マップオプションを変数に格納
               var mapOptions = {
                 zoom : 15,          // 拡大倍率
@@ -114,7 +114,7 @@
               google.maps.event.addListener(marker, 'dragend', function(e) {
                 //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
                 document.getElementById( "target_latitude" ).value = e.latLng.lat(),
-                document.getElementById( "target_longtitude" ).value = e.latLng.lng()
+                document.getElementById( "target_longitude" ).value = e.latLng.lng()
               });
             },
             // 取得失敗した場合

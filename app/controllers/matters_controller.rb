@@ -50,6 +50,6 @@ class MattersController < ApplicationController
 
 
   def matter_params
-    params.require(:matter).permit(:title, :content, :address, :latitude, :longtitude, :status, :priority, :start_date, :completion_date, :remark, images: [])
+    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_date, :completion_date, :remark, images: [])
   end
 end
