@@ -28,12 +28,12 @@
 
   <div class="field">
     <%= form.label :latitude %>
-    <%= form.text_field :latitude %>
+    <%= form.text_field :latitude, {id: "target_latitude"} %>
   </div>
 
   <div class="field">
-    <%= form.label :longtitude %>
-    <%= form.text_field :longitude %>
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, {id: "target_longitude"} %>
   </div>
 
   <div class="field">
@@ -70,3 +70,77 @@
     <%= form.submit %>
   </div>
 <% end %>
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
+}
+</style>
+</head>
+
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<script>
+  var map;
+  // 現在地取得処理
+      function initMap() {
+        // Geolocation APIに対応している
+        if (navigator.geolocation) {
+          // 現在地を取得
+          navigator.geolocation.getCurrentPosition(
+            // 取得成功した場合
+            function(position) {
+              // 緯度・経度を変数に格納
+              var latitude = position.coords.latitude
+              var longitude = position.coords.longitude
+              var mapLatLng = new google.maps.LatLng(latitude, longitude);
+              // マップオプションを変数に格納
+              var mapOptions = {
+                zoom : 15,          // 拡大倍率
+                center : mapLatLng  // 緯度・経度
+              };
+              // マップオブジェクト作成
+              var map = new google.maps.Map(
+                document.getElementById("map"), // マップを表示する要素
+                mapOptions         // マップオプション
+              );
+              //　マップにマーカーを表示する
+              var marker = new google.maps.Marker({
+                map : map,
+                draggable: true,            // 対象の地図オブジェクト
+                position : mapLatLng   // 緯度・経度
+              });
+              //マーカーのドロップ（ドラッグ終了）時のイベント
+              google.maps.event.addListener(marker, 'dragend', function(e) {
+                //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+                document.getElementById( "target_latitude" ).value = e.latLng.lat(),
+                document.getElementById( "target_longitude" ).value = e.latLng.lng()
+              });
+            },
+            // 取得失敗した場合
+            function(error) {
+              // エラーメッセージを表示
+              switch(error.code) {
+                case 1: // PERMISSION_DENIED
+                  alert("位置情報の利用が許可されていません");
+                  break;
+                case 2: // POSITION_UNAVAILABLE
+                  alert("現在位置が取得できませんでした");
+                  break;
+                case 3: // TIMEOUT
+                  alert("タイムアウトになりました");
+                  break;
+                default:
+                  alert("その他のエラー(エラーコード:"+error.code+")");
+                  break;
+              }
+            }
+          );
+        // Geolocation APIに対応していない
+        } else {
+          alert("この端末では位置情報が取得できません");
+        }
+      }
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['APIKEY']%>&callback=initMap" async defer></script>
