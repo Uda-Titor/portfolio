@@ -8,8 +8,8 @@ class CreateMatters < ActiveRecord::Migration[5.2]
       t.float :longitude
       t.string :status
       t.integer :priority
-      t.date :start_date
-      t.date :completion_date
+      t.date :start_time
+      t.date :end_time
       t.text :remark
 
       t.timestamps
