@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
+#カレンダー
+gem "simple_calendar", "~> 2.0"
+#グラフ
+gem "chartkick"
+gem 'groupdate'
 #画像アップロード
 gem 'carrierwave'
 gem 'mini_magick'

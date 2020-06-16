@@ -1,6 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Matters</h1>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">グラフ</a></li>
+  <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">カレンダー</a></li>
+  <li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">地図</a></li>
+</ul>
+
+<div class="tab-content mt-3" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+    <%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
+    <%= month_calendar events: @matters do |date, matters| %>
+      <%= date %>
+
+      <% matters.each do |matter| %>
+        <div>
+          <%= matter.title %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
+    <div id="map"></div>
+  </div>
+</div>
+
+
+
+
 <%= render 'matter_search', search: @search %>
 
 <table>
@@ -27,3 +57,48 @@
     <% end %>
   </tbody>
 </table>
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
+}
+</style>
+<body>
+<!-- 地図を表示する div 要素（id="map"）-->
+<script>
+  var map;
+function initMap() {
+  var myLatlng = new google.maps.LatLng(35.893867,139.633587);
+ //インスタンスを作成
+ map = new google.maps.Map(document.getElementById('map'), {
+  //地図のオプション
+  //初期のズームレベル
+  zoom: 12,
+  //地図の中心点
+  center: myLatlng
+ });
+ //マーカーの初期プロパティを指定
+ <% @matters.each do |matter| %>
+      (function(){
+        var contentString = "<%= matter.title %>";
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position:{lat: <%= matter.latitude %>, lng: <%= matter.longitude %>},
+            map: map,
+            title: contentString
+        });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+       })();
+      <% end %>
+}
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['APIKEY']%>&callback=initMap" async defer></script>
+</body>

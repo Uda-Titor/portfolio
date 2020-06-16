@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require jquery/dist/jquery.js
 //= require bootstrap/dist/js/bootstrap.min
+//= require chartkick
+//= require Chart.bundle
 //= require_tree .
