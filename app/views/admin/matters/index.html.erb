@@ -1,17 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Matters</h1>
-<%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">グラフ</a></li>
+  <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">カレンダー</a></li>
+  <li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">地図</a></li>
+</ul>
 
-<%= month_calendar events: @matters do |date, matters| %>
-  <%= date %>
+<div class="tab-content mt-3" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+    <%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
+    <%= month_calendar events: @matters do |date, matters| %>
+      <%= date %>
 
-  <% matters.each do |matter| %>
-    <div>
-      <%= matter.title %>
-    </div>
-  <% end %>
-<% end %>
+      <% matters.each do |matter| %>
+        <div>
+          <%= matter.title %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
+    <div id="map"></div>
+  </div>
+</div>
+
+
+
 
 <%= render 'matter_search', search: @search %>
 
@@ -47,7 +65,7 @@
 }
 </style>
 <body>
-<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<!-- 地図を表示する div 要素（id="map"）-->
 <script>
   var map;
 function initMap() {
