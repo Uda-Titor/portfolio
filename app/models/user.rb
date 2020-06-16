@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   #管理者がいなくならないようにコールバック
-  before_destroy :check_destroy
+  #before_destroy :check_destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  mount_uploader :user_image, ImageUploader
   #user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)
     params.delete(:current_password)

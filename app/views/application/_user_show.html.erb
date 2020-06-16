@@ -1,8 +1,10 @@
-
 <h1>about me</h1>
 
-<h3>ユーザ画像</h3>
-<%= user.user_image %>
+<% if user.user_image? %>
+  <%= image_tag user.user_image.url, class: 'icon' %>
+<% else %>
+  <image src="/assets/default.png" class="icon" alt="ユーザーアイコン" %>
+<% end %>
 <h3>ユーザー名</h3>
 <%= user.name %>
 <h3>メールアドレス</h3>
