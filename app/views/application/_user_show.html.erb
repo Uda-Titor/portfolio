@@ -3,7 +3,7 @@
 <% if user.user_image? %>
   <%= image_tag user.user_image.url, class: 'icon' %>
 <% else %>
-  <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+  <i class="fas fa-user-circle fa-3x" aria-hidden="true"></i>
 <% end %>
 <h3>ユーザー名</h3>
 <%= user.name %>

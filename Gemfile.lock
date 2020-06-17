@@ -104,8 +104,8 @@ GEM
       factory_bot (~> 5.2.0)
       railties (>= 4.2.0)
     ffi (1.13.1)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
+    font-awesome-sass (5.13.0)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     groupdate (5.0.0)
@@ -227,6 +227,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -285,7 +287,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot_rails
-  font-awesome-rails
+  font-awesome-sass
   groupdate
   letter_opener_web
   listen (>= 3.0.5, < 3.2)

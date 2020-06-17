@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 #アイコンデフォルト
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 #カレンダー
 gem "simple_calendar", "~> 2.0"
 #グラフ
