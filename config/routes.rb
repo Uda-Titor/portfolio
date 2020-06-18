@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :matters do
     resources :comments
+    resource :favorites, only: [:create, :destroy]
   end
-  resources :favorites, only: [:create, :destroy]
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
