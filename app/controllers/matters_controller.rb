@@ -1,6 +1,6 @@
 class MattersController < ApplicationController
   before_action :set_matter, only: [:show, :edit, :update, :destroy]
-  before_action :user_confirmation, only: [:show, :edit, :update, :destroy]
+  before_action :user_confirmation, only: [:edit, :update, :destroy]
 
   def index
     @search = Matter.ransack(params[:q])
