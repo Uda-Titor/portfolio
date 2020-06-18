@@ -1,6 +1,6 @@
 class MattersController < ApplicationController
   before_action :set_matter, only: [:show, :edit, :update, :destroy]
-
+  before_action :user_confirmation, only: [:show, :edit, :update, :destroy]
 
   def index
     @search = Matter.ransack(params[:q])
@@ -58,5 +58,9 @@ class MattersController < ApplicationController
     params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [])
   end
 
-  
+  def user_confirmation
+    redirect_to root_path unless @matter.user.id == current_user || current_user.admin?
+  end
+
+
 end
