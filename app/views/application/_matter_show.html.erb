@@ -16,6 +16,22 @@
 </p>
 
 <p>
+  <strong>Priority:</strong>
+  <%= matter.priority %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= matter.status %>
+</p>
+
+<% if matter.images.attached? %>
+  <% matter.images.each do |image| %>
+    <%= image_tag image.variant(resize:'50x50').processed %>
+  <% end %>
+<% end %>
+
+<p>
   <strong>Latitude:</strong>
   <%= matter.latitude %>
 </p>
@@ -25,29 +41,21 @@
   <%= matter.longitude %>
 </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= matter.status %>
-</p>
+<% if current_user.admin? %>
+  <p>
+    <strong>StartDate:</strong>
+    <%= matter.start_time %>
+  </p>
 
-<p>
-  <strong>Priority:</strong>
-  <%= matter.priority %>
-</p>
+  <p>
+    <strong>EndDate:</strong>
+    <%= matter.end_time %>
+  </p>
 
-<p>
-  <strong>StartDate:</strong>
-  <%= matter.start_time %>
-</p>
-
-<p>
-  <strong>CompletionDate:</strong>
-  <%= matter.end_time %>
-</p>
-
-<% if matter.images.attached? %>
-  <% matter.images.each do |image| %>
-    <%= image_tag image.variant(resize:'50x50').processed %>
-  <% end %>
+  <p>
+    <strong>Remark:</strong>
+    <%= matter.remark %>
+  </p>
 <% end %>
+
 <br>
