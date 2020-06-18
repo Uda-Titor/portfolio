@@ -27,12 +27,7 @@
     <div id="map"></div>
   </div>
 </div>
-
-
-
-
-<%= render 'matter_search', search: @search %>
-
+<p>今日の工事開始予定案件</p>
 <table>
   <thead>
     <tr>
@@ -45,15 +40,49 @@
   </thead>
   <tbody>
     <% @matters.each do |matter| %>
-      <tr>
-        <td><%= matter.title %></td>
-        <td><%= matter.status %></td>
-        <td id='priority_row'><%= matter.priority %></td>
-        <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
-        <td><%= link_to 'Show', admin_matter_path(matter.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_matter_path(matter.id) %></td>
-        <td><%= link_to 'Destroy', admin_matter_path(matter.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if matter.end_time.present? %>
+        <% if matter.start_time.strftime('%Y/%m/%d') == Date.today.strftime('%Y/%m/%d') %>
+          <tr>
+            <td><%= matter.title %></td>
+            <td><%= matter.status %></td>
+            <td id='priority_row'><%= matter.priority %></td>
+            <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to 'Show', admin_matter_path(matter.id) %></td>
+            <td><%= link_to 'Edit', edit_admin_matter_path(matter.id) %></td>
+            <td><%= link_to 'Destroy', admin_matter_path(matter.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<p>今日の工事完了予定案件</p>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th><%= sort_link(@search, :priority, '優先順位') %></th>
+      <th><%= sort_link(@search, :created_at, '作成日時') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @matters.each do |matter| %>
+      <% if matter.end_time.present? %>
+        <% if matter.end_time.strftime('%Y/%m/%d') == Date.today.strftime('%Y/%m/%d') %>
+          <tr>
+            <td><%= matter.title %></td>
+            <td><%= matter.status %></td>
+            <td id='priority_row'><%= matter.priority %></td>
+            <td><%= matter.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to 'Show', admin_matter_path(matter.id) %></td>
+            <td><%= link_to 'Edit', edit_admin_matter_path(matter.id) %></td>
+            <td><%= link_to 'Destroy', admin_matter_path(matter.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>
