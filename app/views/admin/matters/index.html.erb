@@ -21,6 +21,7 @@
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
     <%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
+    <%= line_chart Matter.group_by_day(:created_at, format: "%a").count %>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
     <div id="map"></div>
