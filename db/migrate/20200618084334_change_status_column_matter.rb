@@ -1,5 +1,5 @@
 class ChangeStatusColumnMatter < ActiveRecord::Migration[5.2]
-  def up
+  def upz
     change_column :matters, :status, :string, default: "未着手"
   end
 
