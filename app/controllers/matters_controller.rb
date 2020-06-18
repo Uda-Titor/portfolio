@@ -9,8 +9,13 @@ class MattersController < ApplicationController
 
   def show
     @favorite = current_user.favorites.find_by(matter_id: @matter.id)
+    if @matter.latest_sender != current_user.name && (@matter.user_id == current_user.id || current_user.admin == true)
+      @matter.latest_sender = nil
+      @matter.save
+    end
     @comments = @matter.comments
     @comment = @matter.comments.build
+
   end
 
   def new
