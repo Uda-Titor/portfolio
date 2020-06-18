@@ -1,6 +1,8 @@
 
 <%= render 'matter_show', matter: @matter %>
-
+<% if @matter.latitude.present? %>
+  <div id="map"></div>
+<% end %>
 <style>
 #map {
   height: 400px;
@@ -8,7 +10,7 @@
 }
 </style>
 
-<div id="map"></div>
+
 <script>
   var map;
 function initMap() {

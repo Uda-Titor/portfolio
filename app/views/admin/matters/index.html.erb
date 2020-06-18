@@ -109,6 +109,7 @@ function initMap() {
  });
  //マーカーの初期プロパティを指定
  <% @matters.each do |matter| %>
+  <% if matter.latitude.present? %>
       (function(){
         var contentString = "<%= matter.title %>";
         var infowindow = new google.maps.InfoWindow({
@@ -125,7 +126,8 @@ function initMap() {
           infowindow.open(map, marker);
         });
        })();
-      <% end %>
+    <% end %>
+  <% end %>
 }
 google.maps.event.addDomListener(window, 'load', initMap);
 </script>
