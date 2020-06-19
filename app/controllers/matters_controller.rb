@@ -59,7 +59,7 @@ class MattersController < ApplicationController
   end
 
   def user_confirmation
-    redirect_to root_path unless @matter.user.id == current_user || current_user.admin?
+    redirect_to root_path unless @matter.user_id == current_user.id || current_user.admin?
   end
 
 
