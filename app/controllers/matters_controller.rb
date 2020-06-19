@@ -4,7 +4,7 @@ class MattersController < ApplicationController
 
   def index
     @search = Matter.ransack(params[:q])
-    @matters = @search.result
+    @matters = @search.result.page(params[:page])
   end
 
   def show
