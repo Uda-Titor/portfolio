@@ -5,6 +5,8 @@ class MattersController < ApplicationController
   def index
     @search = Matter.ransack(params[:q])
     @matters = @search.result.page(params[:page])
+    @informations = Information.all
+    @information = Information.new
   end
 
   def show

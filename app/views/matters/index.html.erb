@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<div id="informations_area">
+    <%= render partial: 'informations/index', locals: { informations: @informations } %>
+</div>
+<%= render partial: 'informations/form', locals: { information: @information } %>
+
 <h1>Matters</h1>
 <div class="container">
   <div class="row">
