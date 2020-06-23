@@ -1,4 +1,5 @@
-<%= form_with model: information, url: informations_path  do |form| %>
+
+  <%= form_with model: information, url: informations_path  do |form| %>
   <% if information.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(information.errors.count, "error") %> prohibited this information from being saved:</h2>
@@ -9,9 +10,11 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <%= form.label :content %>
+      <%= form.text_area :content, class: 'form-control'  %>
+    </div>
   </div>
   <div class="actions">
     <%= form.submit %>

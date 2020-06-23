@@ -6,8 +6,10 @@
   white-space: nowrap;
 }
 
-.row {
+.show {
   border-bottom: 1px solid #CCC;
-  margin: 0 0 0 0;
-  padding: 2rem 0 2rem 0;
+}
+
+#information {
+  border: ridge 2px  #808080;
 }

@@ -1,12 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<div id="informations_area">
-    <%= render partial: 'informations/index', locals: { informations: @informations } %>
-</div>
-<%= render partial: 'informations/form', locals: { information: @information } %>
-
-<h1>Matters</h1>
 <div class="container">
+  <h3>お知らせ</h3>
+  <div class="row rounded p-2" id = "information">
+    <div id="informations_area">
+        <%= render partial: 'informations/index', locals: { informations: @informations } %>
+    </div>
+  </div>
+  <% if current_user.admin? %>
+    <%= render partial: 'informations/form', locals: { information: @information } %>
+  <% end %>
+
   <div class="row">
     <div class="col-md-3 bg-light">
       <%= render 'matter_search', search: @search %>
