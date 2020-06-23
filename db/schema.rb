@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_072149) do
+ActiveRecord::Schema.define(version: 2020_06_16_025618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,19 +53,13 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "information", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "matters", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.string "status", default: "未着手"
+    t.string "status"
     t.integer "priority"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -73,7 +67,6 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.string "latest_sender"
     t.index ["user_id"], name: "index_matters_on_user_id"
   end
 

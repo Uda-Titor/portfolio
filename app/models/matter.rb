@@ -6,8 +6,4 @@ class Matter < ApplicationRecord
   has_many :comments, dependent: :destroy
   #画像アップロード
   has_many_attached :images
-
-  def favorited_by?(user)
-    favorites.where(user_id: user.id).present?
-  end
 end

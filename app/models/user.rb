@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   #管理者がいなくならないようにコールバック
-  before_destroy :check_destroy
+  #before_destroy :check_destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

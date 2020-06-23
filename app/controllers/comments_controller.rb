@@ -7,9 +7,6 @@ class CommentsController < ApplicationController
     # クライアント要求に応じてフォーマットを変更
     respond_to do |format|
       if @comment.save
-        #最後の送信者の名前を登録
-        @matter.latest_sender = current_user.name
-        @matter.save
         format.js { render :index }
       else
         format.html { redirect_to matter_path(@matter), notice: '投稿できませんでした...' }

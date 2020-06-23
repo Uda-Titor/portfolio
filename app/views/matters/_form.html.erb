@@ -10,144 +10,76 @@
       </ul>
     </div>
   <% end %>
-<div class="container bg-light">
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-10">
-        <%= form.label :title %>
-        <%= form.text_field :title, class: 'form-control', placeholder: "タイトルを入れてください" %>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-10">
-        <%= form.label :content %>
-        <%= form.text_area :content, class: 'form-control', placeholder: "要望内容を書いてください" %>
-      </div>
-    </div>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
 
-    <div class="form-group">
-      <%= form.label :images %>
-      <div id="file" class="input-group">
-        <div class="custom-file">
-          <%= form.file_field :images, multiple: true, id: "customfile" , class: 'custom-file-input' %>
-          <label class="custom-file-label" for="customfile" data-browse="参照">ファイル選択...</label>
-        </div>
-        <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary reset">取消</button>
-        </div>
-      </div>
-    </div>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
 
-    <script>
-      $('.custom-file-input').on('change', handleFileSelect);
-function handleFileSelect(evt) {
-        $('#preview').remove();// 繰り返し実行時の処理
-        $(this).parents('.input-group').after('<div id="preview"></div>');
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
 
-    var files = evt.target.files;
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude, {id: "target_latitude"} %>
+  </div>
 
-    for (var i = 0, f; f = files[i]; i++) {
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, {id: "target_longitude"} %>
+  </div>
 
-        var reader = new FileReader();
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
+  </div>
 
-        reader.onload = (function(theFile) {
-            return function(e) {
-                if (theFile.type.match('image.*')) {
-                    var $html = ['<div class="d-inline-block mr-1 mt-1"><img class="img-thumbnail" src="', e.target.result,'" title="', escape(theFile.name), '" style="height:100px;" /><div class="small text-muted text-center">', escape(theFile.name),'</div></div>'].join('');// 画像では画像のプレビューとファイル名の表示
-                } else {
-                    var $html = ['<div class="d-inline-block mr-1"><span class="small">', escape(theFile.name),'</span></div>'].join('');//画像以外はファイル名のみの表示
-                }
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, [:高, :中, :低 ]  %>
+  </div>
 
-                $('#preview').append($html);
-            };
-        })(f);
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.date_field :start_time %>
+  </div>
 
-        reader.readAsDataURL(f);
-    }
-    $(this).next('.custom-file-label').html(+ files.length + '個のファイルを選択しました');
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.date_field :end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remark %>
+    <%= form.text_area :remark %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
 }
+</style>
+</head>
 
-//ファイルの取消
-$('.reset').click(function(){
-    $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
-    $('#preview').remove();
-    $('.custom-file-input').val('');
-})
-    </script>
-
-    <div class="form-row">
-      <div class="form-group col-md-1">
-        <%= form.label :priority %>
-        <%= form.select :priority, [:高, :中, :低 ]  %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-10">
-        <%= form.label :address %>
-        <%= form.text_field :address, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <%= form.label :latitude %>
-        <%= form.text_field :latitude, id: "target_latitude", class: 'form-control' %>
-      </div>
-
-      <div class="form-group col-md-3">
-        <%= form.label :longitude %>
-        <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
-      </div>
-    </div>
-
-    <% if current_user.admin? %>
-    <p>--以下は管理者のみ記入可能です。--</p>
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <%= form.label :status %>
-          <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください", class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <%= form.label :start_time %>
-          <%= form.date_field :start_time, class: 'form-control' %>
-        </div>
-
-        <div class="form-group col-md-4">
-          <%= form.label :end_time %>
-          <%= form.date_field :end_time, class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-10">
-          <%= form.label :remark %>
-          <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
-        </div>
-      </div>
-    <% end %>
-
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-  <% end %>
-  <style>
-  /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
-  #map {
-    height: 400px;
-    width: 600px;
-  }
-  </style>
-
-  <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
-  </form>
-</div>
-
-
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
 <script>
   var map;
   // 現在地取得処理

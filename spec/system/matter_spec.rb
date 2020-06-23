@@ -38,7 +38,6 @@ RSpec.describe '案件周りの操作確認', type: :system do
         visit matters_path
         click_on '優先順位'
         matter_list = all('#priority_row')
-        sleep 0.5
         expect(matter_list[0]).to have_content '高'
         expect(matter_list[1]).to have_content '中'
         expect(matter_list[2]).to have_content '低'
@@ -71,8 +70,9 @@ RSpec.describe '案件周りの操作確認', type: :system do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
         click_on "Show"
-        find('.fas').click
-        expect(page).to have_css "div#favorites_buttons_#{matter.id} ", text: '1'
+        click_on "お気に入りする"
+        click_on "Show"
+        expect(page).to have_content 'お気に入り解除する'
       end
      end
      context '任意の案件詳細画面に遷移した場合' do
