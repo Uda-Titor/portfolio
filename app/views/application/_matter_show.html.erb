@@ -20,8 +20,15 @@
       <h5>Image</h5>
       <% if matter.images.attached? %>
         <% matter.images.each do |image| %>
-          <%= image_tag image.variant(resize:'50x50').processed %>
+          <%=  link_to image, 'data-lightbox': image do %>
+            <%= image_tag image.variant(resize:'100x100').processed  %>
+          <% end %>
         <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-12">
+      <% if matter.images.present? %>
+        <p>※クリックしたら拡大できます。</p>
       <% end %>
     </div>
   </div>
