@@ -4,15 +4,22 @@
     <div id="map"></div>
   <% end %>
 
-  <div id="favorites_buttons_<%= @matter.id %>">
-    <%= render partial: 'favorites/favorite', locals: { matter: @matter} %>
-  </div>
-
   <p>
-    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      コメントを表示する
-    </button>
+    <span>
+      <div id="favorites_buttons_<%= @matter.id %>">
+        <%= render partial: 'favorites/favorite', locals: { matter: @matter} %>
+      </div>
+    </span>
+    <span>
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-comments"></i>
+      </button>
+    </span>
   </p>
+
+
+
+
 
   <div class="collapse " id="collapseExample">
     <div class="card card-body">
