@@ -1,15 +1,29 @@
-<ul>
-  <% comments.each do |comment| %>
-    <% if comment.id.present? %>
-      <li>
-        <div class="comment-content" id ="this_comment_<%= comment.id %>">
-          <p><%= comment.content %></p>
-          <p><%= comment.user.name %></p>
-          <p><%= link_to "コメント編集", edit_matter_comment_path(matter, comment), remote: true %></p>
-          <p><%= link_to "コメント削除", matter_comment_path(comment.matter_id, comment.id), method: :delete, remote: true,
-                                          data: { confirm: "本当に削除しますか?"} %></p>
+<% comments.each do |comment| %>
+  <% if comment.id.present? %>
+    <div class="comment-content" id ="this_comment_<%= comment.id %>">
+      <div class="media">
+        <% if comment.user.user_image.present? %>
+          <p><%= image_tag comment.user.user_image.url, class: 'icon', size: "32x32" %></p>
+        <% else %>
+          <p><i class="fas fa-user-circle fa-2x" aria-hidden="true"></i></p>
+        <% end %>
+        <% if current_user == comment.user %>
+        <div class="media-body">
+          <p class="ml-3"><%= comment.content %>
+            <span>
+              <%= link_to edit_matter_comment_path(matter, comment), remote: true  do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+            </span>
+            <span>
+              <%= link_to matter_comment_path(comment.matter_id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </span>
+          </p>
         </div>
-      </li>
-    <% end %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
+<% end %>
