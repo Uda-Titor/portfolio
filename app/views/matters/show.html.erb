@@ -8,10 +8,21 @@
     <%= render partial: 'favorites/favorite', locals: { matter: @matter} %>
   </div>
 
-  <div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments, matter: @matter } %>
+  <p>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      コメントを表示する
+    </button>
+  </p>
+
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <div id="comments_area">
+        <%= render partial: 'comments/index', locals: { comments: @comments, matter: @matter } %>
+      </div>
+      <%= render partial: 'comments/form', locals: { comment: @comment, matter: @matter } %>
+    </div>
   </div>
-  <%= render partial: 'comments/form', locals: { comment: @comment, matter: @matter } %>
+
 
   <%= link_to 'Edit', edit_matter_path(@matter) %> |
   <%= link_to 'Back', matters_path %>
