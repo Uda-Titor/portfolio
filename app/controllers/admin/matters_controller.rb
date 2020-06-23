@@ -32,10 +32,6 @@ class Admin::MattersController < ApplicationController
     redirect_to root_path unless current_user.admin?
   end
 
-  def matter_params
-    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [])
-  end
-
   def set_matter
      @matter = Matter.find(params[:id])
   end

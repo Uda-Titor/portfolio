@@ -9,15 +9,11 @@
       </ul>
     </div>
   <% end %>
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-8">
-        <%= form.label :content %>
-        <%= form.text_area :content, class: 'form-control' %>
-      </div>
-    </div>
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-  </form>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>

@@ -3,7 +3,7 @@
 <% if user.user_image? %>
   <%= image_tag user.user_image.url, class: 'icon' %>
 <% else %>
-  <i class="fas fa-user-circle fa-3x" aria-hidden="true"></i>
+  <image src="/assets/default.png" class="icon" alt="ユーザーアイコン" %>
 <% end %>
 <h3>ユーザー名</h3>
 <%= user.name %>
@@ -15,40 +15,3 @@
 <%= user.user_address%>
 <h3>備考</h3>
 <%= user.remark%>
-
-<h3><%= user.name %>の案件</h3>
-<table>
-  <tbody>
-    <% @user.matters.each do |matter| %>
-      <% if matter.status == "未着手" %>
-        <tr class="matter bg-warning">
-      <% elsif matter.status =="工事中" %>
-        <tr class="matter bg-danger">
-      <% else %>
-        <tr class="matter bg-secondary">
-      <% end %>
-          <% if matter.user.user_image.present? %>
-            <td width="7%"><%= image_tag matter.user.user_image.url, class: 'icon' %></td>
-          <% else %>
-            <td width="7%"><i class="fas fa-user-circle fa-3x" aria-hidden="true"></i></td>
-          <% end %>
-          <td width="30%"><%= matter.title %></td>
-          <td width="10%"><%= matter.status %></td>
-          <td id='priority_row' width="5%" ><%= matter.priority %></td>
-          <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
-          <td width="3%"><i class="fas fa-thumbs-up fa-2x"></i></td>
-          <td width="3%"><%= matter.favorites.count %></td>
-          <td width="3%"><%= link_to 'Show', matter %></td>
-          <td width="3%"><%= link_to 'Edit', edit_matter_path(matter) %></td>
-          <td width="3%"><%= link_to 'Destroy', matter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% if (matter.user_id == current_user.id) || (current_user.admin == true) %>
-            <% if (matter.latest_sender != current_user.name) && (matter.latest_sender != nil) %>
-              <td width="3%" class="bg-light"><i class="far fa-envelope fa-2x"></i></td>
-            <% end %>
-          <% else %>
-              <td width="3%" class="bg-light"></td>
-          <% end %>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
