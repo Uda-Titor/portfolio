@@ -37,8 +37,28 @@
   </div>
 
   <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
+  </div>
+
+  <div class="field">
     <%= form.label :priority %>
     <%= form.select :priority, [:高, :中, :低 ]  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.date_field :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.date_field :end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remark %>
+    <%= form.text_area :remark %>
   </div>
 
   <div class="field">
@@ -46,31 +66,9 @@
     <%= form.file_field :images, multiple: true %>
   </div>
 
-  <% if current_user.admin? %>
-    <div class="field">
-      <%= form.label :status %>
-      <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :start_time %>
-      <%= form.date_field :start_time %>
-    </div>
-
-    <div class="field">
-      <%= form.label :end_time %>
-      <%= form.date_field :end_time %>
-    </div>
-
-    <div class="field">
-      <%= form.label :remark %>
-      <%= form.text_area :remark %>
-    </div>
-  <% end %>
-  
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>
 <style>
 /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
