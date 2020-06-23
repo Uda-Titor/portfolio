@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   root to: 'matters#index'
-    devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }#current_passwordを入れず、編集する
+
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }#current_passwordを入れず、編集する
   get "users/show" => "users#show"
 
   resources :matters do
     resources :comments
+    resource :favorites, only: [:create, :destroy]
   end
-  resources :favorites, only: [:create, :destroy]
+
+  resources :informations
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update, :destroy]

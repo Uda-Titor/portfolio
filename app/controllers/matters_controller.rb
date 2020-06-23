@@ -1,16 +1,25 @@
 class MattersController < ApplicationController
   before_action :set_matter, only: [:show, :edit, :update, :destroy]
-
+  before_action :user_confirmation, only: [:edit, :update, :destroy]
 
   def index
     @search = Matter.ransack(params[:q])
-    @matters = @search.result
+    @matters = @search.result.page(params[:page])
+    @matters = @matters.order(created_at: :desc)
+
+    @informations = Information.all
+    @information = Information.new
   end
 
   def show
     @favorite = current_user.favorites.find_by(matter_id: @matter.id)
+    if @matter.latest_sender != current_user.name && (@matter.user_id == current_user.id || current_user.admin == true)
+      @matter.latest_sender = nil
+      @matter.save
+    end
     @comments = @matter.comments
     @comment = @matter.comments.build
+
   end
 
   def new
@@ -52,4 +61,10 @@ class MattersController < ApplicationController
   def matter_params
     params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [])
   end
+
+  def user_confirmation
+    redirect_to root_path unless @matter.user_id == current_user.id || current_user.admin?
+  end
+
+
 end
