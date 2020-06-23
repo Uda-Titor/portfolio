@@ -1,61 +1,79 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= matter.title %>
-</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= matter.content %>
-</p>
+  <div class="row">
+    <div class="col-md-10">
+      <h5>Title</h5>
+      <h4><%= matter.title %></h4>
+    </div>
+  </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= matter.address %>
-</p>
+  <div class="row">
+    <div class="col-md-10">
+      <h5>Content</h5>
+      <p><%= matter.content %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>Priority:</strong>
-  <%= matter.priority %>
-</p>
+  <div class="row">
+    <div class="col-md-12">
+      <h5>Image</h5>
+      <% if matter.images.attached? %>
+        <% matter.images.each do |image| %>
+          <%= image_tag image.variant(resize:'50x50').processed %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= matter.status %>
-</p>
+  <br>
 
-<% if matter.images.attached? %>
-  <% matter.images.each do |image| %>
-    <%= image_tag image.variant(resize:'50x50').processed %>
+  <div class="row">
+    <div class="col-md-3">
+      <h5>Status:<span><%= matter.status %></span></h5>
+    </div>
+
+    <div class="col-md-3">
+        <h5>Priority:<span><%= matter.priority %></span></h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+      <h5>Address:</h5>
+      <p><%= matter.address %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Latitude:</h5>
+      <p><%= matter.latitude %></p>
+    </div>
+
+    <div class="col-md-4">
+      <h5>Longtitude:</h5>
+      <p><%= matter.longitude %></p>
+    </div>
+  </div>
+
+  <% if current_user.admin? %>
+    <div class="row">
+      <div class="col-md-4">
+        <h5>StartDate:</h5>
+        <p><%= matter.start_time %></p>
+      </div>
+
+      <div class="col-md-4">
+        <h5>EndDate:</h5>
+        <p><%= matter.end_time %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10">
+        <h5>Remark:</h5>
+        <p><%= matter.remark %></p>
+      </div>
+    </div>
   <% end %>
-<% end %>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= matter.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= matter.longitude %>
-</p>
-
-<% if current_user.admin? %>
-  <p>
-    <strong>StartDate:</strong>
-    <%= matter.start_time %>
-  </p>
-
-  <p>
-    <strong>EndDate:</strong>
-    <%= matter.end_time %>
-  </p>
-
-  <p>
-    <strong>Remark:</strong>
-    <%= matter.remark %>
-  </p>
-<% end %>
-
-<br>
