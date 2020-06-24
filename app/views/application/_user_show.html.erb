@@ -1,5 +1,12 @@
 <div class="card mx-auto mt-3" style="max-width: 25rem;">
-  <div class="card-header bg-light p-0 border-light">ユーザー情報</div>
+  <div class="card-header bg-light p-0 border-light">
+    ユーザー情報
+    <span class="float-right">
+      <%= link_to edit_path do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+    </span>
+  </div>
   <% if user.user_image? %>
     <%= image_tag user.user_image.url, class: 'icon mx-auto' , size: '90x90' %>
   <% else %>
@@ -72,3 +79,4 @@
     </div>
   </div>
 </div>
+<%= link_to '編集する', edit_path %>
