@@ -40,7 +40,9 @@
 <div class="conteiner">
   <div class="row mt-4">
     <div class="col-8  mx-auto">
+      <% if @user.matters.present? %>
       <h3><%= user.name %>の案件</h3>
+      <% end %>
       <table>
         <tbody>
           <% @user.matters.each do |matter| %>
