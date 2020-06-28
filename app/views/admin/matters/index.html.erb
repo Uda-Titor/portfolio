@@ -22,7 +22,7 @@
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
       <div class="row">
         <div class="col-6">
-          
+
           <%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
         </div>
         <div class="col-6">
@@ -59,7 +59,7 @@
    });
    //マーカーの初期プロパティを指定
    <% @matters.each do |matter| %>
-    <% if matter.latitude.present? %>
+    <% if matter.latitude.present? && matter.status != "工事完了" %>
         (function(){
           var contentString = "<%= matter.title %>";
           var infowindow = new google.maps.InfoWindow({
