@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="row">
+    <div class="col-12 m-2">
+      <%= link_to new_matter_path do %>
+        <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus-circle"></i>新規案件</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-3 bg-light">
       <%= render 'matter_search', search: @search %>
     </div>
@@ -82,5 +89,3 @@
 
 
 <br>
-
-<%= link_to 'New Matter', new_matter_path %>
