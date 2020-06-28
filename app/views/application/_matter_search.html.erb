@@ -4,6 +4,10 @@
     <br>
     <%= f.text_field :title_cont %>
     <br>
+    <%= f.label :user_name_cont, "ユーザー名" %>
+    <br>
+    <%= f.search_field :user_name_cont %>
+    <br>
     <%= f.label :status_eq, 'ステータス' %>
     <br>
     <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
@@ -16,9 +20,8 @@
     <%= f.label :created_at_lteq, '〜' %>
     <%= f.date_field :created_at_lteq %>
     <br>
-    <%= f.label :title_cont, 'タイトル' %>
-    <br>
-    <%= f.text_field :title_cont %>
+
+
 
     <div>
       <%= f.submit '検索する' %>

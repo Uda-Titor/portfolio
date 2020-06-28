@@ -23,6 +23,7 @@
           <a class="nav-item nav-link active" href="#"><li><%= link_to '案件一覧', matters_path %></li><span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" href="#"><li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li></a>
           <a class="nav-item nav-link" href="#"><li><%= link_to current_user.name, users_show_path(current_user.id) %></li></a>
+
           <% if current_user.admin? %>
             <a class="nav-item nav-link "href="#" ><li><%= link_to 'ユーザ一覧', admin_users_path %></li></a>
             <a class="nav-item nav-link"href="#" ><li><%= link_to '管理者画面', admin_matters_path %></li></a>
