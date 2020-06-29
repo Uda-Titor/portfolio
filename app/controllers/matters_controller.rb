@@ -9,6 +9,8 @@ class MattersController < ApplicationController
 
     @informations = Information.all
     @information = Information.new
+
+    @notifications = current_user.passive_notifications
   end
 
   def show
@@ -19,7 +21,10 @@ class MattersController < ApplicationController
     end
     @comments = @matter.comments
     @comment = @matter.comments.build
-
+    @notifications = current_user.passive_notifications
+    @notifications.where(checked: false).each do |notification|
+      notification.update_attributes(checked: true)
+    end
   end
 
   def new

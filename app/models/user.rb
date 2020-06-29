@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :matters, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  #通知機能
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   mount_uploader :user_image, ImageUploader
   #user編集時にcurrent_passwordを入れないようにする処理関係
