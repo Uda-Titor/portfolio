@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
         #最後の送信者の名前を登録
         @matter.latest_sender = current_user.name
         @matter.save
+        @matter.create_notification_comment!(current_user, @comment.id)
         format.js { render :index }
       else
         format.html { redirect_to matter_path(@matter), notice: '投稿できませんでした...' }
