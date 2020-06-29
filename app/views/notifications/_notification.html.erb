@@ -22,6 +22,11 @@
         <% end %>
       <div>
         <%= time_ago_in_words(notification.created_at).upcase %>
+        <% if notification.checked == false %>
+          <span class="badge badge-warning">未確認</span>
+        <% else %>
+          <span class="badge badge-secondary">確認済み</span>
+        <% end %>
       </div>
   </span>
 <% end %>
