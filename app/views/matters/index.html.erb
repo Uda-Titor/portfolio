@@ -78,6 +78,14 @@
                     <td width="3%" class="bg-light"></td>
                 <% end %>
               </tr>
+              <tr>
+                <td>
+                  <% binding.irb %>
+                  <% matter.labels.each do |label| %>
+                    <%= label.name %>
+                  <% end %>
+                </td>
+              </tr>
           <% end %>
           <%= paginate @matters %>
         </tbody>

@@ -102,6 +102,12 @@ $('.reset').click(function(){
       </div>
     </div>
 
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+      </div>
+    </div>
+
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>
       <div class="form-row">

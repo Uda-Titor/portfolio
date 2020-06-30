@@ -8,6 +8,9 @@ class Matter < ApplicationRecord
   has_many :notifications, dependent: :destroy
   #画像アップロード
   has_many_attached :images
+  #ラベル
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).present?
@@ -52,5 +55,5 @@ class Matter < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-  
+
 end

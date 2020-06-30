@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :labels
   root to: 'matters#index'
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }#current_passwordを入れず、編集する

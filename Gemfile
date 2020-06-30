@@ -6,7 +6,7 @@ ruby '2.6.5'
 #ページネーション
 gem 'kaminari'
 #アイコンデフォルト
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 5.4.1'
 #カレンダー
 gem "simple_calendar", "~> 2.0"
 #グラフ
