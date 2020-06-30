@@ -67,6 +67,18 @@
       </div>
     </div>
     <% end %>
+  <% if matter.labels.present? %>
+    <div class="row m-0 py-4 show">
+      <div class="col-md-12">
+        <p>
+          <% matter.labels.each do |label| %>
+            <%= label.name %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
   <% if current_user.admin? %>
     <% if matter.start_time.present? %>
       <div class="row m-0 py-4 show">
