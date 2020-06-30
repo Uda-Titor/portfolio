@@ -5,6 +5,7 @@
     <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">カレンダー</a></li>
     <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">グラフ</a></li>
     <li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">地図</a></li>
+    <li class="nav-item"><a class="nav-link" id="label-tab" data-toggle="tab" href="#label" role="tab" aria-controls="label" aria-selected="false">ラベル</a></li>
   </ul>
 
   <div class="tab-content mt-3" id="myTabContent">
@@ -32,6 +33,29 @@
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
       <div id="map"></div>
+    </div>
+    <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab" >
+      <div id="labels_area">
+          <%= render partial: 'admin/labels/index', locals: { labels: @labels } %>
+      </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
+        <i class="fas fa-plus-circle"></i>ラベル作成
+      </button>
+      <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">モーダルのタイトル</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= render partial: 'admin/labels/form', locals: { label: @label } %>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     </div>
   </div>
 

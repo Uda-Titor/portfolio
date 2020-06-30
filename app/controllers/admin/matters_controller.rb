@@ -5,6 +5,8 @@ class Admin::MattersController < ApplicationController
   def index
     @search = Matter.ransack(params[:q])
     @matters = @search.result
+    @label = Label.new
+    @labels = Label.all
   end
 
   def show
