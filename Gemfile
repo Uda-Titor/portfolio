@@ -17,6 +17,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 #userログイン機能
 gem 'devise'
+gem 'devise-i18n'
 #検索gem
 gem 'ransack'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
