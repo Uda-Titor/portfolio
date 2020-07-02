@@ -21,7 +21,9 @@ class MattersController < ApplicationController
     @comments = @matter.comments
     @comment = @matter.comments.build
     @notification = Notification.find_by(matter_id: @matter.id)
-    @notification.update_attributes(checked: true)
+    if @notification.present?
+      @notification.update_attributes(checked: true)
+    end
   end
 
   def new
