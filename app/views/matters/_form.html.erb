@@ -77,9 +77,9 @@ $('.reset').click(function(){
     </script>
 
     <div class="form-row">
-      <div class="form-group col-md-1">
+      <div class="form-group col-md-2">
         <%= form.label :priority %>
-        <%= form.select :priority, [:高, :中, :低 ]  %>
+        <%= form.select :priority, [:高, :中, :低 ], {}, { class: 'form-control' }  %>
       </div>
     </div>
 
@@ -102,12 +102,18 @@ $('.reset').click(function(){
       </div>
     </div>
 
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+      </div>
+    </div>
+
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>
       <div class="form-row">
         <div class="form-group col-md-3">
           <%= form.label :status %>
-          <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください", class: 'form-control' %>
+          <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], { include_blank: "選択してください" }, { class: 'form-control' } %>
         </div>
       </div>
 
@@ -132,7 +138,7 @@ $('.reset').click(function(){
     <% end %>
 
       <div class="actions">
-        <%= form.submit %>
+        <%= form.submit '登録する',  class: 'btn btn-primary' %>
       </div>
   <% end %>
   <style>

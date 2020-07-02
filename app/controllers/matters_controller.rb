@@ -10,7 +10,6 @@ class MattersController < ApplicationController
     @informations = Information.all
     @information = Information.new
 
-    @notifications = current_user.passive_notifications
   end
 
   def show
@@ -21,9 +20,9 @@ class MattersController < ApplicationController
     end
     @comments = @matter.comments
     @comment = @matter.comments.build
-    @notifications = current_user.passive_notifications
-    @notifications.where(checked: false).each do |notification|
-      notification.update_attributes(checked: true)
+    @notification = Notification.find_by(matter_id: @matter.id)
+    if @notification.present?
+      @notification.update_attributes(checked: true)
     end
   end
 
@@ -64,7 +63,7 @@ class MattersController < ApplicationController
 
 
   def matter_params
-    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [])
+    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [],  label_ids: [] )
   end
 
   def user_confirmation

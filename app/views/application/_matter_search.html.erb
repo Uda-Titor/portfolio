@@ -1,34 +1,35 @@
 
   <%= search_form_for search do |f| %>
-    <%= f.label :title_cont, 'タイトル' %>
-    <br>
-    <%= f.text_field :title_cont %>
-    <br>
-    <%= f.label :user_name_cont, "ユーザー名" %>
-    <br>
-    <%= f.search_field :user_name_cont %>
-    <br>
-    <%= f.label :status_eq, 'ステータス' %>
-    <br>
-    <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください" %>
-    <br>
-    <%= f.label :created_at_gteq, '日付' %>
-    <br>
-    <%= f.date_field :created_at_gteq %>
-    <br>
+    <div class="form-group">
+      <%= f.label :title_cont, 'タイトル' %>
+      <%= f.text_field :title_cont, class: 'form-control' %>
+    </div>
 
-    <%= f.label :created_at_lteq, '〜' %>
-    <%= f.date_field :created_at_lteq %>
-    <br>
+    <div class="form-group">
+      <%= f.label :user_name_cont, "ユーザー名" %>
+      <%= f.search_field :user_name_cont, class: 'form-control' %>
+    </div>
 
+    <div class="form-group">
+      <%= f.label :status_eq, 'ステータス' %>
+      <%= f.select :status_eq, [["未着手"],["工事中"],["工事完了"]], { include_blank: "選択してください" }, { class: 'form-control' }  %>
+    </div>
 
+    <div class="form-group">
+      <%= f.label :created_at_gteq, '日付' %>
+      <%= f.date_field :created_at_gteq, class: 'form-control' %>
+    </div>
 
+    <div class="form-group">
+      <%= f.label :created_at_lteq, '〜' %>
+      <%= f.date_field :created_at_lteq, class: 'form-control' %>
+    </div>
     <div>
-      <%= f.submit '検索する' %>
+      <%= f.submit '検索する', class: 'btn btn-primary' %>
     </div>
   <% end %>
   <%= search_form_for @search do |f| %>
-  <div>
-    <%= f.submit 'リセット' %>
+  <div class="mt-1">
+    <%= f.submit 'リセット', class: 'btn btn-secondary' %>
   </div>
   <% end %>

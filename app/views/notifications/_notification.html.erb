@@ -5,10 +5,19 @@
       <%= visitor.name %>さんが
       <% case notification.action %>
         <%  when 'favorite' then %>
-          <%= link_to 'あなたの投稿', notification.matter, style: "font-weight: bold;" %>
+          <% if notification.matter.user_id == visited.id && notification.matter.user_id == current_user.id %>
+            <%= link_to 'あなたの投稿', notification.matter, style: "font-weight: bold;" %>
             にいいねしました
+          <% else %>
+          <span>
+            <%= link_to notification.matter do %>
+              <%= notification.matter.user.name %>さんの案件
+            <% end %>
+              にいいねしました
+          </span>
+          <% end %>
         <% when 'comment' then %>
-          <% if notification.matter.user_id == visited.id %>
+          <% if notification.matter.user_id == visited.id && notification.matter.user_id == current_user.id %>
             <%= link_to "あなたの案件", matter_path(notification.matter_id), style: "font-weight: bold;" %>
               にコメントしました
           <% else %>

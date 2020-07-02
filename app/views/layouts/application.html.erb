@@ -33,7 +33,7 @@
           <a class="nav-item nav-link" href="#"><li><%= link_to 'サインアップ', new_user_registration_path %></li></a>
         <% end %>
       </div>
-      </div>
+    </div>
     <% if user_signed_in? %>
       <button type="button" class="btn btn-primary nav-item nav-link float-light" data-toggle="modal" data-target="#exampleModal">
         <i class="fas fa-bell"></i>
@@ -66,6 +66,12 @@
   </nav>
 </header>
   <body>
+    <% if notice %>
+    <p class="alert alert-notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-error"><%= alert %></p>
+  <% end %>
     <%= yield %>
   </body>
 </html>
