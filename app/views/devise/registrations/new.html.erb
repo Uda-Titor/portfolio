@@ -6,7 +6,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field form-group">
+        <div class="form-group">
           <%= f.label 'ユーザー名' %> <br />
           <%= f.text_field :name, class: 'form-control' %>
         </div>
