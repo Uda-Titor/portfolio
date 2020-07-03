@@ -12,10 +12,10 @@
   <div class="form-row">
     <div class="form-group col-md-2">
       <%= form.label :name %>
-      <%= form.text_field :name, class: 'form-control'  %>
+      <%= form.text_field :name, {class: 'form-control', id: 'label_form'}  %>
     </div>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit '登録する',  class: 'btn btn-primary' %>
   </div>
 <% end %>
