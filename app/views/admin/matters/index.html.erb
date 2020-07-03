@@ -11,7 +11,7 @@
   <div class="tab-content mt-3" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
       <%= month_calendar events: @matters do |date, matters| %>
-        <%= date %>
+        <%= date.day %>
 
         <% matters.each do |matter| %>
           <div class="bg-danger border" >

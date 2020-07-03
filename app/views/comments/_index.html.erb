@@ -3,12 +3,13 @@
     <div class="comment-content" id ="this_comment_<%= comment.id %>">
       <div class="media">
         <% if comment.user.user_image.present? %>
-          <p><%= image_tag comment.user.user_image.url, class: 'icon', size: "32x32" %></p>
+          <p><%= image_tag comment.user.user_image.url, class: 'icon', size: "50x50" %></p>
         <% else %>
-          <p><i class="fas fa-user-circle fa-2x" aria-hidden="true"></i></p>
+          <p><i class="fas fa-user-circle fa-3x" aria-hidden="true"></i></p>
         <% end %>
 
         <div class="media-body">
+          <h6><%= comment.user.name %></h6>
           <p class="ml-3"><%= comment.content %>
             <% if current_user == comment.user %>
               <span>
