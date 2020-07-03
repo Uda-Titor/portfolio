@@ -44,11 +44,7 @@
             <% else %>
               <tr class="matter bg-secondary">
             <% end %>
-                <% if matter.user.user_image.present? %>
-                  <td width="7%"><%= image_tag matter.user.user_image.url, class: 'icon' %></td>
-                <% else %>
-                  <td width="7%"><i class="fas fa-user-circle fa-3x" aria-hidden="true"></i></td>
-                <% end %>
+                <td width="7%"><%= image_tag set_image( matter.user.user_image.url, 'default.png'), class: 'icon', size: '48x48' %></td>
                 <td width="30%"><%= matter.title %></td>
                 <td width="10%"><%= matter.status %></td>
                 <td id='priority_row' width="10%" ><%= matter.priority %></td>
