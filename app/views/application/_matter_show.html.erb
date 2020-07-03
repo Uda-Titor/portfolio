@@ -3,21 +3,21 @@
 
   <div class="row m-0 py-4 show">
     <div class="col-md-10">
-      <h5>Title</h5>
+      <h5 class="font-weight-bold">Title</h5>
       <h4><%= matter.title %></h4>
     </div>
   </div>
 
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-10">
-      <h5>Content</h5>
+      <h5 class="font-weight-bold">Content</h5>
       <p><%= matter.content %></p>
     </div>
   </div>
 
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-12">
-      <h5>Image</h5>
+      <h5 class="font-weight-bold">Image</h5>
       <% if matter.images.attached? %>
         <% matter.images.each do |image| %>
           <%=  link_to image, 'data-lightbox': image do %>
@@ -37,18 +37,18 @@
 
   <div class="row m-0 py-4 show">
     <div class="col-md-3">
-      <h5>Status:<span><%= matter.status %></span></h5>
+      <h5 class="font-weight-bold">Status:<span><%= matter.status %></span></h5>
     </div>
 
     <div class="col-md-3">
-        <h5>Priority:<span><%= matter.priority %></span></h5>
+        <h5 class="font-weight-bold">Priority:<span><%= matter.priority %></span></h5>
     </div>
   </div>
 
   <% if matter.address.present? %>
     <div class="row m-0 py-4 show">
       <div class="col-md-10">
-        <h5>Address:</h5>
+        <h5 class="font-weight-bold">Address:</h5>
         <p><%= matter.address %></p>
       </div>
     </div>
@@ -57,12 +57,12 @@
   <% if matter.latitude.present? %>
     <div class="row m-0 py-4 show">
       <div class="col-md-4">
-        <h5>Latitude:</h5>
+        <h5 class="font-weight-bold">Latitude:</h5>
         <p><%= matter.latitude %></p>
       </div>
 
       <div class="col-md-4">
-        <h5>Longtitude:</h5>
+        <h5 class="font-weight-bold">Longtitude:</h5>
         <p><%= matter.longitude %></p>
       </div>
     </div>
@@ -83,13 +83,13 @@
     <% if matter.start_time.present? %>
       <div class="row m-0 py-4 show">
         <div class="col-md-4">
-          <h5>StartDate:</h5>
+          <h5 class="font-weight-bold">StartDate:</h5>
           <p><%= matter.start_time %></p>
         </div>
     <% end %>
     <% if matter.end_time.present? %>
         <div class="col-md-3">
-          <h5>EndDate:</h5>
+          <h5 class="font-weight-bold">EndDate:</h5>
           <p><%= matter.end_time %></p>
         </div>
       </div>
@@ -98,7 +98,7 @@
     <% if matter.remark.present? %>
       <div class="row m-0 py-4 show">
         <div class="col-md-10">
-          <h5>Remark:</h5>
+          <h5 class="font-weight-bold">Remark:</h5>
           <p><%= matter.remark %></p>
         </div>
       </div>
