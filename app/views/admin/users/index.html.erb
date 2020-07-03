@@ -5,8 +5,8 @@
           <div class="card-header bg-light p-0 border-light">
             ユーザー情報
             <span class="float-right">
-              <%= link_to admin_user_path(user.id) do %>
-                <i class="fas fa-file-alt"></i>
+              <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fas fa-trash-alt"></i>
               <% end %>
             </span>
             <span class="float-right">
@@ -15,8 +15,8 @@
               <% end %>
             </span>
             <span class="float-right">
-              <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <i class="fas fa-trash-alt"></i>
+              <%= link_to admin_user_path(user.id) do %>
+                <i class="fas fa-file-alt"></i>
               <% end %>
             </span>
           </div>
