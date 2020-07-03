@@ -23,7 +23,7 @@
           <% if user.user_image? %>
             <%= image_tag user.user_image.url, class: 'icon mx-auto' , size: '90x90' %>
           <% else %>
-            <i class="fas fa-user-circle fa-5x mx-auto" aria-hidden="true"></i>
+            <%= image_tag 'default.png', class: 'icon mx-auto' , size: '90x90' %>
           <% end %>
           <div class="card-body mx-auto">
             <h4 class="card-title"><%= user.name %></h4>
