@@ -14,20 +14,27 @@
         <%= date.day %>
 
         <% matters.each do |matter| %>
-          <div class="bg-danger border" >
-            <%= matter.title %>
+          <div class="font-weight-bold text-dark " >
+            <%= link_to matter.title, matter  %>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
+      <div class="row mx-auto mb-3">
+        <div class="col-md-12">
+          <h3 class="text-center">案件の種類割合(全案件)</h3>
+          <%= pie_chart Label.group(:name).count %>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-6">
-
+        <div class="col-md-6">
+          <h3 class="text-center">1週間の案件数</h3>
           <%= column_chart Matter.group_by_day_of_week(:created_at, format: "%a").count %>
         </div>
-        <div class="col-6">
-          <%= line_chart Matter.group_by_day(:created_at, format: "%a").count %>
+        <div class="col-md-6">
+          <h3 class="text-center">年間の案件数</h3>
+          <%= column_chart Matter.group_by_day(:created_at, format: "%a").count %>
         </div>
       </div>
     </div>
@@ -35,6 +42,7 @@
       <div id="map"></div>
     </div>
     <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab" >
+      <h3>ラベルを追加できます</h3>
       <div id="labels_area">
           <%= render partial: 'admin/labels/index', locals: { labels: @labels } %>
       </div>
