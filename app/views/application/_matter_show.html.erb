@@ -3,14 +3,14 @@
 
   <div class="row m-0 py-4 show">
     <div class="col-md-10">
-      <h5 class="font-weight-bold">Title</h5>
+      <h5 class="font-weight-bold">タイトル</h5>
       <h4><%= matter.title %></h4>
     </div>
   </div>
 
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-10">
-      <h5 class="font-weight-bold">Content</h5>
+      <h5 class="font-weight-bold">要望内容</h5>
       <p><%= matter.content %></p>
       <% if matter.labels %>
         <p>
@@ -24,7 +24,7 @@
 
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-12">
-      <h5 class="font-weight-bold">Image</h5>
+      <h5 class="font-weight-bold">写真ファイル</h5>
       <% if matter.images.attached? %>
         <% matter.images.each do |image| %>
           <%=  link_to image, 'data-lightbox': image do %>
@@ -44,18 +44,27 @@
 
   <div class="row m-0 py-4 show">
     <div class="col-md-3">
-      <h5 class="font-weight-bold">Status:<span><%= matter.status %></span></h5>
+      <h5 class="font-weight-bold">進捗状況:
+        <% if matter.status == "未着手" %>
+          <span class="badge badge-warning"><%= matter.status %></span>
+        <% elsif matter.status == "工事中" %>
+          <span class="badge badge-danger"><%= matter.status %></span>
+        <% else %>
+          <span class="badge badge-secondary"><%= matter.status %></span>
+        <% end %>
+        </h5>
+
     </div>
 
     <div class="col-md-3">
-        <h5 class="font-weight-bold">Priority:<span><%= matter.priority %></span></h5>
+        <h5 class="font-weight-bold">緊急度:<span><%= matter.priority %></span></h5>
     </div>
   </div>
 
   <% if matter.address %>
     <div class="row m-0 py-4 show">
       <div class="col-md-10">
-        <h5 class="font-weight-bold">Address:</h5>
+        <h5 class="font-weight-bold">要望箇所</h5>
         <p><%= matter.address %></p>
       </div>
     </div>
@@ -64,12 +73,12 @@
   <% if matter.latitude %>
     <div class="row m-0 py-4 show">
       <div class="col-md-4">
-        <h5 class="font-weight-bold">Latitude:</h5>
+        <h5 class="font-weight-bold">緯度</h5>
         <p><%= matter.latitude %></p>
       </div>
 
       <div class="col-md-4">
-        <h5 class="font-weight-bold">Longtitude:</h5>
+        <h5 class="font-weight-bold">経度</h5>
         <p><%= matter.longitude %></p>
       </div>
     </div>
@@ -79,13 +88,13 @@
     <% if matter.start_time %>
       <div class="row m-0 py-4 show">
         <div class="col-md-4">
-          <h5 class="font-weight-bold">StartDate:</h5>
+          <h5 class="font-weight-bold">工事開始日</h5>
           <p><%= matter.start_time %></p>
         </div>
     <% end %>
     <% if matter.end_time %>
         <div class="col-md-3">
-          <h5 class="font-weight-bold">EndDate:</h5>
+          <h5 class="font-weight-bold">工事終了日</h5>
           <p><%= matter.end_time %></p>
         </div>
       </div>
@@ -94,7 +103,7 @@
     <% if matter.remark %>
       <div class="row m-0 py-4 show">
         <div class="col-md-10">
-          <h5 class="font-weight-bold">Remark:</h5>
+          <h5 class="font-weight-bold">備考</h5>
           <p><%= matter.remark %></p>
         </div>
       </div>

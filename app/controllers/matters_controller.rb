@@ -20,9 +20,13 @@ class MattersController < ApplicationController
     end
     @comments = @matter.comments
     @comment = @matter.comments.build
-    @notification = Notification.find_by(matter_id: @matter.id)
+    @notification = Notification.find_by(matter_id: @matter.id, visited_id: current_user)
     if @notification.present?
-      @notification.update_attributes(checked: true)
+      if current_user.admin?
+        @notification.update_attributes(admin_checked: true)
+      else
+        @notification.update_attributes(checked: true)
+      end
     end
   end
 
