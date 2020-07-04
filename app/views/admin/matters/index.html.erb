@@ -10,6 +10,7 @@
 
   <div class="tab-content mt-3" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+      <h3 class="text-center">工事予定カレンダー</h3>
       <%= month_calendar events: @matters do |date, matters| %>
         <%= date.day %>
 
@@ -39,6 +40,7 @@
       </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
+      <h3 class="map">案件箇所マップ</h3><span>※未着手、工事中のみマッピングしています。</span>
       <div id="map"></div>
     </div>
     <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab" >
