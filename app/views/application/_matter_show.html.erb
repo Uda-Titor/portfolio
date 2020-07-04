@@ -12,8 +12,17 @@
     <div class="col-md-10">
       <h5 class="font-weight-bold">Content</h5>
       <p><%= matter.content %></p>
+      <% if matter.labels %>
+        <p>
+          <% matter.labels.each do |label| %>
+            <span class="badge badge-info" ><%= label.name %></span>
+          <% end %>
+        </p>
+      <% end %>
     </div>
   </div>
+
+
 
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-12">
@@ -64,17 +73,6 @@
       <div class="col-md-4">
         <h5 class="font-weight-bold">Longtitude:</h5>
         <p><%= matter.longitude %></p>
-      </div>
-    </div>
-    <% end %>
-  <% if matter.labels.present? %>
-    <div class="row m-0 py-4 show">
-      <div class="col-md-12">
-        <p>
-          <% matter.labels.each do |label| %>
-            <%= label.name %>
-          <% end %>
-        </p>
       </div>
     </div>
   <% end %>
