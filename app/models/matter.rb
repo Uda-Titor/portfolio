@@ -1,4 +1,8 @@
 class Matter < ApplicationRecord
+  validates :title, presence: true
+  validates :content, presence: true
+
+
   enum priority: { 高: 0, 中: 1, 低: 2 }
   belongs_to :user
   has_many :favorites, dependent: :destroy

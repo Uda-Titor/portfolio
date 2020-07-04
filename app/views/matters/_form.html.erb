@@ -14,20 +14,31 @@
   <form>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :title %>
+        <%= form.label :title %>　<span class="badge badge-danger">必須</span>
         <%= form.text_field :title, class: 'form-control', placeholder: "タイトルを入れてください" %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :content %>
+        <%= form.label :content %>　<span class="badge badge-danger">必須</span>
         <%= form.text_area :content, class: 'form-control', placeholder: "要望内容を書いてください" %>
       </div>
     </div>
 
+    <p>※該当項目にチェックを付けてください　<span class="badge badge-secondary">任意</span></p>
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |b| %>
+          <div class="form-check-inline">
+            <strong><%= b.check_box + b.label { b.text } %></strong>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="form-group">
-      <%= form.label :images %>
+      <%= form.label :images %>　<span class="badge badge-secondary">任意</span>
       <div id="file" class="input-group">
         <div class="custom-file">
           <%= form.file_field :images, multiple: true, id: "customfile" , class: 'custom-file-input' %>
@@ -78,15 +89,15 @@ $('.reset').click(function(){
 
     <div class="form-row">
       <div class="form-group col-md-2">
-        <%= form.label :priority %>
+        <%= form.label :priority %>　<span class="badge badge-secondary">任意</span>
         <%= form.select :priority, [:高, :中, :低 ], {}, { class: 'form-control' }  %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :address %>
-        <%= form.text_field :address, class: 'form-control' %>
+        <%= form.label :address %>　<span class="badge badge-secondary">任意</span>
+        <%= form.text_field :address, class: 'form-control', placeholder: "要望箇所の住所を入れてください" %>
       </div>
     </div>
 
@@ -101,12 +112,7 @@ $('.reset').click(function(){
         <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-10">
-        <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
-      </div>
-    </div>
+    ※GoogleMapへのマッピングに成功すると緯度・経度に値が入ります。
 
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>

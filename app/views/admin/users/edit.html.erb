@@ -1,42 +1,72 @@
-<%= form_with(model: @user, url: admin_user_url(@user), local: true) do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
+<div class="container mt-5 bg-light">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <%= form_with(model: @user, url: admin_user_url(@user), local: true) do |form| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
+        <div class="form-group">
+          <%= form.label 'ユーザーアイコン' %> <br />
+          <%= form.file_field :user_image, id: :user_iamge %>
+        </div>
+        <p><%= form.check_box :remove_user_image %>画像を削除する</p>
+
+        <script type="text/javascript">
+          $(function() {
+           function readURL(input) {
+             if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                 $('#img_prev').attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+             }
+           }
+           $("#user_iamge").change(function(){
+             readURL(this);
+           });
+          });
+        </script>
+
+        <div class="field form-group">
+          <%= form.label :name %>　<span class="badge badge-danger">必須</span>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="field form-group">
+          <%= form.label :email %>　<span class="badge badge-danger">必須</span>
+          <%= form.text_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label '電話番号' %>　<span class="badge badge-secondary">任意</span>
+          <%= form.text_field :phone_number, class: 'form-control' %>
+        </div>
+
+        <div class="field form-group">
+          <%= form.label :user_address %>　<span class="badge badge-secondary">任意</span>
+          <%= form.text_field :user_address, class: 'form-control' %>
+        </div>
+
+        <div class="field form-group">
+          <%= form.label :remark %>　<span class="badge badge-secondary">任意</span>
+          <%= form.text_area :remark, class: 'form-control' %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit '更新する', class: 'btn btn-primary' %>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_area :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_address %>
-    <%= form.text_field :user_address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_image %>
-    <%= form.text_field :user_image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :remark %>
-    <%= form.text_area :remark %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
