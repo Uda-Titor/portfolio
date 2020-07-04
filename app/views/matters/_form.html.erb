@@ -26,6 +26,17 @@
       </div>
     </div>
 
+    <p>※該当項目にチェックを付けてください</p>
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |b| %>
+          <div class="form-check-inline">
+            <strong><%= b.check_box + b.label { b.text } %></strong>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="form-group">
       <%= form.label :images %>
       <div id="file" class="input-group">
@@ -99,12 +110,6 @@ $('.reset').click(function(){
       <div class="form-group col-md-3">
         <%= form.label :longitude %>
         <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-10">
-        <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
       </div>
     </div>
 
