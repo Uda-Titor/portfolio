@@ -22,8 +22,6 @@
     </div>
   </div>
 
-
-
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-12">
       <h5 class="font-weight-bold">Image</h5>
@@ -54,7 +52,7 @@
     </div>
   </div>
 
-  <% if matter.address.present? %>
+  <% if matter.address %>
     <div class="row m-0 py-4 show">
       <div class="col-md-10">
         <h5 class="font-weight-bold">Address:</h5>
@@ -63,7 +61,7 @@
     </div>
   <% end %>
 
-  <% if matter.latitude.present? %>
+  <% if matter.latitude %>
     <div class="row m-0 py-4 show">
       <div class="col-md-4">
         <h5 class="font-weight-bold">Latitude:</h5>
@@ -78,14 +76,14 @@
   <% end %>
 
   <% if current_user.admin? %>
-    <% if matter.start_time.present? %>
+    <% if matter.start_time %>
       <div class="row m-0 py-4 show">
         <div class="col-md-4">
           <h5 class="font-weight-bold">StartDate:</h5>
           <p><%= matter.start_time %></p>
         </div>
     <% end %>
-    <% if matter.end_time.present? %>
+    <% if matter.end_time %>
         <div class="col-md-3">
           <h5 class="font-weight-bold">EndDate:</h5>
           <p><%= matter.end_time %></p>
@@ -93,7 +91,7 @@
       </div>
     <% end %>
 
-    <% if matter.remark.present? %>
+    <% if matter.remark %>
       <div class="row m-0 py-4 show">
         <div class="col-md-10">
           <h5 class="font-weight-bold">Remark:</h5>
