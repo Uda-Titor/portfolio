@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    models:
+      matter: 案件
+      user: ユーザー
+      comment: コメント
+    attributes:
+      matter:
+        title: タイトル
+        content: 要望内容
+        images: 写真ファイル
+        priority: 緊急度
+        address: 要望箇所
+        latitude: 緯度
+        longitude: 経度
+        status: 進捗状況
+        start_time: 工事開始日
+        end_time: 工事終了日
+        remark: 備考
+      user:
+        email: メール
+        name: 名前
+        user_image: アイコン
+        phone_number: 電話番号
+        user_address: 住所
+        remark: 備考
