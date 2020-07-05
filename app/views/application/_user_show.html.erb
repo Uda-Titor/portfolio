@@ -1,5 +1,5 @@
 <div class="card mx-auto mt-3" style="max-width: 25rem;">
-  <div class="card-header bg-light p-0 border-light">
+  <div class="card-header bg-color p-0 border-color">
     ユーザー情報
     <span class="float-right">
       <%= link_to edit_path do %>
@@ -61,10 +61,10 @@
                 <td width="3%"><%= link_to 'Destroy', matter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 <% if (matter.user_id == current_user.id) || (current_user.admin == true) %>
                   <% if (matter.latest_sender != current_user.name) && (matter.latest_sender != nil) %>
-                    <td width="3%" class="bg-light"><i class="far fa-envelope fa-2x"></i></td>
+                    <td width="3%" class="bg-color"><i class="far fa-envelope fa-2x"></i></td>
                   <% end %>
                 <% else %>
-                    <td width="3%" class="bg-light"></td>
+                    <td width="3%" class="bg-color"></td>
                 <% end %>
               </tr>
           <% end %>
