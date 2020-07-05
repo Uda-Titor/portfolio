@@ -1,12 +1,8 @@
-
-<div class="container mt-5 bg-color">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container bg-color mt-3">
   <div class="row">
     <div class="col-md-8 mx-auto">
-      <h2><%= t('.title', resource: resource.model_name.human) %></h2>
-
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
         <%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
         <div class="form-group">
           <%= f.label 'ユーザーアイコン' %> <br />

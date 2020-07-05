@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :name, presence: true
+  validates :email, presence: true
   #管理者がいなくならないようにコールバック
   before_destroy :check_destroy
 
