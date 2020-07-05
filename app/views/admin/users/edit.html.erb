@@ -1,19 +1,18 @@
+<%= form_with(model: @user, url: admin_user_url(@user), local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div class="container">
+      <div id="error_explanation"class="alert alert-danger" role="alert">
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 <div class="container mt-5 bg-color">
   <div class="row">
     <div class="col-md-8 mx-auto">
-      <%= form_with(model: @user, url: admin_user_url(@user), local: true) do |form| %>
-        <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
-
-            <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-
         <%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
         <div class="form-group">
           <%= form.label 'ユーザーアイコン' %> <br />

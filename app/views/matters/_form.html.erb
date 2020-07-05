@@ -1,7 +1,7 @@
   <%= form_with(model: matter, local: true) do |form| %>
     <% if matter.errors.any? %>
     <div class="container">
-      <div id="error_explanation" class="alert alert-danger" role="alert"  >
+      <div id="error_explanation" class="alert alert-danger" role="alert">
         <ul>
         <% matter.errors.full_messages.each do |message| %>
           <li><%= message %></li>
