@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-
+  
   <div class="row m-0 py-4 show">
     <div class="col-md-10">
       <h5 class="font-weight-bold">タイトル</h5>
@@ -27,7 +25,7 @@
       <h5 class="font-weight-bold">写真ファイル</h5>
       <% if matter.images.attached? %>
         <% matter.images.each do |image| %>
-          <%=  link_to image, 'data-lightbox': image do %>
+          <%=  link_to image, 'data-colorbox': image do %>
             <%= image_tag image.variant(resize:'100x100').processed  %>
           <% end %>
         <% end %>
@@ -61,7 +59,7 @@
     </div>
   </div>
 
-  <% if matter.address %>
+  <% if matter.address.present? %>
     <div class="row m-0 py-4 show">
       <div class="col-md-10">
         <h5 class="font-weight-bold">要望箇所</h5>
@@ -70,7 +68,7 @@
     </div>
   <% end %>
 
-  <% if matter.latitude %>
+  <% if matter.latitude.present? %>
     <div class="row m-0 py-4 show">
       <div class="col-md-4">
         <h5 class="font-weight-bold">緯度</h5>
@@ -85,14 +83,14 @@
   <% end %>
 
   <% if current_user.admin? %>
-    <% if matter.start_time %>
+    <% if matter.start_time? %>
       <div class="row m-0 py-4 show">
         <div class="col-md-4">
           <h5 class="font-weight-bold">工事開始日</h5>
           <p><%= matter.start_time %></p>
         </div>
     <% end %>
-    <% if matter.end_time %>
+    <% if matter.end_time? %>
         <div class="col-md-3">
           <h5 class="font-weight-bold">工事終了日</h5>
           <p><%= matter.end_time %></p>
@@ -100,7 +98,7 @@
       </div>
     <% end %>
 
-    <% if matter.remark %>
+    <% if matter.remark? %>
       <div class="row m-0 py-4 show">
         <div class="col-md-10">
           <h5 class="font-weight-bold">備考</h5>

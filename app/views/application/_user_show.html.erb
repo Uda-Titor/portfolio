@@ -1,5 +1,5 @@
 <div class="card mx-auto mt-3" style="max-width: 25rem;">
-  <div class="card-header bg-light p-0 border-light">
+  <div class="card-header bg-color p-0 border-color">
     ユーザー情報
     <span class="float-right">
       <%= link_to edit_path do %>
@@ -50,21 +50,23 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , size: '48x48' %></td>
-                <td width="30%"><%= matter.title %></td>
+                <td width="34%"><%= matter.title %></td>
                 <td width="10%"><%= matter.status %></td>
                 <td id='priority_row' width="5%" ><%= matter.priority %></td>
                 <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
-                <td width="3%"><i class="fas fa-thumbs-up fa-2x"></i></td>
-                <td width="3%"><%= matter.favorites.count %></td>
-                <td width="3%"><%= link_to 'Show', matter %></td>
-                <td width="3%"><%= link_to 'Edit', edit_matter_path(matter) %></td>
-                <td width="3%"><%= link_to 'Destroy', matter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td width="2%"><i class="fas fa-thumbs-up fa-2x"></i></td>
+                <td width="2%"><%= matter.favorites.count %></td>
+                <td width="2%">
+                  <%= link_to matter do%>
+                    <i class="fas fa-file-alt fa-2x"></i>
+                    <% end %>
+                </td>
                 <% if (matter.user_id == current_user.id) || (current_user.admin == true) %>
                   <% if (matter.latest_sender != current_user.name) && (matter.latest_sender != nil) %>
-                    <td width="3%" class="bg-light"><i class="far fa-envelope fa-2x"></i></td>
+                    <td width="3%" class="bg-color"><i class="far fa-envelope fa-2x"></i></td>
                   <% end %>
                 <% else %>
-                    <td width="3%" class="bg-light"></td>
+                    <td width="3%" class="bg-color"></td>
                 <% end %>
               </tr>
           <% end %>

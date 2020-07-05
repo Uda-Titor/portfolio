@@ -2,7 +2,7 @@
   border-radius: 50%;
 }
 
-div.bg-light {
+div.bg-color {
   padding: 0.5rem;
   border: solid 0.5rem white;
 }
@@ -10,4 +10,12 @@ div.bg-light {
 .matter {
   border-top: solid 0.1rem white;
   border-bottom: solid 0.1rem white;
+}
+
+.bg-color {
+  background-color: #CCFF99;
+}
+
+.card-header {
+  border-color: #CCFF99;
 }
