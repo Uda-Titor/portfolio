@@ -43,7 +43,7 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image( matter.user.user_image.url, 'default.png'), class: 'icon', size: '48x48' %></td>
-                <td width="30%"><%= matter.title %></td>
+                <td width="34%"><%= matter.title %></td>
                 <td width="10%"><%= matter.status %></td>
                 <td id='priority_row' width="10%" ><%= matter.priority %></td>
                 <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
@@ -53,16 +53,6 @@
                   <%= link_to matter do%>
                     <i class="fas fa-file-alt fa-2x"></i>
                     <% end %>
-                </td>
-                <td width="2%">
-                  <%= link_to edit_matter_path(matter) do %>
-                   <i class="fas fa-edit fa-2x"></i>
-                  <% end %>
-                </td>
-                <td width="2%">
-                  <%= link_to matter, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                    <i class="fas fa-trash-alt fa-2x"></i>
-                  <% end %>
                 </td>
                 <% if (matter.user_id == current_user.id) || (current_user.admin == true) %>
                   <% if (matter.latest_sender != current_user.name) && (matter.latest_sender != nil) %>
