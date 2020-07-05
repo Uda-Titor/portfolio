@@ -35,7 +35,7 @@
             通知
             <span class="badge badge-light">
               <% notifications = get_notifications.where.not(visitor_id: current_user.id) %>
-              <% if notifications.exists? %>
+              <% if notifications.present? %>
                 <% if current_user.admin? %>
                   <%= notifications.where(admin_checked: false).length %>
                 <% else %>
@@ -60,7 +60,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <% if notifications.exists?  %>
+            <% if notifications.present?  %>
               <%= render partial: 'notifications/notification', locals: { notifications: notifications} %>
               <%= paginate notifications %>
             <% else %>
