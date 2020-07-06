@@ -43,7 +43,7 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image( matter.user.user_image.url, 'default.png'), class: 'icon', size: '48x48' %></td>
-                <td width="34%"><%= matter.title %></td>
+                <td width="34%"><%= matter.title.truncate(18) %></td>
                 <td width="10%"><%= matter.status %></td>
                 <td id='priority_row' width="10%" ><%= matter.priority %></td>
                 <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
