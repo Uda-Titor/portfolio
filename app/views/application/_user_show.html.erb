@@ -50,10 +50,10 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , size: '48x48' %></td>
-                <td width="34%"><%= matter.title %></td>
-                <td width="10%"><%= matter.status %></td>
-                <td id='priority_row' width="5%" ><%= matter.priority %></td>
-                <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
+                <td width="34%" ><%= matter.title.truncate(20) %></td>
+                <td width="10%" class="text-center"><%= matter.status %></td>
+                <td id='priority_row' width="5%" class="text-center"><%= matter.priority %></td>
+                <td width="15%" class="text-center"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
                 <td width="2%"><i class="fas fa-thumbs-up fa-2x"></i></td>
                 <td width="2%"><%= matter.favorites.count %></td>
                 <td width="2%">
