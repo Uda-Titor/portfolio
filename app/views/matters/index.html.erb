@@ -1,13 +1,22 @@
-<div class="container">
-  <h3>お知らせ</h3>
+<div class="container mt-3">
+  <% if current_user.admin? %>
+    <h2>お知らせ
+        <button class="btn btn-secondary float-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fas fa-plus"></i>
+        </button>
+    </h2>
+  <% end %>
   <div class="row rounded p-2" id = "information">
     <div id="informations_area">
         <%= render partial: 'informations/index', locals: { informations: @informations } %>
     </div>
   </div>
-  <% if current_user.admin? %>
-    <%= render partial: 'informations/form', locals: { information: @information } %>
-  <% end %>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <%= render partial: 'informations/form', locals: { information: @information } if current_user.admin?%>
+    </div>
+  </div>
+
 
   <div class="row">
     <div class="col-12 m-2">
