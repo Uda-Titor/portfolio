@@ -4,9 +4,9 @@ RSpec.describe '案件周りの操作確認', type: :system do
     FactoryBot.create(:user)
     FactoryBot.create(:admin)
     visit new_user_session_path
-    fill_in 'Email', with: 'user@example.com'
-    fill_in 'Password', with: '00000000'
-    click_on 'Log in'
+    fill_in 'メール', with: 'user@example.com'
+    fill_in 'パスワード', with: '00000000'
+    click_on 'log_in'
   end
   describe '案件一覧画面' do
     context '案件を作成した場合' do
@@ -26,17 +26,18 @@ RSpec.describe '案件周りの操作確認', type: :system do
         visit matters_path
         fill_in 'タイトル',with: 'test1_title'
         click_on '検索する'
-        expect(page).not_to have_content 'test2_title', 'test3_title'
+        expect(page).not_to have_content 'test2_title'
       end
       it 'ステータスで検索できる' do
         visit matters_path
         select '未着手', from: 'ステータス'
         click_on '検索する'
-        expect(page).not_to have_content 'test2_title', 'test3_title'
+        expect(page).not_to have_content 'test2_title'
       end
       it '優先順位で並び替えができる' do
         visit matters_path
         click_on '優先順位'
+        sleep 0.5
         matter_list = all('#priority_row')
         sleep 0.5
         expect(matter_list[0]).to have_content '高'
@@ -49,11 +50,27 @@ RSpec.describe '案件周りの操作確認', type: :system do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do
         visit matters_path
-        click_on 'New Matter'
-        fill_in 'Title', with: 'test_title'
-        fill_in 'Content', with: 'test_content'
+        click_on 'new'
+        fill_in 'タイトル', with: 'test_title'
+        fill_in '要望内容', with: 'test_content'
         click_button '登録する'
         expect(page).to have_content 'test_title'
+      end
+      it 'タイトルを入れないとエラーが出る' do
+        visit matters_path
+        click_on 'new'
+        fill_in 'タイトル', with: ''
+        fill_in '要望内容', with: 'test_content'
+        click_button '登録する'
+        expect(page).to have_content 'タイトルを入力してください'
+      end
+      it '要望内容を入れないとエラーが出る' do
+        visit matters_path
+        click_on 'new'
+        fill_in 'タイトル', with: 'test_title'
+        fill_in '要望内容', with: ''
+        click_button '登録する'
+        expect(page).to have_content '要望内容を入力してください'
       end
     end
   end
@@ -62,7 +79,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
        it '該当案件の内容が表示されたページに遷移する' do
         matter = FactoryBot.create(:test1, user_id: 1)
         visit matters_path
-        click_on "Show"
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
         expect(page).to have_content 'test1_title'
       end
      end
@@ -70,8 +87,8 @@ RSpec.describe '案件周りの操作確認', type: :system do
        it '該当案件にいいねができる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        click_on "Show"
-        find('.fas').click
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find('.fa-thumbs-up').click
         expect(page).to have_css "div#favorites_buttons_#{matter.id} ", text: '1'
       end
      end
@@ -79,9 +96,10 @@ RSpec.describe '案件周りの操作確認', type: :system do
        it 'コメントができる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        click_on "Show"
-        fill_in 'Content', with: 'さすがです'
-        click_on "登録する"
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '/html/body/div/span/button').click
+        fill_in 'comment', with: 'さすがです'
+        click_on "コメントする"
         expect(page).to have_content 'さすがです'
       end
      end
@@ -89,10 +107,12 @@ RSpec.describe '案件周りの操作確認', type: :system do
        it 'コメント後、コメントを削除できる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        click_on "Show"
-        fill_in 'Content', with: 'さすがです'
-        click_on "登録する"
-        click_on "コメント削除"
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '/html/body/div/span/button').click
+        fill_in 'comment', with: 'さすがです'
+        click_on "コメントする"
+        sleep 0.5
+        find('.fa-trash-alt').click
         page.accept_confirm '本当に削除しますか?'
         expect(page).not_to have_content 'さすがです'
       end
@@ -101,12 +121,13 @@ RSpec.describe '案件周りの操作確認', type: :system do
        it 'コメント後、コメントを編集できる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        click_on "Show"
-        fill_in 'Content', with: 'さすがです'
-        click_on "登録する"
-        click_on "コメント編集"
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '/html/body/div/span/button').click
+        fill_in 'comment', with: 'さすがです'
+        click_on "コメントする"
+        find('.fa-edit').click
         fill_in "comment_content_#{matter.id}", with: 'すばらしいです'
-        click_on "更新する"
+        click_on "変更する"
         expect(page).to have_content 'すばらしいです'
       end
      end
