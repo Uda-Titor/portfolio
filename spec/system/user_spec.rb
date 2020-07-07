@@ -65,13 +65,19 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on 'log_in'
         expect(page).to have_content 'お知らせ'
       end
-      it 'ログインして、ユーザの詳細を確認' do
+      it 'ユーザログインするとき、メールを空欄にしたらエラーがでる' do
         visit new_user_session_path
-        fill_in 'メール', with: 'user@example.com'
+        fill_in 'メール', with: ''
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        click_on 'user'
-        expect(page).to have_content 'user@example.com'
+        expect(page).to have_content 'メールまたはパスワードが違います。'
+      end
+      it 'ユーザログインするとき、パスワードを空欄にしたらエラーがでる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: ''
+        click_on 'log_in'
+        expect(page).to have_content 'メールまたはパスワードが違います。'
       end
       it 'ログインして、ユーザの詳細を確認後、編集できる' do
         visit new_user_session_path

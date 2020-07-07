@@ -25,7 +25,7 @@
       <h5 class="font-weight-bold">写真ファイル</h5>
       <% if matter.images.attached? %>
         <% matter.images.each do |image| %>
-          <%=  link_to image, 'data-colorbox': image do %>
+          <%=  link_to image, 'data-lightbox': image do %>
             <%= image_tag image.variant(resize:'100x100').processed  %>
           <% end %>
         <% end %>
