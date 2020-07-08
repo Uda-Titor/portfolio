@@ -20,8 +20,7 @@ class MattersController < ApplicationController
     end
     @comments = @matter.comments
     @comment = @matter.comments.build
-    @notifications = Notification.where(matter_id: @matter.id, visited_id: current_user)
-    binding.irb
+    current_user.admin? ? @notifications = Notification.where(matter_id: @matter.id) : @notifications = Notification.where(matter_id: @matter.id, visited_id: current_user)
     if @notifications.present?
       if current_user.admin?
         @notifications.each do |notification|
