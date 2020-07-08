@@ -178,4 +178,37 @@ RSpec.describe '案件周りの操作確認', type: :system do
       end
      end
   end
+  describe '通知' do
+    context 'userデータがあり、案件が１つ作成されている場合' do
+      before do
+        FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+      end
+      it 'いいねをしたら、通知される' do
+        visit matters_path
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find('.fa-thumbs-up').click
+        visit matters_path
+        click_on 'ログアウト'
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on '通知'
+        expect(Notification.count).to eq 1
+      end
+      it 'コメントをしたら、通知される' do
+        visit matters_path
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '/html/body/div/span/button').click
+        fill_in 'comment', with: 'さすがです'
+        click_on "コメントする"
+        click_on 'ログアウト'
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on '通知'
+        expect(Notification.count).to eq 1
+      end
+    end
+  end
 end

@@ -20,12 +20,17 @@ class MattersController < ApplicationController
     end
     @comments = @matter.comments
     @comment = @matter.comments.build
-    @notification = Notification.find_by(matter_id: @matter.id, visited_id: current_user)
-    if @notification.present?
+    @notifications = Notification.where(matter_id: @matter.id, visited_id: current_user)
+    binding.irb
+    if @notifications.present?
       if current_user.admin?
-        @notification.update_attributes(admin_checked: true)
+        @notifications.each do |notification|
+          notification.update_attributes(admin_checked: true)
+        end
       else
-        @notification.update_attributes(checked: true)
+        @notifications.each do |notification|
+          notification.update_attributes(checked: true)
+        end
       end
     end
   end
