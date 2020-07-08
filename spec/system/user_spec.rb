@@ -162,6 +162,9 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it 'ユーザーの電話番号が表示される' do
         expect(page).to have_content '090-0909-0909'
       end
+      it 'ユーザーの住所が表示される' do
+        expect(page).to have_content 'ユーザーの住所'
+      end
       it '備考が表示される' do
         expect(page).to have_content '備考です'
       end
@@ -181,6 +184,28 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         visit admin_matters_path
         expect(page).to have_content 'user'
       end
+      it '一般ユーザーはユーザー一覧に入れない' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        visit admin_users_path
+        expect(page).to have_content '勤務時間は平日の8時半〜１７時までです。'
+      end
+      it '一般ユーザーには管理者画面へのリンクが表示されない' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        expect(page).to_not have_content '管理者画面'
+      end
+      it '一般ユーザーにはユーザー一覧へのリンクが表示されない' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        expect(page).to_not have_content 'ユーザー覧'
+      end
       it '管理者は管理者画面に入り、他のユーザを編集できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
@@ -192,17 +217,52 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on '更新する'
         expect(page).to have_content 'sample'
       end
-      it 'ログインして、ユーザの詳細を確認後、削除できる' do
+      it 'ログインして、管理者画面に移り、ラベルを作成できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        click_on 'ユーザ一覧'
-        find(:xpath, '/html/body/div/div/div[1]/div[1]/span[1]/a/i').click
-        sleep 0.5
-        page.accept_confirm 'Are you sure?'
-        sleep 0.5
-        expect(User.count).to eq(1)
+        click_on '管理者画面'
+        click_on 'ラベル'
+        fill_in 'label_form', with: '道路'
+        click_on '登録する'
+        expect(page).to have_content '道路'
+      end
+      it 'ログインして、管理者画面に移り、ラベルを作成後、削除できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on '管理者画面'
+        click_on 'ラベル'
+        fill_in 'label_form', with: '道路'
+        click_on '登録する'
+        find('.fa-trash-alt').click
+        page.accept_confirm '本当に削除しますか?'
+        expect(page).to_not have_content '道路'
+      end
+      it 'ログインして、お知らせを追加できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        binding.irb
+        find('.information').click
+        fill_in 'information_content', with: '今日は大変忙しいです'
+        click_on '追加する'
+        expect(page).to_not have_content '今日は大変忙しいです'
+      end
+      it 'ログインして、お知らせを追加後、編集できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        binding.irb
+        find('.information').click
+        fill_in 'information_content', with: '今日は大変忙しいです'
+        click_on '追加する'
+        find('.fas fa-edit').click
+        expect(page).to_not have_content '今日は大変忙しいです'
       end
     end
   end

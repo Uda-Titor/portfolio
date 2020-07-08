@@ -5,6 +5,7 @@ FactoryBot.define do
     email { 'user@example.com' }
     password { '00000000' }
     phone_number { '090-0909-0909' }
+    user_place { 'ユーザーの住所' }
     remark { '備考です' }
   end
   factory :admin, class: User do

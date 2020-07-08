@@ -4,6 +4,10 @@ FactoryBot.define do
       content { 'test1_content' }
       status { '未着手' }
       priority { 2 }
+      address { 'test_address' }
+      latitude { 111 }
+      longitude { 112 }
+      remark { 'test_remark' }
       start_time { '2020_07_15' }
       end_time { '2020_07_30' }
   end

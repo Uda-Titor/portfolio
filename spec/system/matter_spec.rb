@@ -4,7 +4,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
     FactoryBot.create(:user)
     FactoryBot.create(:admin)
     visit new_user_session_path
-    fill_in 'メール', with: 'admin@example.com'
+    fill_in 'メール', with: 'user@example.com'
     fill_in 'パスワード', with: '00000000'
     click_on 'log_in'
   end
@@ -83,7 +83,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
   describe '案件詳細画面' do
      context '任意の案件詳細画面に遷移した場合' do
        it '該当案件の内容が表示されたページに遷移する' do
-        matter = FactoryBot.create(:test1, user_id: 1)
+      FactoryBot.create(:test1, user_id: 1)
         visit matters_path
         find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
         expect(page).to have_content 'test1_title'
@@ -95,12 +95,24 @@ RSpec.describe '案件周りの操作確認', type: :system do
         visit matters_path
         find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
         find('.fa-thumbs-up').click
+        sleep 0.5
         expect(page).to have_css "div#favorites_buttons_#{matter.id} ", text: '1'
       end
      end
      context '任意の案件詳細画面に遷移した場合' do
+       it '該当案件にいいねを外すことができる' do
+          matter = FactoryBot.create(:test1, user_id: 2)
+        visit matters_path
+        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find('.fa-thumbs-up').click
+        find('.fa-thumbs-up').click
+        sleep 0.5
+        expect(page).to have_css "div#favorites_buttons_#{matter.id}", text: '0'
+      end
+     end
+     context '任意の案件詳細画面に遷移した場合' do
        it 'コメントができる' do
-        matter = FactoryBot.create(:test1, user_id: 2)
+        FactoryBot.create(:test1, user_id: 2)
         visit matters_path
         find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
         find(:xpath, '/html/body/div/span/button').click
@@ -111,7 +123,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
      end
      context '任意の案件詳細画面に遷移した場合' do
        it 'コメント後、コメントを削除できる' do
-        matter = FactoryBot.create(:test1, user_id: 2)
+        FactoryBot.create(:test1, user_id: 2)
         visit matters_path
         find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
         find(:xpath, '/html/body/div/span/button').click
@@ -121,6 +133,34 @@ RSpec.describe '案件周りの操作確認', type: :system do
         find('.fa-trash-alt').click
         page.accept_confirm '本当に削除しますか?'
         expect(page).not_to have_content 'さすがです'
+      end
+      context 'ページレイアウト' do
+        before do
+          FactoryBot.create(:test1, user_id: 2)
+          visit matters_path
+          find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        end
+        it '案件のタイトルが表示される' do
+          expect(page).to have_content 'test1_title'
+        end
+        it '案件内容が表示される' do
+          expect(page).to have_content 'test1_content'
+        end
+        it '案件の進捗状況が表示される' do
+          expect(page).to have_content '未着手'
+        end
+        it '要望箇所が表示される' do
+          expect(page).to have_content 'test_address'
+        end
+        it '緯度が表示される' do
+          expect(page).to have_content 'test_address'
+        end
+        it '経度が表示される' do
+          expect(page).to have_content 111
+        end
+        it '緊急度が表示される' do
+          expect(page).to have_content 112
+        end
       end
      end
      context '任意の案件詳細画面に遷移した場合' do
