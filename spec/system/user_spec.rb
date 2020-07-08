@@ -217,6 +217,27 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on '更新する'
         expect(page).to have_content 'sample'
       end
+      it '管理者はユーザー一覧に入り、他のユーザを削除できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'ユーザ一覧'
+        find(:xpath, '/html/body/div/div/div[1]/div[1]/span[1]/a').click
+        page.accept_confirm 'Are you sure?'
+        sleep 0.5
+        expect(User.count).to eq 1
+      end
+      it '管理者はユーザー一覧に入り、管理者を削除しようとするが、できない' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'admin@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'ユーザ一覧'
+        find(:xpath, '/html/body/div/div/div[2]/div[1]/span[1]/a').click
+        page.accept_confirm 'Are you sure?'
+        expect(User.count).to eq 2
+      end
       it 'ログインして、管理者画面に移り、ラベルを作成できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
@@ -246,23 +267,10 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        binding.irb
         find('.information').click
         fill_in 'information_content', with: '今日は大変忙しいです'
         click_on '追加する'
-        expect(page).to_not have_content '今日は大変忙しいです'
-      end
-      it 'ログインして、お知らせを追加後、編集できる' do
-        visit new_user_session_path
-        fill_in 'メール', with: 'admin@example.com'
-        fill_in 'パスワード', with: '00000000'
-        click_on 'log_in'
-        binding.irb
-        find('.information').click
-        fill_in 'information_content', with: '今日は大変忙しいです'
-        click_on '追加する'
-        find('.fas fa-edit').click
-        expect(page).to_not have_content '今日は大変忙しいです'
+        expect(page).to have_content '今日は大変忙しいです'
       end
     end
   end
