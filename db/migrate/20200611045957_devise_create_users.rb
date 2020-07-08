@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :user_image
       t.string :phone_number
-      t.string :user_address
+      t.string :user_place
       t.text :remark
 
       ## Recoverable

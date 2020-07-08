@@ -9,7 +9,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'password', with: '00000000'
         fill_in 'password_confirmation', with: '00000000'
         click_on 'sign_up'
-        expect(page).to have_content 'お知らせ'
+        expect(page).to have_content 'アカウント登録が完了しました。'
       end
       it 'ログインしていない時はログイン画面に飛ぶテスト' do
         visit matters_path
@@ -51,6 +51,17 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on 'sign_up'
         expect(page).to have_content 'パスワード（確認用）とパスワードの入力が一致しません'
       end
+      it 'ユーザー新規登録時にメールがすでに登録してあるとエラーが出る' do
+        FactoryBot.create(:user)
+        sleep 0.5
+        visit new_user_registration_path
+        fill_in 'user', with: 'user'
+        fill_in 'email', with: 'user@example.com'
+        fill_in 'password', with: '00000000'
+        fill_in 'password_confirmation', with: '00000000'
+        click_on 'sign_up'
+        expect(page).to have_content 'メールはすでに存在します'
+      end
     end
   end
   describe 'ユーザのログインテスト' do
@@ -63,7 +74,15 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'メール', with: 'user@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        expect(page).to have_content 'お知らせ'
+        expect(page).to have_content 'ログインしました。'
+      end
+      it 'ユーザログイン後、ログアウトできる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'ログアウト'
+        expect(current_path).to eq new_user_session_path
       end
       it 'ユーザログインするとき、メールを空欄にしたらエラーがでる' do
         visit new_user_session_path
@@ -79,16 +98,72 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on 'log_in'
         expect(page).to have_content 'メールまたはパスワードが違います。'
       end
-      it 'ログインして、ユーザの詳細を確認後、編集できる' do
+      it 'ログインして、ユーザの詳細を確認後、ユーザー名編集できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'user@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         click_on 'user'
         find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
-        fill_in 'user', with: '1'
+        fill_in 'user', with: 'sample'
         click_on 'update'
-        expect(page).to have_content '1'
+        expect(page).to have_content 'sample'
+      end
+      it 'ログインして、ユーザの詳細を確認後、パスワードを編集できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'user'
+        find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
+        fill_in 'password', with: '09090909'
+        fill_in 'password_confirmation', with: '09090909'
+        click_on 'update'
+        click_on 'ログアウト'
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '09090909'
+        click_on 'log_in'
+        expect(page).to have_content 'ログインしました。'
+      end
+      it 'ログインして、ユーザの詳細を確認後、アカウントを削除できる' do
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'user'
+        find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
+        click_on 'user_delete'
+        sleep 0.5
+        page.accept_confirm '本当によろしいですか?'
+        sleep 0.5
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '09090909'
+        click_on 'log_in'
+        expect(page).to have_content 'メールまたはパスワードが違います。'
+      end
+    end
+  end
+  describe 'プロフィール編集ページ' do
+    context 'ページレイアウト' do
+      before do
+        FactoryBot.create(:user)
+        visit new_user_session_path
+        fill_in 'メール', with: 'user@example.com'
+        fill_in 'パスワード', with: '00000000'
+        click_on 'log_in'
+        click_on 'user'
+      end
+      it 'ユーザーの名前が表示される' do
+        expect(page).to have_content 'user'
+      end
+      it 'ユーザーのメールが表示される' do
+        expect(page).to have_content 'user@example.com'
+      end
+      it 'ユーザーの電話番号が表示される' do
+        expect(page).to have_content '090-0909-0909'
+      end
+      it '備考が表示される' do
+        expect(page).to have_content '備考です'
       end
     end
   end
@@ -117,7 +192,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on '更新する'
         expect(page).to have_content 'sample'
       end
-      it 'ログインして、ユーザの詳細を確認後、編集できる' do
+      it 'ログインして、ユーザの詳細を確認後、削除できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'

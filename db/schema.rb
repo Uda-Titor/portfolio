@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_094209) do
+ActiveRecord::Schema.define(version: 2020_07_08_005916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_094209) do
     t.string "name"
     t.text "user_image"
     t.string "phone_number"
-    t.string "user_address"
+    t.string "user_place"
     t.text "remark"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

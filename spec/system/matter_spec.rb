@@ -4,7 +4,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
     FactoryBot.create(:user)
     FactoryBot.create(:admin)
     visit new_user_session_path
-    fill_in 'メール', with: 'user@example.com'
+    fill_in 'メール', with: 'admin@example.com'
     fill_in 'パスワード', with: '00000000'
     click_on 'log_in'
   end
@@ -19,12 +19,18 @@ RSpec.describe '案件周りの操作確認', type: :system do
     context '検索をした場合' do
       before do
         FactoryBot.create(:test1, user_id: 1)
-        FactoryBot.create(:test2, user_id: 1)
-        FactoryBot.create(:test3, user_id: 1)
+        FactoryBot.create(:test2, user_id: 2)
+        FactoryBot.create(:test3, user_id: 2)
       end
       it 'タイトルで検索できる' do
         visit matters_path
         fill_in 'タイトル',with: 'test1_title'
+        click_on '検索する'
+        expect(page).not_to have_content 'test2_title'
+      end
+      it 'ユーザー名で検索できる' do
+        visit matters_path
+        fill_in 'ユーザー名',with: 'user'
         click_on '検索する'
         expect(page).not_to have_content 'test2_title'
       end
