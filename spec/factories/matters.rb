@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :test1, class: Matter do
+      id { 1 }
       title { 'test1_title' }
       content { 'test1_content' }
       status { '未着手' }
@@ -10,6 +11,7 @@ FactoryBot.define do
       remark { 'test_remark' }
       start_time { '2020_07_15' }
       end_time { '2020_07_30' }
+      user_id { 1 }
   end
 
   factory :test2, class: Matter do

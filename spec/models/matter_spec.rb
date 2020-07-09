@@ -1,28 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Matter, type: :model do
-  let!(:matter) { create(:matter) }
-
-  it "has a valid factory of user" do
-    expect(matter).to be_valid
+  before do
+    FactoryBot.create(:user)
   end
-  it "has a valid factory of another_user" do
-    comment = build(:comment, )
-    expect(user).to be_valid
-  end
-
-  it "is valid with title, content and user_id" do
-    user = @user
-    matter = user.matters.build(
-      title: "test",
-      content: "test_content",
-      user_id: 1
-      )
-    expect(matter).to be_valid
-  end
-  it "is invalid without title" do
-    matter = Matter.new(title: nil)
-    matter.valid?
-    expect(matter.errors[:title]).to include("を入力してください")
+  context "バリデーション" do
+    it "有効な状態であること" do
+      matter = FactoryBot.build(:test1, user_id: 1)
+      expect(matter).to be_valid
+    end
+    it "titleがなければ無効" do
+      matter = FactoryBot.build(:test1, title: nil,  user_id: 1)
+      expect(matter).not_to be_valid
+    end
+    it "titleがなければ無効" do
+      matter = FactoryBot.build(:test1, content: nil,  user_id: 1)
+      expect(matter).not_to be_valid
+    end
+    it "user_idがなければ無効" do
+      matter = FactoryBot.build(:test1, content: nil,  user_id: 1)
+      expect(matter).not_to be_valid
+    end
   end
 end
