@@ -1,4 +1,5 @@
 class InformationsController < ApplicationController
+  before_action :set_information, only: [:edit, :update, :destroy]
 
   def create
     @information = Information.new(information_params)
@@ -13,7 +14,6 @@ class InformationsController < ApplicationController
   end
 
   def edit
-    @information = Information.find(params[:id])
     respond_to do |format|
       flash.now[:notice] = 'お知らせの編集中'
       format.js { render :edit }
@@ -21,8 +21,7 @@ class InformationsController < ApplicationController
   end
 
   def update
-    @information = Information.find(params[:id])
-      respond_to do |format|
+        respond_to do |format|
         if @information.update(information_params)
           @informations = Information.all.order(created_at: :desc)
           flash.now[:notice] = 'お知らせが編集されました'
@@ -35,7 +34,6 @@ class InformationsController < ApplicationController
   end
 
   def destroy
-    @information = Information.find(params[:id])
     @information.destroy
     respond_to do |format|
       flash.now[:notice] = 'コメントが削除されました'
@@ -45,6 +43,9 @@ class InformationsController < ApplicationController
   end
 
   private
+  def set_information
+    @information = Information.find(params[:id])
+  end
 
   def information_params
     params.require(:information).permit(:content)
