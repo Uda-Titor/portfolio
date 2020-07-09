@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :email, presence: true
   #管理者がいなくならないようにコールバック
   before_destroy :check_destroy

@@ -36,13 +36,11 @@
             通知
             <span class="badge badge-light">
               <% notifications = get_notifications.where.not(visitor_id: current_user.id) %>
-              <% if notifications.present? %>
                 <% if current_user.admin? %>
-                  <%= notifications.where(admin_checked: false).length %>
+                  <%= notifications.where(admin_checked: false).present? ? notifications.where(admin_checked: false).length : 0  %>
                 <% else %>
-                  <%= notifications.where(checked: false).length %>
+                  <%= notifications.where(checked: false).present? ? notifications.where(checked: false).length : 0 %>
                 <% end %>
-              <% end %>
             </span>
           </button>
         <% else %>

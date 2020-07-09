@@ -45,7 +45,7 @@ class MattersController < ApplicationController
     @matter = current_user.matters.build(matter_params)
 
     if @matter.save
-      redirect_to @matter, notice: 'Matter was successfully created.'
+      redirect_to @matter, notice: '案件を作成しました！'
     else
       render :new
     end
@@ -53,7 +53,7 @@ class MattersController < ApplicationController
 
   def update
     if @matter.update(matter_params)
-      redirect_to @matter, notice: 'Matter was successfully updated.'
+      redirect_to @matter, notice: '案件を編集しました！'
     else
       render :edit
     end
@@ -61,7 +61,7 @@ class MattersController < ApplicationController
 
   def destroy
     @matter.destroy
-    redirect_to matters_url, notice: 'Matter was successfully destroyed.'
+    redirect_to matters_url, notice: '案件を削除しました！'
   end
 
   private
