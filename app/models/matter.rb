@@ -1,6 +1,7 @@
 class Matter < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
+  validates :user_id, presence: true
 
 
   enum priority: { 高: 0, 中: 1, 低: 2 }
