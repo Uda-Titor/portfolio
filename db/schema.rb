@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_072426) do
+ActiveRecord::Schema.define(version: 2020_07_09_132542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_072426) do
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
-    t.integer "matter_id"
+    t.integer "matter_id", null: false
     t.integer "comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
@@ -134,3 +134,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_072426) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "matters"
   add_foreign_key "comments", "users"
+  add_foreign_key "labellings", "labels"
+  add_foreign_key "labellings", "matters"
+  add_foreign_key "matters", "users"
+end
