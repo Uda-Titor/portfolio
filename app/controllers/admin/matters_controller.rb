@@ -26,7 +26,7 @@ class Admin::MattersController < ApplicationController
 
   def destroy
     @matter.destroy
-    redirect_to admin_matters_path, notice: 'matter was successfully destroyed.'
+    redirect_to admin_matters_path, notice: '#{@matter.title}を削除しました。'
   end
 
   private
