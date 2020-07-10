@@ -5,7 +5,7 @@ FactoryBot.define do
     visited_id { 2 }
     matter_id { 1 }
     comment_id { 1 }
-    action { "comment" }
+    action { 'comment' }
     checked { false }
     admin_checked { false }
   end

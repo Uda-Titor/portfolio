@@ -1,6 +1,6 @@
 class MattersController < ApplicationController
-  before_action :set_matter, only: [:show, :edit, :update, :destroy]
-  before_action :user_confirmation, only: [:edit, :update, :destroy]
+  before_action :set_matter, only: %i[show edit update destroy]
+  before_action :user_confirmation, only: %i[edit update destroy]
 
   def index
     @search = Matter.ransack(params[:q])
@@ -9,7 +9,6 @@ class MattersController < ApplicationController
 
     @informations = Information.all
     @information = Information.new
-
   end
 
   def show
@@ -38,8 +37,7 @@ class MattersController < ApplicationController
     @matter = Matter.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @matter = current_user.matters.build(matter_params)
@@ -65,18 +63,16 @@ class MattersController < ApplicationController
   end
 
   private
+
   def set_matter
     @matter = Matter.find(params[:id])
   end
 
-
   def matter_params
-    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [],  label_ids: [] )
+    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [], label_ids: [])
   end
 
   def user_confirmation
     redirect_to root_path unless @matter.user_id == current_user.id || current_user.admin?
   end
-
-
 end

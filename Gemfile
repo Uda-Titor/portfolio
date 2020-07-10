@@ -3,22 +3,25 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-#ページネーション
+# rubcop
+gem 'rubocop'
+gem 'rubocop-rails', require: false
+# ページネーション
 gem 'kaminari'
-#アイコンデフォルト
+# アイコンデフォルト
 gem 'font-awesome-sass', '~> 5.4.1'
-#カレンダー
-gem "simple_calendar", "~> 2.0"
-#グラフ
-gem "chartkick"
+# カレンダー
+gem 'simple_calendar', '~> 2.0'
+# グラフ
+gem 'chartkick'
 gem 'groupdate'
-#画像アップロード
+# 画像アップロード
 gem 'carrierwave'
 gem 'mini_magick'
-#userログイン機能
+# userログイン機能
 gem 'devise'
 gem 'devise-i18n'
-#検索gem
+# 検索gem
 gem 'ransack'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
@@ -54,25 +57,25 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  #デバック関連
-  gem 'pry-rails'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # デバック関連
   gem 'better_errors'
   gem 'binding_of_caller'
-  #テスト関連
-  gem 'spring'
-  gem 'rspec-rails', '~> 3.8'
-  gem 'factory_bot_rails'
+  gem 'pry-rails'
+  # テスト関連
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'spring'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener_web'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
@@ -81,4 +84,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
