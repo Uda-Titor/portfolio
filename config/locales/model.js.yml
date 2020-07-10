@@ -22,5 +22,5 @@ ja:
         name: 名前
         user_image: アイコン
         phone_number: 電話番号
-        user_address: 住所
+        user_place: 住所
         remark: 備考

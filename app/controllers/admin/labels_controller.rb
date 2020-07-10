@@ -1,5 +1,4 @@
 class Admin::LabelsController < ApplicationController
-
   def create
     @label = Label.new(label_params)
     respond_to do |format|
@@ -24,7 +23,8 @@ class Admin::LabelsController < ApplicationController
   end
 
   private
-    def label_params
-      params.require(:label).permit(:name)
-    end
+
+  def label_params
+    params.require(:label).permit(:name)
+  end
 end

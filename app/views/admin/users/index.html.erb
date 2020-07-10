@@ -1,8 +1,8 @@
   <div class="container mt-5">
-    <div class="card-deck">
+    <div class="row mx-a">
       <% @users.each do |user| %>
-        <div class="card" style="max-width: 15rem;" >
-          <div class="card-header bg-color p-0 border-color">
+        <div class="card col-lg-4 m-3" style="max-width: 15rem;" >
+          <div class="card-header bg-color p-0">
             ユーザー情報
             <span class="float-right">
               <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
@@ -20,11 +20,7 @@
               <% end %>
             </span>
           </div>
-          <% if user.user_image? %>
-            <%= image_tag user.user_image.url, class: 'icon mx-auto' , size: '90x90' %>
-          <% else %>
-            <%= image_tag 'default.png', class: 'icon mx-auto' , size: '90x90' %>
-          <% end %>
+          <%= image_tag set_image(user.icon, 'default.png'), class: 'icon mx-auto', size: '90x90' %>
           <div class="card-body mx-auto">
             <h4 class="card-title"><%= user.name %></h4>
           </div>

@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def set_image(image_url, default)
-    image_url.present? ? image_url : default
+  def set_image(icon, default)
+    icon.attached? ? icon : default
   end
 end

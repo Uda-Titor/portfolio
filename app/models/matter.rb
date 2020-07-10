@@ -1,18 +1,18 @@
 class Matter < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
-
+  validates :user_id, presence: true
 
   enum priority: { 高: 0, 中: 1, 低: 2 }
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
-  #通知機能
+  # 通知機能
   has_many :notifications, dependent: :destroy
-  #画像アップロード
+  # 画像アップロード
   has_many_attached :images
-  #ラベル
+  # ラベル
   has_many :labellings, dependent: :destroy
   has_many :labels, through: :labellings
 
@@ -22,7 +22,7 @@ class Matter < ApplicationRecord
 
   def create_notification_favorite!(current_user)
     # すでに「いいね」されているか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and matter_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and matter_id = ? and action = ? ', current_user.id, user_id, id, 'favorite'])
     # いいねされていない場合のみ、通知レコードを作成
     if temp.blank?
       notification = current_user.active_notifications.new(
@@ -56,8 +56,8 @@ class Matter < ApplicationRecord
     # 自分の投稿に対するコメントの場合は、通知済みとする
     if notification.visitor_id == notification.visited_id
       notification.checked = true
+      notification.admin_checked = true
     end
     notification.save if notification.valid?
   end
-
 end
