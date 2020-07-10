@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   # 管理者がいなくならないようにコールバック
   before_destroy :check_destroy
+  #画像アップロード
+  has_one_attached :icon
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -13,8 +15,7 @@ class User < ApplicationRecord
   # 通知機能
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-
-  mount_uploader :user_image, ImageUploader
+  
   # user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)
     params.delete(:current_password)

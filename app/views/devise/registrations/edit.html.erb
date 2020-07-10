@@ -3,10 +3,10 @@
 <div class="container bg-color mt-3">
   <div class="row">
     <div class="col-md-8 mx-auto">
-        <%= image_tag set_image(@user.user_image.url, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
+        <%= image_tag set_image(@user.icon, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
         <div class="form-group">
           <%= f.label 'ユーザーアイコン' %> <br />
-          <%= f.file_field :user_image, placeholder:"アイコン", id: :user_iamge %>
+          <%= f.file_field :icon, placeholder:"アイコン", id: :icon %>
         </div>
         <p><%= f.check_box :remove_user_image %>画像を削除する</p>
 
@@ -21,7 +21,7 @@
                reader.readAsDataURL(input.files[0]);
              }
            }
-           $("#user_iamge").change(function(){
+           $("#icon").change(function(){
              readURL(this);
            });
           });

@@ -51,7 +51,7 @@
             <% else %>
               <tr class="matter bg-secondary">
             <% end %>
-                <td width="7%"><%= image_tag set_image( matter.user.user_image.url, 'default.png'), class: 'icon', size: '48x48' %></td>
+                <td width="7%"><%= image_tag set_image(matter.user.icon, 'default.png'), class: 'icon mx-auto', size: '48x48' %></td>
                 <td width="34%"><%= matter.title.truncate(18) %></td>
                 <td width="10%" class="text-center"><%= matter.status %></td>
                 <td id='priority_row' width="10%" class="text-center" ><%= matter.priority %></td>
