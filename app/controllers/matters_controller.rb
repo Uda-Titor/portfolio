@@ -69,7 +69,7 @@ class MattersController < ApplicationController
   end
 
   def matter_params
-    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, images: [], label_ids: [])
+    params.require(:matter).permit(:title, :content, :address, :latitude, :longitude, :status, :priority, :start_time, :end_time, :remark, :mail_status, :send_email, images: [], label_ids: [])
   end
 
   def user_confirmation

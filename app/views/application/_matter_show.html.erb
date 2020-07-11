@@ -83,6 +83,16 @@
   <% end %>
 
   <% if current_user.admin? %>
+    <div class="row m-0 py-4 show">
+      <div class="col-md-4">
+        <p class="font-weight-bold"><%= matter.mail_status %></p>
+      </div>
+
+      <div class="col-md-4">
+        <p class="font-weight-bold"><%= "完了メール送信予定" if matter.send_email %></p>
+      </div>
+    </div>
+
     <% if matter.start_time? %>
       <div class="row m-0 py-4 show">
         <div class="col-md-4">

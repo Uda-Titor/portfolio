@@ -125,6 +125,16 @@ $('.reset').click(function(){
       </div>
 
       <div class="form-row">
+        <div class="form-group col-2">
+          <%= matter.mail_status %>
+        </div>
+        <div class="form-group col-5">
+          <%= form.check_box :send_email ,{}, "true", "false" %>
+          <%= form.label '工事完了メールを送信する' %>
+        </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group col-md-4">
           <%= form.label :start_time %>
           <%= form.date_field :start_time, class: 'form-control' %>
@@ -142,6 +152,7 @@ $('.reset').click(function(){
           <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
         </div>
       </div>
+
     <% end %>
     <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
       <div class="actions">

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+#バッヂ処理
+gem 'whenever', require: false
 # rubcop
 gem 'rubocop'
 gem 'rubocop-rails', require: false
