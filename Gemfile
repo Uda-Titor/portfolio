@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'dotenv-rails'
 gem 'unicorn' # アプリケーションサーバのunicorn
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 #バッヂ処理
@@ -68,7 +69,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   # テスト関連
-  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
   gem 'spring'
