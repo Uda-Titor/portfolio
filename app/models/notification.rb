@@ -3,8 +3,8 @@ class Notification < ApplicationRecord
   validates :visited_id, presence: true
   validates :matter_id, presence: true
   validates :action, presence: true
-  validates :checked, presence: true
-  validates :admin_checked, presence: true
+  validates :checked, inclusion: [true, false]
+  validates :admin_checked, inclusion: [true, false]
 
   default_scope -> { order(created_at: :desc) }
   belongs_to :matter, optional: true

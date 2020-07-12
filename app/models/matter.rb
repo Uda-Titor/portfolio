@@ -41,7 +41,6 @@ class Matter < ApplicationRecord
         visited_id: user_id,
         action: 'favorite'
       )
-
       notification.save if notification.valid?
     end
   end
