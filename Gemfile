@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'unicorn' # アプリケーションサーバのunicorn
+gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 #バッヂ処理
 gem 'whenever', require: false
 # rubcop
@@ -20,6 +22,7 @@ gem 'groupdate'
 # 画像アップロード
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'aws-sdk-s3', require: false
 # userログイン機能
 gem 'devise'
 gem 'devise-i18n'
@@ -69,6 +72,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
   gem 'spring'
+
+  gem 'capistrano', '3.6.0' # capistranoのツール一式
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
