@@ -1,0 +1,51 @@
+<% notifications.each do |notification| %>
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
+  <span>
+      <%= visitor.name %>さんが
+      <% case notification.action %>
+        <%  when 'favorite' then %>
+          <% if notification.matter.user_id == visited.id && notification.matter.user_id == current_user.id %>
+            <%= link_to 'あなたの投稿', notification.matter, style: "font-weight: bold;" %>
+            にいいねしました
+          <% else %>
+          <span>
+            <%= link_to notification.matter do %>
+              <%= notification.matter.user.name %>さんの案件
+            <% end %>
+              にいいねしました
+          </span>
+          <% end %>
+        <% when 'comment' then %>
+          <% if notification.matter.user_id == visited.id && notification.matter.user_id == current_user.id %>
+            <%= link_to "あなたの案件", matter_path(notification.matter_id), style: "font-weight: bold;" %>
+              にコメントしました
+          <% else %>
+            <span>
+              <%= link_to notification.matter do %>
+                <%= notification.matter.user.name %>さんの案件
+              <% end %>
+                にコメントしました
+            </span>
+          <% end %>
+        <% end %>
+      <div>
+        <%= time_ago_in_words(notification.created_at).upcase %>
+        <% if current_user.admin? %>
+          <% if notification.admin_checked %>
+            <span class="badge badge-secondary">確認済み</span>
+          <% else %>
+            <span class="badge badge-warning">未確認</span>
+          <% end %>
+        <% else %>
+          <% if notification.checked %>
+            <span class="badge badge-secondary">確認済み</span>
+          <% else %>
+            <span class="badge badge-warning">未確認</span>
+          <% end %>
+        <% end %>
+      </div>
+
+
+  </span>
+<% end %>

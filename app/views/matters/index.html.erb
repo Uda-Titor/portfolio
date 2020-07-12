@@ -1,29 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<div class="container">
-  <h3>お知らせ</h3>
+<div class="container mt-3">
+  <% if current_user.admin? %>
+    <h2>お知らせ
+        <button class="btn btn-secondary float-right information" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fas fa-plus"></i>
+        </button>
+    </h2>
+  <% end %>
   <div class="row rounded p-2" id = "information">
     <div id="informations_area">
         <%= render partial: 'informations/index', locals: { informations: @informations } %>
     </div>
   </div>
-  <% if current_user.admin? %>
-    <%= render partial: 'informations/form', locals: { information: @information } %>
-  <% end %>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <%= render partial: 'informations/form', locals: { information: @information } if current_user.admin?%>
+    </div>
+  </div>
+
 
   <div class="row">
-    <div class="col-md-3 bg-light">
+    <div class="col-12 m-2">
+      <%= link_to new_matter_path do %>
+        <button type="button" class="btn btn-primary float-right" id="new"><i class="fas fa-plus-circle"></i>新規案件</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 bg-color">
       <%= render 'matter_search', search: @search %>
     </div>
-    <div class="col-md-9 bg-light">
+    <div class="col-md-9 bg-color">
       <table width="100%" >
         <thead>
           <tr>
             <th width="10%"></th>
-            <th width="30%">Title</th>
-            <th width="10%">Status</th>
-            <th width="15%"><%= sort_link(@search, :priority, '優先順位') %></th>
-            <th width="15%"><%= sort_link(@search, :created_at, '作成日時') %></th>
+            <th width="30%" class="text-center">タイトル</th>
+            <th width="10%" class="text-center">進捗状況</th>
+            <th width="15%" class="text-center"><%= sort_link(@search, :priority, '優先順位') %></th>
+            <th width="15%" class="text-center"><%= sort_link(@search, :created_at, '作成日時') %></th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -37,15 +51,11 @@
             <% else %>
               <tr class="matter bg-secondary">
             <% end %>
-                <% if matter.user.user_image.present? %>
-                  <td width="7%"><%= image_tag matter.user.user_image.url, class: 'icon' %></td>
-                <% else %>
-                  <td width="7%"><i class="fas fa-user-circle fa-3x" aria-hidden="true"></i></td>
-                <% end %>
-                <td width="30%"><%= matter.title %></td>
-                <td width="10%"><%= matter.status %></td>
-                <td id='priority_row' width="10%" ><%= matter.priority %></td>
-                <td width="15%"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
+                <td width="7%"><%= image_tag set_image(matter.user.icon, 'default.png'), class: 'icon mx-auto', size: '48x48' %></td>
+                <td width="34%"><%= matter.title.truncate(18) %></td>
+                <td width="10%" class="text-center"><%= matter.status %></td>
+                <td id='priority_row' width="10%" class="text-center" ><%= matter.priority %></td>
+                <td width="15%" class="text-center"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
                 <td width="2%"><i class="fas fa-thumbs-up fa-2x"></i></td>
                 <td width="2%"><%= matter.favorites.count %></td>
                 <td width="2%">
@@ -53,22 +63,12 @@
                     <i class="fas fa-file-alt fa-2x"></i>
                     <% end %>
                 </td>
-                <td width="2%">
-                  <%= link_to edit_matter_path(matter) do %>
-                   <i class="fas fa-edit fa-2x"></i>
-                  <% end %>
-                </td>
-                <td width="2%">
-                  <%= link_to matter, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                    <i class="fas fa-trash-alt fa-2x"></i>
-                  <% end %>
-                </td>
                 <% if (matter.user_id == current_user.id) || (current_user.admin == true) %>
                   <% if (matter.latest_sender != current_user.name) && (matter.latest_sender != nil) %>
-                    <td width="3%" class="bg-light"><i class="far fa-envelope fa-2x"></i></td>
+                    <td width="3%" class="bg-color"><i class="far fa-envelope fa-2x"></i></td>
                   <% end %>
                 <% else %>
-                    <td width="3%" class="bg-light"></td>
+                    <td width="3%" class="bg-color"></td>
                 <% end %>
               </tr>
           <% end %>
@@ -82,5 +82,3 @@
 
 
 <br>
-
-<%= link_to 'New Matter', new_matter_path %>

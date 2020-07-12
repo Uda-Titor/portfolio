@@ -1,9 +1,30 @@
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= link_to 'Show', admin_user_path(user.id) %></td>
-    <td><%= link_to 'Edit', edit_admin_user_path(user.id) %></td>
-    <td><%= link_to 'Destroy', admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-  <br>
-<% end %>
+  <div class="container mt-5">
+    <div class="row mx-a">
+      <% @users.each do |user| %>
+        <div class="card col-lg-4 m-3" style="max-width: 15rem;" >
+          <div class="card-header bg-color p-0">
+            ユーザー情報
+            <span class="float-right">
+              <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </span>
+            <span class="float-right">
+              <%= link_to edit_admin_user_path(user.id) do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+            </span>
+            <span class="float-right">
+              <%= link_to admin_user_path(user.id) do %>
+                <i class="fas fa-file-alt"></i>
+              <% end %>
+            </span>
+          </div>
+          <%= image_tag set_image(user.icon, 'default.png'), class: 'icon mx-auto', size: '90x90' %>
+          <div class="card-body mx-auto">
+            <h4 class="card-title"><%= user.name %></h4>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

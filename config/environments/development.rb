@@ -4,7 +4,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -41,7 +41,7 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  # Highlight code that triggered database queries in logs.
+  # Highcolor code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
   # Debug mode disables concatenation and preprocessing of assets.

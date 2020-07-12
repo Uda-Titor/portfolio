@@ -1,0 +1,13 @@
+<% labels.each do |label| %>
+  <% if label.id.present? %>
+    <div class="label-content" id ="this_label_<%= label.id %>">
+      <h4><span class="badge badge-info"><%= label.name %></span>
+        <span>
+          <%= link_to admin_label_path(label), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </span>
+      </h4>
+    </div>
+  <% end %>
+<% end %>

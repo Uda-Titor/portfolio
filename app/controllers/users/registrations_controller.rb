@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
 
   protected
+
   def update_resource(resource, params)
     resource.update_without_current_password(params)
   end
@@ -18,9 +19,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
   # def update

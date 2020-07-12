@@ -1,17 +1,17 @@
 class Admin::MattersController < ApplicationController
   before_action :if_not_admin
-  before_action :set_matter, only: [:show, :edit, :update, :destroy]
+  before_action :set_matter, only: %i[show edit update destroy]
 
   def index
     @search = Matter.ransack(params[:q])
     @matters = @search.result
+    @label = Label.new
+    @labels = Label.all
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @matter.update(matter_params)
@@ -24,10 +24,11 @@ class Admin::MattersController < ApplicationController
 
   def destroy
     @matter.destroy
-    redirect_to admin_matters_path, notice: 'matter was successfully destroyed.'
+    redirect_to admin_matters_path, notice: '#{@matter.title}を削除しました。'
   end
 
   private
+
   def if_not_admin
     redirect_to root_path unless current_user.admin?
   end
@@ -37,6 +38,6 @@ class Admin::MattersController < ApplicationController
   end
 
   def set_matter
-     @matter = Matter.find(params[:id])
+    @matter = Matter.find(params[:id])
   end
 end

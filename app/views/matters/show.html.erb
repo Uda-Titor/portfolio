@@ -1,4 +1,16 @@
-<div class="container bg-light">
+<div class="container bg-color">
+  <div class="row m-0">
+    <div class="ml-auto ">
+      <% if current_user == @matter.user || current_user.admin? %>
+        <%= link_to edit_matter_path(@matter) do %>
+          <i class="fas fa-edit fa-2x"></i>
+        <% end %>
+        <%= link_to @matter, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fas fa-trash-alt fa-2x"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <%= render 'matter_show', matter: @matter %>
   <% if @matter.latitude.present? %>
     <div id="map"></div>
@@ -17,10 +29,6 @@
     </span>
   </p>
 
-
-
-
-
   <div class="collapse " id="collapseExample">
     <div class="card card-body">
       <div id="comments_area">
@@ -29,10 +37,6 @@
       <%= render partial: 'comments/form', locals: { comment: @comment, matter: @matter } %>
     </div>
   </div>
-
-
-  <%= link_to 'Edit', edit_matter_path(@matter) %> |
-  <%= link_to 'Back', matters_path %>
 
 </div>
 <style>

@@ -9,11 +9,13 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.text_area :content, id: "comment_content_#{matter.id}" %>
-    <%= form.label :content %>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <h5><span class="badge badge-warning">変更中</span></h5>
+      <%= form.text_area :content, id: "comment_content_#{matter.id}" , class: 'form-control' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mb-3">
+    <%= form.submit '変更する', class: 'btn btn-warning' %>
   </div>
 <% end %>

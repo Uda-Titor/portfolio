@@ -1,33 +1,45 @@
-<%= form_with(model: matter, local: true) do |form| %>
-  <% if matter.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(matter.errors.count, "error") %> prohibited this matter from being saved:</h2>
-
-      <ul>
-      <% matter.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= form_with(model: matter, local: true) do |form| %>
+    <% if matter.errors.any? %>
+    <div class="container">
+      <div id="error_explanation" class="alert alert-danger" role="alert">
+        <ul>
+        <% matter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
-  <% end %>
-<div class="container bg-light">
+    <% end %>
+
+<div class="container bg-color">
   <form>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :title %>
+        <%= form.label :title %>　<span class="badge badge-danger">必須</span>
         <%= form.text_field :title, class: 'form-control', placeholder: "タイトルを入れてください" %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :content %>
+        <%= form.label :content %>　<span class="badge badge-danger">必須</span>
         <%= form.text_area :content, class: 'form-control', placeholder: "要望内容を書いてください" %>
       </div>
     </div>
 
+    <p>※該当項目にチェックを付けてください　<span class="badge badge-secondary">任意</span></p>
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |b| %>
+          <div class="form-check-inline">
+            <strong><%= b.check_box + b.label { b.text } %></strong>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="form-group">
-      <%= form.label :images %>
+      <%= form.label :images %>　<span class="badge badge-secondary">任意</span>
       <div id="file" class="input-group">
         <div class="custom-file">
           <%= form.file_field :images, multiple: true, id: "customfile" , class: 'custom-file-input' %>
@@ -54,7 +66,7 @@ function handleFileSelect(evt) {
         reader.onload = (function(theFile) {
             return function(e) {
                 if (theFile.type.match('image.*')) {
-                    var $html = ['<div class="d-inline-block mr-1 mt-1"><img class="img-thumbnail" src="', e.target.result,'" title="', escape(theFile.name), '" style="height:100px;" /><div class="small text-muted text-center">', escape(theFile.name),'</div></div>'].join('');// 画像では画像のプレビューとファイル名の表示
+                    var $html = ['<div class="d-inline-block mr-1 mt-1"><img class="img-thumbnail" src="', e.target.result,'" title="', escape(theFile.name), '" style="height:100px;" /><div class="small text-color text-center">', escape(theFile.name),'</div></div>'].join('');// 画像では画像のプレビューとファイル名の表示
                 } else {
                     var $html = ['<div class="d-inline-block mr-1"><span class="small">', escape(theFile.name),'</span></div>'].join('');//画像以外はファイル名のみの表示
                 }
@@ -77,16 +89,16 @@ $('.reset').click(function(){
     </script>
 
     <div class="form-row">
-      <div class="form-group col-md-1">
-        <%= form.label :priority %>
-        <%= form.select :priority, [:高, :中, :低 ]  %>
+      <div class="form-group col-md-2">
+        <%= form.label :priority %>　<span class="badge badge-secondary">任意</span>
+        <%= form.select :priority, [:高, :中, :低 ], {}, { class: 'form-control' }  %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :address %>
-        <%= form.text_field :address, class: 'form-control' %>
+        <%= form.label :address %>　<span class="badge badge-secondary">任意</span>
+        <%= form.text_field :address, class: 'form-control', placeholder: "要望箇所の住所を入れてください" %>
       </div>
     </div>
 
@@ -101,13 +113,24 @@ $('.reset').click(function(){
         <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
       </div>
     </div>
+    ※GoogleMapへのマッピングに成功すると緯度・経度に値が入ります。
 
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>
       <div class="form-row">
         <div class="form-group col-md-3">
           <%= form.label :status %>
-          <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], include_blank: "選択してください", class: 'form-control' %>
+          <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], { include_blank: "選択してください" }, { class: 'form-control' } %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-2">
+          <%= matter.mail_status %>
+        </div>
+        <div class="form-group col-5">
+          <%= form.check_box :send_email ,{}, "true", "false" %>
+          <%= form.label '工事完了メールを送信する' %>
         </div>
       </div>
 
@@ -129,10 +152,11 @@ $('.reset').click(function(){
           <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
         </div>
       </div>
-    <% end %>
 
+    <% end %>
+    <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
       <div class="actions">
-        <%= form.submit %>
+        <%= form.submit '登録する',  class: 'btn btn-primary' %>
       </div>
   <% end %>
   <style>
@@ -142,8 +166,6 @@ $('.reset').click(function(){
     width: 600px;
   }
   </style>
-
-  <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
   </form>
 </div>
 

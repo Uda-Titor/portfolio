@@ -9,11 +9,13 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.text_area :content  %>
-    <%= form.label :content %>
+  <div class="form-row">
+    <div class="form-group">
+      <h5><span class="badge badge-warning">変更中</span></h5>
+      <%= form.text_area :content, class: 'form-control'  %>
+    </div>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit '変更する', class: 'btn btn-warning' %>
   </div>
 <% end %>

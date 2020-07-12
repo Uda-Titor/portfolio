@@ -1,6 +1,10 @@
 class User < ApplicationRecord
-  #管理者がいなくならないようにコールバック
+  validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :email, presence: true
+  # 管理者がいなくならないようにコールバック
   before_destroy :check_destroy
+  #画像アップロード
+  has_one_attached :icon
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -8,9 +12,11 @@ class User < ApplicationRecord
   has_many :matters, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
-  mount_uploader :user_image, ImageUploader
-  #user編集時にcurrent_passwordを入れないようにする処理関係
+  # 通知機能
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  
+  # user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)
     params.delete(:current_password)
 
@@ -25,8 +31,8 @@ class User < ApplicationRecord
   end
 
   private
-  def check_destroy
-    throw :abort if User.where(admin: true).count == 1 && self.admin == true
-  end
 
+  def check_destroy
+    throw :abort if User.where(admin: true).count == 1 && admin == true
+  end
 end

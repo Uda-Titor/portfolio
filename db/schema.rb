@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_072149) do
+ActiveRecord::Schema.define(version: 2020_07_11_094526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "matter_id"
-    t.text "content"
+    t.bigint "matter_id", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -47,21 +47,36 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "matter_id"
+    t.integer "user_id", null: false
+    t.integer "matter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "information", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "labellings", force: :cascade do |t|
+    t.bigint "matter_id", null: false
+    t.bigint "label_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label_id"], name: "index_labellings_on_label_id"
+    t.index ["matter_id"], name: "index_labellings_on_matter_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "matters", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
     t.string "address"
     t.float "latitude"
     t.float "longitude"
@@ -74,16 +89,34 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "latest_sender"
+    t.string "mail_status", default: "未送信"
+    t.boolean "send_email", default: false
     t.index ["user_id"], name: "index_matters_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "matter_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin_checked", default: false, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["matter_id"], name: "index_notifications_on_matter_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "name"
+    t.string "name", null: false
     t.text "user_image"
     t.string "phone_number"
-    t.string "user_address"
+    t.string "user_place"
     t.text "remark"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -103,5 +136,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_072149) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "matters"
   add_foreign_key "comments", "users"
+  add_foreign_key "labellings", "labels"
+  add_foreign_key "labellings", "matters"
   add_foreign_key "matters", "users"
 end
