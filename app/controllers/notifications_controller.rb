@@ -1,2 +1,2 @@
-class NotificationsController < ApplicationControllerz
+class NotificationsController < ApplicationController
 end
