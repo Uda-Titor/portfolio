@@ -214,7 +214,7 @@ $('.reset').click(function(){
               switch(error.code) {
                 case 1: // PERMISSION_DENIED
                   alert("位置情報の利用が許可されていません");
-                  var mapLatLng = new google.maps.LatLng(0, 0);
+                  var mapLatLng = new google.maps.LatLng(35.681236, 139.767125);
                   // マップオプションを変数に格納
                   var mapOptions = {
                     zoom : 15,          // 拡大倍率
@@ -253,7 +253,7 @@ $('.reset').click(function(){
         // Geolocation APIに対応していない
         } else {
           alert("この端末では位置情報が取得できません");
-          var mapLatLng = new google.maps.LatLng(0, 0);
+          var mapLatLng = new google.maps.LatLng(35.681236, 139.767125);
           // マップオプションを変数に格納
           var mapOptions = {
             zoom : 15,          // 拡大倍率
