@@ -4,7 +4,7 @@ lock '3.6.0'
 set :application, 'portfolio'
 set :repo_url, 'https://github.com/ryoheiudagawa1995/portfolio.git'
 
-set :bundle_gemfile,  "rails_code/Gemfile"
+set :bundle_gemfile,  "app/Gemfile"
 # deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, ENV['BRANCH'] || 'master'
 # deploy先のディレクトリ。
