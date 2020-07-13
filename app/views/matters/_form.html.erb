@@ -173,6 +173,7 @@ $('.reset').click(function(){
 <script>
   var map;
   // 現在地取得処理
+
       function initMap() {
         // Geolocation APIに対応している
         if (navigator.geolocation) {
@@ -213,6 +214,29 @@ $('.reset').click(function(){
               switch(error.code) {
                 case 1: // PERMISSION_DENIED
                   alert("位置情報の利用が許可されていません");
+                  var mapLatLng = new google.maps.LatLng(0, 0);
+                  // マップオプションを変数に格納
+                  var mapOptions = {
+                    zoom : 15,          // 拡大倍率
+                    center : mapLatLng  // 緯度・経度
+                  };
+                  // マップオブジェクト作成
+                  var map = new google.maps.Map(
+                    document.getElementById("map"), // マップを表示する要素
+                    mapOptions         // マップオプション
+                  );
+                  //　マップにマーカーを表示する
+                  var marker = new google.maps.Marker({
+                    map : map,
+                    draggable: true,            // 対象の地図オブジェクト
+                    position : mapLatLng   // 緯度・経度
+                  });
+                  //マーカーのドロップ（ドラッグ終了）時のイベント
+                  google.maps.event.addListener(marker, 'dragend', function(e) {
+                    //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+                    document.getElementById( "target_latitude" ).value = e.latLng.lat(),
+                    document.getElementById( "target_longitude" ).value = e.latLng.lng()
+                  });
                   break;
                 case 2: // POSITION_UNAVAILABLE
                   alert("現在位置が取得できませんでした");
@@ -229,6 +253,29 @@ $('.reset').click(function(){
         // Geolocation APIに対応していない
         } else {
           alert("この端末では位置情報が取得できません");
+          var mapLatLng = new google.maps.LatLng(0, 0);
+          // マップオプションを変数に格納
+          var mapOptions = {
+            zoom : 15,          // 拡大倍率
+            center : mapLatLng  // 緯度・経度
+          };
+          // マップオブジェクト作成
+          var map = new google.maps.Map(
+            document.getElementById("map"), // マップを表示する要素
+            mapOptions         // マップオプション
+          );
+          //　マップにマーカーを表示する
+          var marker = new google.maps.Marker({
+            map : map,
+            draggable: true,            // 対象の地図オブジェクト
+            position : mapLatLng   // 緯度・経度
+          });
+          //マーカーのドロップ（ドラッグ終了）時のイベント
+          google.maps.event.addListener(marker, 'dragend', function(e) {
+            //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+            document.getElementById( "target_latitude" ).value = e.latLng.lat(),
+            document.getElementById( "target_longitude" ).value = e.latLng.lng()
+          });
         }
       }
 google.maps.event.addDomListener(window, 'load', initMap);
