@@ -44,7 +44,7 @@
     <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab" >
       <h3>ラベルを追加できます</h3>
       <div id="labels_area">
-          <%= render partial: 'admin/labels/index', locals: { labels: @labels } %>
+        <%= render partial: 'admin/labels/index', locals: { labels: @labels } %>
       </div>
       <%= render partial: 'admin/labels/form', locals: { label: @label } %>
     </div>
@@ -76,7 +76,7 @@
    <% @matters.each do |matter| %>
     <% if matter.latitude.present? && matter.status != "工事完了" %>
         (function(){
-          var contentString = "<%= matter.title %>";
+          var contentString = '<%= link_to matter.title.truncate(8), matter  %>';
           var infowindow = new google.maps.InfoWindow({
               content: contentString
           });
@@ -84,7 +84,8 @@
           var marker = new google.maps.Marker({
               position:{lat: <%= matter.latitude %>, lng: <%= matter.longitude %>},
               map: map,
-              title: contentString
+              title: contentString,
+              visible: true
           });
 
           marker.addListener('click', function() {
