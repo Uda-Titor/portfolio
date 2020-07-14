@@ -7,23 +7,18 @@
 // }
 
 .top-image {
-  background-image: image-url(image-path('top_image2.jpg'));
+  background-image: image-url(image-path('top_page.jpg'));
   background-size: cover;
   background-position: top;
-  min-height: calc(100vh - 100px);
   width: 100%;
   position: relative;
-  ///navbar以下の余白を削除
-  margin-top: -100px;
-  ///footer上の余白を削除
-  margin-bottom: -100px;
 }
 
 .app-title {
   text-align: center;
   position: relative;
   font-size: 7rem;
-  padding-top: 25rem;
+  padding-top: 10rem;
   color: #fff;
   text-shadow:1px 1px 0 #000000,
               -1px -1px 0 #000000,
