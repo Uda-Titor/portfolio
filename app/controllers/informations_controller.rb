@@ -8,7 +8,7 @@ class InformationsController < ApplicationController
         @informations = Information.all
         format.js { render :index }
       else
-        format.html { redirect_to matters_path, notice: '投稿できませんでした...' }
+        format.html { redirect_to matters_path, alert: '投稿できませんでした...' }
       end
     end
   end
@@ -27,7 +27,7 @@ class InformationsController < ApplicationController
         flash.now[:notice] = 'お知らせが編集されました'
         format.js { render :index }
       else
-        flash.now[:notice] = 'お知らせの編集に失敗しました'
+        flash.now[:alert] = 'お知らせの編集に失敗しました'
         format.js { render :edit_error }
       end
     end
