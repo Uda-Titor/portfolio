@@ -23,7 +23,7 @@
       <div class="row mx-auto mb-3">
         <div class="col-md-12">
           <h3 class="text-center">案件の種類割合(全案件)</h3>
-          <%= pie_chart Label.group(:name).count %>
+          <%= pie_chart Labelling.joins(:label).group(:name).count %>
         </div>
       </div>
       <div class="row">
