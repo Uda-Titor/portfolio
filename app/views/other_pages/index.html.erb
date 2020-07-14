@@ -1,0 +1,17 @@
+<div class="top-image">
+  <h1 class="app-title">Fix Here!</h1>
+  <div class="copy">
+    <h3><strong>「ここを直して欲しいけど、役所まで行くのがめんどくさい」「住所がなく、場所を伝えるのが難しい」</strong></h3>
+    <div class="lead">
+      Fix Here は住民の方からの要望をより便利に役所に伝わるようにするコミュニケーションサービスです<br>
+        役所の方もデータがより簡単にまとめることができます<br>
+        　気軽に使ってみてください
+    </div>
+    <div class="topbtn">
+      <% unless current_user %>
+      <%= link_to "新規登録", new_user_registration_path, class: "topbtn__item" %>
+      <%= link_to "ログイン", new_user_session_path, class: "topbtn__item" %>
+    <% end %>
+    </div>
+  </div>
+</div>
