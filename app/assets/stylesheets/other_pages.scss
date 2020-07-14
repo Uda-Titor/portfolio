@@ -12,6 +12,8 @@
   background-position: top;
   width: 100%;
   position: relative;
+  margin-top: 0;
+  margin-bottom: -100px;
 }
 
 .app-title {
@@ -46,9 +48,6 @@
   text-align: center;
 
   .topbtn__item {
-    color: #ffffff;
-    background: rgba(0, 0, 0, .3);
-    border: 1px solid #fff;
     padding: 0.5rem 2rem;
     font-size: 1.5rem;
   }
