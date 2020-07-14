@@ -1,5 +1,7 @@
 class InformationsController < ApplicationController
   before_action :set_information, only: %i[edit update destroy]
+  before_action :authenticate_user!
+
 
   def create
     @information = Information.new(information_params)

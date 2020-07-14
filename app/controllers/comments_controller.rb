@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_matter, only: %i[create edit update]
+  before_action :authenticate_user!
+
   def create
     @matter = Matter.find(params[:matter_id])
     @comment = @matter.comments.build(comment_params)

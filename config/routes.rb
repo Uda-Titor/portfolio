@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'matters#index'
-  
+  root to: 'other_pages#index'
+
   get 'users/show' => 'users#show'
 
   resources :matters do

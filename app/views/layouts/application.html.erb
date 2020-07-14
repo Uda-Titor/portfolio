@@ -48,8 +48,8 @@
             </span>
           </button>
         <% else %>
-        <a class="nav-item nav-link" href="#"><li><%= link_to 'ログイン', new_user_session_path %></li></a>
-        <a class="nav-item nav-link" href="#"><li><%= link_to 'サインアップ', new_user_registration_path %></li></a>
+        <li><%= link_to 'ログイン', new_user_session_path, class: 'nav-link text-primary' %></li>
+        <li><%= link_to 'サインアップ', new_user_registration_path, class: 'nav-link text-primary' %></li>
         <% end %>
       </ul>
     </div>
