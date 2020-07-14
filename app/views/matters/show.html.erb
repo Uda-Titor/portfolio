@@ -5,7 +5,7 @@
         <%= link_to edit_matter_path(@matter) do %>
           <i class="fas fa-edit fa-2x"></i>
         <% end %>
-        <%= link_to @matter, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= link_to @matter, method: :delete, data: { confirm: '本当に削除しますか？' } do %>
           <i class="fas fa-trash-alt fa-2x"></i>
         <% end %>
       <% end %>

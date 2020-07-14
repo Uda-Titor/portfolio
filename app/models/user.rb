@@ -15,7 +15,7 @@ class User < ApplicationRecord
   # 通知機能
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-  
+
   # user編集時にcurrent_passwordを入れないようにする処理関係
   def update_without_current_password(params, *options)
     params.delete(:current_password)
@@ -28,6 +28,12 @@ class User < ApplicationRecord
     result = update_attributes(params, *options)
     clean_up_passwords
     result
+  end
+  #ゲストログイン
+  def self.guest
+    find_or_create_by!(name: 'ゲスト(管理者)', email: 'guest@example.com', admin: true) do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
   end
 
   private

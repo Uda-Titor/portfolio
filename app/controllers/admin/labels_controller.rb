@@ -6,7 +6,7 @@ class Admin::LabelsController < ApplicationController
         @labels = Label.all
         format.js { render :index }
       else
-        format.html { redirect_to matters_path, notice: '投稿できませんでした...' }
+        format.html { redirect_to matters_path, alert: '投稿できませんでした...' }
       end
     end
   end

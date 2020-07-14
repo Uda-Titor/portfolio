@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
         @matter.create_notification_comment!(current_user, @comment.id)
         format.js { render :index }
       else
-        format.html { redirect_to matter_path(@matter), notice: '投稿できませんでした...' }
+        format.html { redirect_to matter_path(@matter), alert: '投稿できませんでした...' }
       end
     end
   end
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
         flash.now[:notice] = 'コメントが編集されました'
         format.js { render :index }
       else
-        flash.now[:notice] = 'コメントの編集に失敗しました'
+        flash.now[:alert] = 'コメントの編集に失敗しました'
         format.js { render :edit_error }
       end
     end

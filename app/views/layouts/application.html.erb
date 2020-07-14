@@ -10,28 +10,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
-
+    <script>
+      $(function(){
+        $(".alert").fadeOut(5000);
+      });
+    </script>
   </head>
 <header>
   <nav class="navbar navbar-expand-md navbar-light bg-color">
-    <a class="navbar-brand"><i class="fas fa-drafting-compass fa-2x">FIX HERE!</i></a>
+    <a class="navbar-brand"><i class="fas fa-drafting-compass">FIX HERE!</i></a>
     <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <% if user_signed_in? %>
-          <a class="nav-item nav-link active" href="#"><li><%= link_to '案件一覧', matters_path %></li><span class="sr-only">(current)</span></a>
-          <% if current_user.admin? %>
-            <a class="nav-item nav-link "href="#" ><li><%= link_to 'ユーザ一覧', admin_users_path %></li></a>
-            <a class="nav-item nav-link"href="#" ><li><%= link_to '管理者画面', admin_matters_path %></li></a>
+      <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item"><%= link_to '案件一覧', matters_path, class: 'nav-link text-primary'  %></li><span class="sr-only">(current)</span>
+            <% if current_user.admin? %>
+              <li class="nav-item"><%= link_to 'ユーザ一覧', admin_users_path, class: 'nav-link text-primary' %></li>
+              <li class="nav-item"><%= link_to '管理者画面', admin_matters_path, class: 'nav-link text-primary' %></li>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <div class="navbar-nav ml-auto">
+      </ul>
+      <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <a class="nav-item nav-link" href="#"><li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li></a>
-          <a class="nav-item nav-link" href="#"><li><%= link_to current_user.name, users_show_path(current_user.id) %></li></a>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link text-primary' %></li>
+          <li><%= link_to current_user.name, users_show_path(current_user.id), class: 'nav-link text-primary' %></li>
           <button type="button" class="btn btn-primary nav-item nav-link float-color ml-3 text-white" data-toggle="modal" data-target="#exampleModal">
             通知
             <span class="badge badge-light">
@@ -47,7 +51,7 @@
         <a class="nav-item nav-link" href="#"><li><%= link_to 'ログイン', new_user_session_path %></li></a>
         <a class="nav-item nav-link" href="#"><li><%= link_to 'サインアップ', new_user_registration_path %></li></a>
         <% end %>
-      </div>
+      </ul>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -75,11 +79,19 @@
   </nav>
 </header>
   <body>
-    <% if notice %>
-    <p class="alert alert-notice"><%= notice %></p>
+  <% if notice %>
+    <div class="container mt-3">
+      <div class="alert alert-success">
+          <p><%= notice %></p>
+      </div>
+    </div>
   <% end %>
   <% if alert %>
-    <p class="alert alert-error"><%= alert %></p>
+  <div class="container mt-3">
+    <div class="alert alert-danger">
+        <p><%= alert %></p>
+    </div>
+  </div>
   <% end %>
     <%= yield %>
   </body>
