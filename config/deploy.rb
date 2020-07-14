@@ -16,6 +16,8 @@ set :keep_releases, 5
 # Rubyのバージョン
 set :rbenv_ruby, '2.6.5'
 set :rbenv_type, :system
+#whennever
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # 出力するログのレベル。エラーログを詳細に見たい場合は :debug に設定する。
 # 本番環境用のものであれば、 :info程度が普通。
 # ただし挙動をしっかり確認したいのであれば :debug に設定する。
