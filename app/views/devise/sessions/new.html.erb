@@ -27,9 +27,9 @@
             <%= f.submit t('.sign_in'), class: 'btn btn-primary', id: 'log_in' %>
           </div>
         <% end %>
-
         <%= render "devise/shared/links" %>
-
+        <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'btn btn-warning' %>
+        <p>ゲスト様には管理者として入っていただきます！</p>
       </div>
     </div>
   </div>

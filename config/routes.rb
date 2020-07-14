@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: 'matters#index'
-
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' } # current_passwordを入れず、編集する
+  
   get 'users/show' => 'users#show'
 
   resources :matters do
@@ -18,6 +17,15 @@ Rails.application.routes.draw do
     resources :matters, only: %i[index show edit update destroy]
     resources :labels
   end
+
+  #ゲストユーザー機能
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
+  }
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
