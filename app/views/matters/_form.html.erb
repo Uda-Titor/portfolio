@@ -15,14 +15,14 @@
   <form>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :title %>　<span class="badge badge-danger">必須</span>
+        <%= form.label :title, class:"font-weight-bold"%>　<span class="badge badge-danger">必須</span>
         <%= form.text_field :title, class: 'form-control', placeholder: "タイトルを入れてください" %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :content %>　<span class="badge badge-danger">必須</span>
+        <%= form.label :content, class:"font-weight-bold" %>　<span class="badge badge-danger">必須</span>
         <%= form.text_area :content, class: 'form-control', placeholder: "要望内容を書いてください" %>
       </div>
     </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="form-group">
-      <%= form.label :images %>　<span class="badge badge-secondary">任意</span>
+      <%= form.label :images, class:"font-weight-bold" %>　<span class="badge badge-secondary">任意</span>
       <div id="file" class="input-group">
         <div class="custom-file">
           <%= form.file_field :images, multiple: true, id: "customfile" , class: 'custom-file-input' %>
@@ -49,6 +49,7 @@
             <button type="button" class="btn btn-outline-secondary reset">取消</button>
         </div>
       </div>
+      <p>※複数の写真を添付できます！</p>
     </div>
 
     <script>
@@ -90,26 +91,26 @@ $('.reset').click(function(){
 
     <div class="form-row">
       <div class="form-group col-md-2">
-        <%= form.label :priority %>　<span class="badge badge-secondary">任意</span>
+        <%= form.label :priority, class:"font-weight-bold" %>　<span class="badge badge-secondary">任意</span>
         <%= form.select :priority, [:高, :中, :低 ], {}, { class: 'form-control' }  %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :address %>　<span class="badge badge-secondary">任意</span>
+        <%= form.label :address, class:"font-weight-bold" %>　<span class="badge badge-secondary">任意</span>
         <%= form.text_field :address, class: 'form-control', placeholder: "要望箇所の住所を入れてください" %>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-3">
-        <%= form.label :latitude %>
+        <%= form.label :latitude, class:"font-weight-bold" %>
         <%= form.text_field :latitude, id: "target_latitude", class: 'form-control' %>
       </div>
 
       <div class="form-group col-md-3">
-        <%= form.label :longitude %>
+        <%= form.label :longitude, class:"font-weight-bold" %>
         <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
       </div>
     </div>
@@ -119,7 +120,7 @@ $('.reset').click(function(){
     <p>--以下は管理者のみ記入可能です。--</p>
       <div class="form-row">
         <div class="form-group col-md-3">
-          <%= form.label :status %>
+          <%= form.label :status, class:"font-weight-bold" %>
           <%= form.select :status, [["未着手"],["工事中"],["工事完了"]], { include_blank: "選択してください" }, { class: 'form-control' } %>
         </div>
       </div>
@@ -136,19 +137,19 @@ $('.reset').click(function(){
 
       <div class="form-row">
         <div class="form-group col-md-4">
-          <%= form.label :start_time %>
+          <%= form.label :start_time, class:"font-weight-bold" %>
           <%= form.date_field :start_time, class: 'form-control' %>
         </div>
 
         <div class="form-group col-md-4">
-          <%= form.label :end_time %>
+          <%= form.label :end_time, class:"font-weight-bold" %>
           <%= form.date_field :end_time, class: 'form-control' %>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-10">
-          <%= form.label :remark %>
+          <%= form.label :remark, class:"font-weight-bold" %>
           <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
         </div>
       </div>
