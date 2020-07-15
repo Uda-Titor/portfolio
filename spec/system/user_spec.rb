@@ -82,7 +82,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         click_on 'ログアウト'
-        expect(current_path).to eq new_user_session_path
+        expect(page).to have_content '新規登録'
       end
       it 'ユーザログインするとき、メールを空欄にしたらエラーがでる' do
         visit new_user_session_path
@@ -98,7 +98,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on 'log_in'
         expect(page).to have_content 'メールまたはパスワードが違います。'
       end
-      it 'ログインして、ユーザの詳細を確認後、ユーザー名編集できる' do
+      it 'ログインして、ユーザの詳細を確認後、ユーザー名を編集できる' do
         visit new_user_session_path
         fill_in 'メール', with: 'user@example.com'
         fill_in 'パスワード', with: '00000000'
@@ -120,6 +120,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'password_confirmation', with: '09090909'
         click_on 'update'
         click_on 'ログアウト'
+        visit new_user_session_path
         fill_in 'メール', with: 'user@example.com'
         fill_in 'パスワード', with: '09090909'
         click_on 'log_in'
@@ -136,6 +137,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         sleep 0.5
         page.accept_confirm '本当によろしいですか?'
         sleep 0.5
+        visit new_user_session_path
         fill_in 'メール', with: 'user@example.com'
         fill_in 'パスワード', with: '09090909'
         click_on 'log_in'
@@ -190,7 +192,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         visit admin_users_path
-        expect(page).to have_content '勤務時間は平日の8時半〜１７時までです。'
+        expect(page).to have_content '気軽に使ってみてください'
       end
       it '一般ユーザーには管理者画面へのリンクが表示されない' do
         visit new_user_session_path
