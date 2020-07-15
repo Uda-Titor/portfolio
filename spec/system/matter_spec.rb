@@ -190,6 +190,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
         find('.fa-thumbs-up').click
         visit matters_path
         click_on 'ログアウト'
+        visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
@@ -203,6 +204,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
         fill_in 'comment', with: 'さすがです'
         click_on 'コメントする'
         click_on 'ログアウト'
+        visit new_user_session_path
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
