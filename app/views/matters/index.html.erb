@@ -39,7 +39,7 @@
         <thead>
           <tr>
             <th width="10%"></th>
-            <th width="30%" class="text-center">タイトル</th>
+            <th width="30%" class="text-center">要望内容</th>
             <th width="10%" class="text-center">進捗状況</th>
             <th width="15%" class="text-center"><%= sort_link(@search, :priority, '優先順位') %></th>
             <th width="15%" class="text-center"><%= sort_link(@search, :created_at, '作成日時') %></th>
@@ -57,7 +57,7 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image(matter.user.icon, 'default.png'), class: 'icon mx-auto', size: '48x48' %></td>
-                <td width="34%"><%= matter.title.truncate(18) %></td>
+                <td width="34%"><%= matter.content.truncate(18) %></td>
                 <td width="10%" class="text-center"><%= matter.status %></td>
                 <td id='priority_row' width="10%" class="text-center" ><%= matter.priority %></td>
                 <td width="15%" class="text-center"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
@@ -108,7 +108,7 @@ function initMap() {
  <% @matters.each do |matter| %>
   <% if matter.latitude.present? && matter.status != "工事完了" %>
       (function(){
-        var contentString = '<%= link_to matter.title.truncate(8), matter  %>';
+        var contentString = '<%= link_to matter.content.truncate(8), matter  %>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });

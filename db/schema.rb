@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_094526) do
+ActiveRecord::Schema.define(version: 2020_07_17_022647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,9 +75,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_094526) do
   end
 
   create_table "matters", force: :cascade do |t|
-    t.string "title", null: false
     t.text "content", null: false
-    t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.string "status", default: "未着手"

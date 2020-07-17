@@ -79,7 +79,7 @@
    <% @matters.each do |matter| %>
     <% if matter.latitude.present? && matter.status != "工事完了" %>
         (function(){
-          var contentString = '<%= link_to matter.title.truncate(8), matter  %>';
+          var contentString = '<%= link_to matter.content.truncate(8), matter  %>';
           var infowindow = new google.maps.InfoWindow({
               content: contentString
           });

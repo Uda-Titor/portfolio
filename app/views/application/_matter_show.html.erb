@@ -1,11 +1,3 @@
-
-  <div class="row m-0 py-4 show">
-    <div class="col-md-10">
-      <h5 class="font-weight-bold">タイトル</h5>
-      <h4><%= matter.title %></h4>
-    </div>
-  </div>
-
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-10">
       <h5 class="font-weight-bold">要望内容</h5>
@@ -58,15 +50,6 @@
         <h5 class="font-weight-bold">緊急度:<span><%= matter.priority %></span></h5>
     </div>
   </div>
-
-  <% if matter.address.present? %>
-    <div class="row m-0 py-4 show">
-      <div class="col-md-10">
-        <h5 class="font-weight-bold">要望箇所</h5>
-        <p><%= matter.address %></p>
-      </div>
-    </div>
-  <% end %>
 
   <% if matter.latitude.present? %>
     <div class="row m-0 py-4 show">
