@@ -1,11 +1,21 @@
 <div class="container mt-3">
-  <% if current_user.admin? %>
-    <h2>お知らせ
+  <h3 class="map text-center">案件箇所マップ</h3>
+  <p class="map text-center">※<span class="text-warning">未着手(黄色)</span>、<span class="text-danger">工事中(赤)</span>のみマッピングしています。</p>
+  <div class="row">
+      <div id="map" class="map"></div>
+  </div>
+  <div class="row">
+
+  </div>
+
+    <h2 class="mt-3">お知らせ
+      <% if current_user.admin? %>
         <button class="btn btn-secondary float-right information" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
           <i class="fas fa-plus"></i>
         </button>
+      <% end %>
     </h2>
-  <% end %>
+
   <div class="row rounded p-2" id = "information">
     <div id="informations_area">
         <%= render partial: 'informations/index', locals: { informations: @informations } %>
@@ -34,7 +44,7 @@
         <thead>
           <tr>
             <th width="10%"></th>
-            <th width="30%" class="text-center">タイトル</th>
+            <th width="30%" class="text-center">要望内容</th>
             <th width="10%" class="text-center">進捗状況</th>
             <th width="15%" class="text-center"><%= sort_link(@search, :priority, '優先順位') %></th>
             <th width="15%" class="text-center"><%= sort_link(@search, :created_at, '作成日時') %></th>
@@ -52,7 +62,7 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image(matter.user.icon, 'default.png'), class: 'icon mx-auto', size: '48x48' %></td>
-                <td width="34%"><%= matter.title.truncate(18) %></td>
+                <td width="34%"><%= matter.content.truncate(18) %></td>
                 <td width="10%" class="text-center"><%= matter.status %></td>
                 <td id='priority_row' width="10%" class="text-center" ><%= matter.priority %></td>
                 <td width="15%" class="text-center"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
@@ -78,7 +88,56 @@
     </div>
   </div>
 </div>
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 900px;
+}
+</style>
+<body>
+<!-- 地図を表示する div 要素（id="map"）-->
+<script>
+  var map;
+function initMap() {
+  var myLatlng = new google.maps.LatLng(35.893867,139.633587);
+ //インスタンスを作成
+ map = new google.maps.Map(document.getElementById('map'), {
+  //地図のオプション
+  //初期のズームレベル
+  zoom: 7,
+  //地図の中心点
+  center: myLatlng
+ });
+ //マーカーの初期プロパティを指定
+ <% @matters.each do |matter| %>
+  <% if matter.latitude.present? && matter.status != "工事完了" %>
+      (function(){
+        var contentString = '<%= link_to matter.content.truncate(8), matter  %>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
 
+        var marker = new google.maps.Marker({
+            position:{lat: <%= matter.latitude %>, lng: <%= matter.longitude %>},
+            map: map,
+            title: contentString,
+            <% if matter.status == '未着手' %>
+              icon: "https://maps.google.com/mapfiles/ms/micons/yellow-dot.png"
+            <% else %>
+              icon: "https://maps.google.com/mapfiles/ms/micons/red-dot.png"
+            <% end %>
+        });
 
+        infowindow.open(map, marker);
 
-<br>
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+       })();
+    <% end %>
+  <% end %>
+}
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['APIKEY']%>&callback=initMap" async defer></script>

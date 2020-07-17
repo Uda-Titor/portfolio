@@ -1,7 +1,7 @@
   <%= search_form_for search do |f| %>
     <div class="form-group">
-      <%= f.label :title_cont, 'タイトル' %>
-      <%= f.text_field :title_cont, class: 'form-control' %>
+      <%= f.label :content_cont, '要望内容' %>
+      <%= f.text_field :content_cont, class: 'form-control' %>
     </div>
 
     <div class="form-group">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :created_at_gteq, '日付' %>
+      <%= f.label :created_at_gteq, '日付(作成日時)' %>
       <%= f.date_field :created_at_gteq, class: 'form-control' %>
     </div>
 

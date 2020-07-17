@@ -15,13 +15,6 @@
   <form>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :title, class:"font-weight-bold"%>　<span class="badge badge-danger">必須</span>
-        <%= form.text_field :title, class: 'form-control', placeholder: "タイトルを入れてください" %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-10">
         <%= form.label :content, class:"font-weight-bold" %>　<span class="badge badge-danger">必須</span>
         <%= form.text_area :content, class: 'form-control', placeholder: "要望内容を書いてください" %>
       </div>
@@ -96,25 +89,28 @@ $('.reset').click(function(){
       </div>
     </div>
 
+    <p class="font-weight-bold">場所</p>
+    <p>※マーカーをドラッグして該当箇所に落としてください</p>
+    <div class="form-row">
+      <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+    </div>
+
+    <div class="form-row mt-1">
+      <div class="form-group col-md-3">
+        <%= form.text_field :latitude, id: "target_latitude", class: 'form-control', placeholder: "緯度" %>
+      </div>
+
+      <div class="form-group col-md-3">
+        <%= form.text_field :longitude, id: "target_longitude", class: 'form-control', placeholder: "経度" %>
+      </div>
+    </div>
+
     <div class="form-row">
       <div class="form-group col-md-10">
-        <%= form.label :address, class:"font-weight-bold" %>　<span class="badge badge-secondary">任意</span>
-        <%= form.text_field :address, class: 'form-control', placeholder: "要望箇所の住所を入れてください" %>
+        <%= form.label :remark, class:"font-weight-bold" %>
+        <%= form.text_area :remark, class: 'form-control', placeholder: "気軽にお書きください！" %>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <%= form.label :latitude, class:"font-weight-bold" %>
-        <%= form.text_field :latitude, id: "target_latitude", class: 'form-control' %>
-      </div>
-
-      <div class="form-group col-md-3">
-        <%= form.label :longitude, class:"font-weight-bold" %>
-        <%= form.text_field :longitude, id: "target_longitude", class: 'form-control' %>
-      </div>
-    </div>
-    ※GoogleMapへのマッピングに成功すると緯度・経度に値が入ります。
 
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>
@@ -146,16 +142,7 @@ $('.reset').click(function(){
           <%= form.date_field :end_time, class: 'form-control' %>
         </div>
       </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-10">
-          <%= form.label :remark, class:"font-weight-bold" %>
-          <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
-        </div>
-      </div>
-
     <% end %>
-    <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
       <div class="actions">
         <%= form.submit '登録する',  class: 'btn btn-primary' %>
       </div>

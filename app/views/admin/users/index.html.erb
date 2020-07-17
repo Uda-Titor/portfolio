@@ -5,7 +5,7 @@
           <div class="card-header bg-color p-0 border border-top-0">
             ユーザー情報
             <span class="float-right">
-              <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <%= link_to admin_user_path(user.id), method: :delete, data: { confirm: '削除してもよろしいですか?' } do %>
                 <i class="fas fa-trash-alt"></i>
               <% end %>
             </span>

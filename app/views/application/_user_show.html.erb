@@ -50,7 +50,7 @@
               <tr class="matter bg-secondary">
             <% end %>
                 <td width="7%"><%= image_tag set_image(matter.user.icon, 'default.png'), class: 'icon mx-auto', size: '48x48' %></td>
-                <td width="34%" ><%= matter.title.truncate(20) %></td>
+                <td width="34%" ><%= matter.content.truncate(20) %></td>
                 <td width="10%" class="text-center"><%= matter.status %></td>
                 <td id='priority_row' width="5%" class="text-center"><%= matter.priority %></td>
                 <td width="15%" class="text-center"><%= matter.created_at.strftime('%Y/%m/%d') %></td>
