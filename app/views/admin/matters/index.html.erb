@@ -38,8 +38,11 @@
       </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
-      <h3 class="map">案件箇所マップ</h3><span>※未着手、工事中のみマッピングしています。</span>
-      <div id="map"></div>
+      <h3 class="map text-center">案件箇所マップ</h3>
+      <p class="text-center"><span class="text-warning">未着手(黄色)</span>、<span class="text-danger">工事中(赤)</span>のみマッピングしています。</p>
+      <div class="row">
+        <div id="map"></div>
+      </div>
     </div>
     <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab" >
       <h3>ラベルを追加できます</h3>
@@ -55,7 +58,7 @@
   /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
   #map {
     height: 500px;
-    width: 750px;
+    width: 900px;
   }
   </style>
   <body>
@@ -68,7 +71,7 @@
    map = new google.maps.Map(document.getElementById('map'), {
     //地図のオプション
     //初期のズームレベル
-    zoom: 12,
+    zoom: 7,
     //地図の中心点
     center: myLatlng
    });
@@ -85,8 +88,14 @@
               position:{lat: <%= matter.latitude %>, lng: <%= matter.longitude %>},
               map: map,
               title: contentString,
-              visible: true
+              <% if matter.status == '未着手' %>
+                icon: "https://maps.google.com/mapfiles/ms/micons/yellow-dot.png"
+              <% else %>
+                icon: "https://maps.google.com/mapfiles/ms/micons/red-dot.png"
+              <% end %>
           });
+
+          infowindow.open(map, marker);
 
           marker.addListener('click', function() {
             infowindow.open(map, marker);
