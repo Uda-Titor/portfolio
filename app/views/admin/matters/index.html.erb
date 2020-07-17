@@ -14,7 +14,7 @@
 
         <% matters.each do |matter| %>
           <div class="font-weight-bold text-dark " >
-            <%= link_to matter.title.truncate(8), matter  %>
+            <%= link_to matter.content.truncate(8), matter  %>
           </div>
         <% end %>
       <% end %>

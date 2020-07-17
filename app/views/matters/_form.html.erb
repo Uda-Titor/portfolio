@@ -104,7 +104,13 @@ $('.reset').click(function(){
         <%= form.text_field :longitude, id: "target_longitude", class: 'form-control', placeholder: "経度" %>
       </div>
     </div>
-    ※GoogleMapへのマッピングに成功すると緯度・経度に値が入ります。
+
+    <div class="form-row">
+      <div class="form-group col-md-10">
+        <%= form.label :remark, class:"font-weight-bold" %>
+        <%= form.text_area :remark, class: 'form-control', placeholder: "気軽にお書きください！" %>
+      </div>
+    </div>
 
     <% if current_user.admin? %>
     <p>--以下は管理者のみ記入可能です。--</p>
@@ -136,14 +142,6 @@ $('.reset').click(function(){
           <%= form.date_field :end_time, class: 'form-control' %>
         </div>
       </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-10">
-          <%= form.label :remark, class:"font-weight-bold" %>
-          <%= form.text_area :remark, class: 'form-control', placeholder: "備考を書いてください" %>
-        </div>
-      </div>
-
     <% end %>
       <div class="actions">
         <%= form.submit '登録する',  class: 'btn btn-primary' %>
