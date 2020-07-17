@@ -25,19 +25,39 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to '案件一覧', matters_path, class: 'nav-link text-primary'  %></li><span class="sr-only">(current)</span>
+            <li class="nav-item">
+              <%= link_to  matters_path, class: 'nav-link text-primary'  do %>
+                <i class="fas fa-tasks"></i>案件一覧
+              <% end %>
+            </li><span class="sr-only">(current)</span>
             <% if current_user.admin? %>
-              <li class="nav-item"><%= link_to 'ユーザ一覧', admin_users_path, class: 'nav-link text-primary' %></li>
-              <li class="nav-item"><%= link_to '管理者画面', admin_matters_path, class: 'nav-link text-primary' %></li>
+              <li class="nav-item">
+                <%= link_to  admin_users_path, class: 'nav-link text-primary' do %>
+                  <i class="fas fa-users"></i>ユーザー覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_matters_path, class: 'nav-link text-primary' do %>
+                  <i class="fas fa-user-shield"></i>管理者画面
+                <% end %>
+              </li>
             <% end %>
           <% end %>
       </ul>
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link text-primary' %></li>
-          <li><%= link_to current_user.name, users_show_path(current_user.id), class: 'nav-link text-primary' %></li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-primary' do %>
+              <i class="fas fa-sign-out-alt"></i>ログアウト
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_show_path(current_user.id), class: 'nav-link text-primary' do %>
+              <i class="fas fa-user"></i><%= current_user.name %>
+            <% end %>
+          </li>
           <button type="button" class="btn btn-primary nav-item nav-link float-color ml-3 text-white" data-toggle="modal" data-target="#exampleModal">
-            通知
+            <i class="fas fa-bell"></i>通知
             <span class="badge badge-light">
               <% notifications = get_notifications.where.not(visitor_id: current_user.id) %>
                 <% if current_user.admin? %>
@@ -48,8 +68,16 @@
             </span>
           </button>
         <% else %>
-        <li><%= link_to 'ログイン', new_user_session_path, class: 'nav-link text-primary' %></li>
-        <li><%= link_to 'サインアップ', new_user_registration_path, class: 'nav-link text-primary' %></li>
+        <li>
+          <%= link_to  new_user_session_path, class: 'nav-link text-primary' do %>
+            <i class="fas fa-sign-in-alt"></i>ログイン
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path, class: 'nav-link text-primary' do %>
+            <i class="fas fa-user-plus"></i>新規登録
+          <% end %>
+        </li>
         <% end %>
       </ul>
     </div>
