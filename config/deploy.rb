@@ -16,6 +16,8 @@ set :keep_releases, 5
 # Rubyのバージョン
 set :rbenv_ruby, '2.6.5'
 set :rbenv_type, :system
+#master.key
+set :linked_files, fetch(:linked_files, []).push("config/master.key")
 #whennever
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 #master_key
