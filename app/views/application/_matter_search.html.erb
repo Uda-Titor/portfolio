@@ -1,12 +1,12 @@
   <%= search_form_for search do |f| %>
     <div class="form-group">
       <%= f.label :content_cont, '要望内容' %>
-      <%= f.text_field :content_cont, class: 'form-control' %>
+      <%= f.text_field :content_cont, class: 'form-control', placeholder: "キーワードを入れてください" %>
     </div>
 
     <div class="form-group">
       <%= f.label :user_name_cont, "ユーザー名" %>
-      <%= f.search_field :user_name_cont, class: 'form-control' %>
+      <%= f.search_field :user_name_cont, class: 'form-control', placeholder: "お名前を入れてください" %>
     </div>
 
     <div class="form-group">

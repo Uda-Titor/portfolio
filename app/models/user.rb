@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   # 管理者がいなくならないようにコールバック
   before_destroy :check_destroy
-  #画像アップロード
+  # 画像アップロード
   has_one_attached :icon
 
   devise :database_authenticatable, :registerable,
@@ -29,7 +29,8 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
-  #ゲストログイン
+
+  # ゲストログイン
   def self.guest
     find_or_create_by!(name: 'ゲスト(管理者)', email: 'guest@example.com', admin: true) do |user|
       user.password = SecureRandom.urlsafe_base64

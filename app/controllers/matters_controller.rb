@@ -3,7 +3,6 @@ class MattersController < ApplicationController
   before_action :user_confirmation, only: %i[edit update destroy]
   before_action :authenticate_user!
 
-
   def index
     @search = Matter.ransack(params[:q])
     @matters = @search.result.page(params[:page])

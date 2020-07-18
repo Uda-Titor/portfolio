@@ -17,3 +17,43 @@
  */
  @import "font-awesome-sprockets";
  @import "font-awesome";
+
+ .index {
+    border-top: solid 1px #EEEEEE;
+ }
+
+ // div.bg-color {
+ //   padding: 0.5rem;
+ //   border: solid 0.5rem white;
+ // }
+
+ .matter {
+   border-top: solid 0.1rem white;
+   border-bottom: solid 0.1rem white;
+ }
+
+ .navbar {
+   border-bottom: solid 1px #EEEEEE;
+ }
+
+ .form {
+   background-color: #D9E5FF;
+ }
+
+ .icon {
+   border-radius: 50%;
+ }
+
+ #wrapper {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+ }
+
+ footer {
+   margin-top: auto;
+ }
+
+ .footer {
+   border-top: solid 1px #EEEEEE;
+ }

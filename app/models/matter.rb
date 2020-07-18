@@ -15,14 +15,14 @@ class Matter < ApplicationRecord
   has_many :labellings, dependent: :destroy
   has_many :labels, through: :labellings
 
-  #バッヂ処理（メール送信)
+  # バッヂ処理（メール送信)
   def self.mail_check
     Matter.all.each do |matter|
-      if matter.send_email == true
-        matter.send_email = false
-        matter.mail_status = 'メール送信済み'
-        MatterMailer.matter_mail(matter).deliver
-      end
+      next unless matter.send_email == true
+
+      matter.send_email = false
+      matter.mail_status = 'メール送信済み'
+      MatterMailer.matter_mail(matter).deliver
     end
   end
 
