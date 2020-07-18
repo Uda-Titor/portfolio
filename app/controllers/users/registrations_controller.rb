@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def check_guest
     if resource.email == 'guest@example.com'
-      redirect_to matters, alert: 'ゲストユーザーの変更・削除はできません。'
+      redirect_to matters_path, alert: 'ゲストユーザーの変更・削除はできません。'
     end
   end
 
