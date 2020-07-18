@@ -6,6 +6,6 @@ class AddColumnMatters < ActiveRecord::Migration[5.2]
 
   def down
     add_column :matters, :mail_status, :string, default: '未送信'
-    add_column :matters, :send_email, :boolean, default: false 
+    add_column :matters, :send_email, :boolean, default: false
   end
 end

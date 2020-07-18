@@ -13,12 +13,10 @@ class Notification < ApplicationRecord
   belongs_to :visitor, class_name: 'User', foreign_key: 'visitor_id', optional: true
   belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
 
-  #バッチ処理
+  # バッチ処理
   def self.delete_check
     Notification.all.each do |notification|
-      if notification.checked == true && notification.admin_checked == true
-        notification.destroy
-      end
+      notification.destroy if notification.checked == true && notification.admin_checked == true
     end
   end
 end

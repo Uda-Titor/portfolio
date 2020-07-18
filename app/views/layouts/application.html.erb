@@ -16,10 +16,12 @@
       });
     </script>
   </head>
-  <body>
+  <body id="wrapper">
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-color">
-        <a class="navbar-brand"><i class="fas fa-drafting-compass">FIX HERE!</i></a>
+        <%= link_to root_path, class: 'navbar-brand text-primary' do %>
+          <i class="fas fa-drafting-compass">FIX HERE!</i>
+        <% end %>
         <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -124,11 +126,11 @@
       <% end %>
         <%= yield %>
     </main>
-      <footer>
-        <div class="text-center bg-color p-0 mt-5 border border-0">
-          <p class="m-0"><i class="fas fa-drafting-compass">FIX HERE!</i></p>
-          <p class="m-0"><small>©️Ryohei Udagawa</small></p>
-        </div>
-      </footer>
+    <footer>
+      <div class="text-center footer mt-5">
+        <p class="m-0 mt-3"><i class="fas fa-drafting-compass">FIX HERE!</i></p>
+        <p class="m-0"><small>©️Ryohei Udagawa</small></p>
+      </div>
+    </footer>
   </body>
 </html>

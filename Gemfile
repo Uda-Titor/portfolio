@@ -4,9 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 gem 'dotenv-rails'
-gem 'unicorn' # アプリケーションサーバのunicorn
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
-#バッヂ処理
+gem 'unicorn' # アプリケーションサーバのunicorn
+# バッヂ処理
 gem 'whenever', require: false
 # rubcop
 gem 'rubocop'
@@ -21,9 +21,9 @@ gem 'simple_calendar', '~> 2.0'
 gem 'chartkick'
 gem 'groupdate'
 # 画像アップロード
+gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'aws-sdk-s3', require: false
 # userログイン機能
 gem 'devise'
 gem 'devise-i18n'
@@ -74,10 +74,10 @@ group :development, :test do
   gem 'spring'
 
   gem 'capistrano', '3.6.0' # capistranoのツール一式
+  gem 'capistrano3-unicorn'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
-  gem 'capistrano3-unicorn'
 end
 
 group :development do
@@ -85,10 +85,10 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring'
+  gem 'bcrypt_pbkdf'
+  gem 'ed25519'
   gem 'letter_opener_web'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'ed25519'
-  gem 'bcrypt_pbkdf'
 end
 
 group :test do

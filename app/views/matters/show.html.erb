@@ -1,5 +1,6 @@
-<div class="container bg-color">
+<div class="container mt-3">
   <div class="row m-0">
+    <h2>案件詳細</h2>
     <div class="ml-auto ">
       <% if current_user == @matter.user || current_user.admin? %>
         <%= link_to edit_matter_path(@matter) do %>
@@ -11,18 +12,22 @@
       <% end %>
     </div>
   </div>
+</div>
 
+<div class="container mt-3 form p-2 rounded">
   <div class="row m-0 py-4 show m-0 py-4">
     <div class="col-md-10">
       <h5 class="font-weight-bold">要望内容</h5>
       <p><%= @matter.content %></p>
-      <% if @matter.labels %>
-        <p>
-          <% @matter.labels.each do |label| %>
-            <span class="badge badge-info" ><%= label.name %></span>
-          <% end %>
-        </p>
-      <% end %>
+      <h5>
+        <% if @matter.labels %>
+          <p>
+            <% @matter.labels.each do |label| %>
+              <span class="badge badge-info" ><%= label.name %></span>
+            <% end %>
+          </p>
+        <% end %>
+      </h5>
     </div>
   </div>
 

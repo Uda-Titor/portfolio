@@ -10,10 +10,11 @@
   background-image: image-url(image-path('top_page.jpg'));
   background-size: cover;
   background-position: top;
-  min-height: calc(100vh - 100px);
+  min-height: calc(90vh - 90px);
   width: 100%;
   position: relative;
   margin-top: 0;
+  margin-bottom: -100px;
 }
 
 .app-title {
