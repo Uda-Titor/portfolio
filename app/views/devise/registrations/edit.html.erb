@@ -1,6 +1,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-<div class="container bg-color mt-3">
+<div class="container bg-color mt-3 form p-2 rounded">
   <div class="row">
     <div class="col-md-8 mx-auto">
         <%= image_tag set_image(@user.icon, 'default.png'), class: 'icon' , id: :img_prev , size: '90x90' %>
