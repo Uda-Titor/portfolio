@@ -13,7 +13,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it '作成済みの案件が表示される' do
         new_matter = FactoryBot.create(:test1, user_id: 1)
         visit matters_path
-        expect(page).to have_content 'test1_title'
+        expect(page).to have_content 'test1_content'
       end
     end
     context '検索をした場合' do
@@ -22,23 +22,23 @@ RSpec.describe '案件周りの操作確認', type: :system do
         FactoryBot.create(:test2, user_id: 2)
         FactoryBot.create(:test3, user_id: 2)
       end
-      it 'タイトルで検索できる' do
+      it '要望内容で検索できる' do
         visit matters_path
-        fill_in 'タイトル', with: 'test1_title'
+        fill_in '要望内容', with: 'test1_content'
         click_on '検索する'
-        expect(page).not_to have_content 'test2_title'
+        expect(page).not_to have_content 'test2_content'
       end
       it 'ユーザー名で検索できる' do
         visit matters_path
         fill_in 'ユーザー名', with: 'user'
         click_on '検索する'
-        expect(page).not_to have_content 'test2_title'
+        expect(page).not_to have_content 'test2_content'
       end
       it 'ステータスで検索できる' do
         visit matters_path
         select '未着手', from: 'ステータス'
         click_on '検索する'
-        expect(page).not_to have_content 'test2_title'
+        expect(page).not_to have_content 'test2_content'
       end
       it '優先順位で並び替えができる' do
         visit matters_path
@@ -57,23 +57,13 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it 'データが保存される' do
         visit matters_path
         click_on 'new'
-        fill_in 'タイトル', with: 'test_title'
         fill_in '要望内容', with: 'test_content'
         click_button '登録する'
-        expect(page).to have_content 'test_title'
-      end
-      it 'タイトルを入れないとエラーが出る' do
-        visit matters_path
-        click_on 'new'
-        fill_in 'タイトル', with: ''
-        fill_in '要望内容', with: 'test_content'
-        click_button '登録する'
-        expect(page).to have_content 'タイトルを入力してください'
+        expect(page).to have_content 'test_content'
       end
       it '要望内容を入れないとエラーが出る' do
         visit matters_path
         click_on 'new'
-        fill_in 'タイトル', with: 'test_title'
         fill_in '要望内容', with: ''
         click_button '登録する'
         expect(page).to have_content '要望内容を入力してください'
@@ -85,15 +75,15 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it '該当案件の内容が表示されたページに遷移する' do
         FactoryBot.create(:test1, user_id: 1)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        expect(page).to have_content 'test1_title'
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
+        expect(page).to have_content 'test1_content'
       end
     end
     context '任意の案件詳細画面に遷移した場合' do
       it '該当案件にいいねができる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
         find('.fa-thumbs-up').click
         sleep 0.5
         expect(page).to have_css "div#favorites_buttons_#{matter.id} ", text: '1'
@@ -103,7 +93,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it '該当案件にいいねを外すことができる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
         find('.fa-thumbs-up').click
         find('.fa-thumbs-up').click
         sleep 0.5
@@ -114,8 +104,8 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it 'コメントができる' do
         FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        find(:xpath, '/html/body/div/span/button').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
+        find(:xpath, '//*[@id="wrapper"]/main/div[2]/span/button').click
         fill_in 'comment', with: 'さすがです'
         click_on 'コメントする'
         expect(page).to have_content 'さすがです'
@@ -125,8 +115,8 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it 'コメント後、コメントを削除できる' do
         FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        find(:xpath, '/html/body/div/span/button').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
+        find(:xpath, '//*[@id="wrapper"]/main/div[2]/span/button').click
         fill_in 'comment', with: 'さすがです'
         click_on 'コメントする'
         sleep 0.5
@@ -138,10 +128,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
         before do
           FactoryBot.create(:test1, user_id: 2)
           visit matters_path
-          find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        end
-        it '案件のタイトルが表示される' do
-          expect(page).to have_content 'test1_title'
+          find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
         end
         it '案件内容が表示される' do
           expect(page).to have_content 'test1_content'
@@ -149,17 +136,14 @@ RSpec.describe '案件周りの操作確認', type: :system do
         it '案件の進捗状況が表示される' do
           expect(page).to have_content '未着手'
         end
-        it '要望箇所が表示される' do
-          expect(page).to have_content 'test_address'
-        end
         it '緯度が表示される' do
-          expect(page).to have_content 'test_address'
-        end
-        it '経度が表示される' do
           expect(page).to have_content 111
         end
-        it '緊急度が表示される' do
+        it '経度が表示される' do
           expect(page).to have_content 112
+        end
+        it '緊急度が表示される' do
+          expect(page).to have_content '低'
         end
       end
     end
@@ -167,8 +151,8 @@ RSpec.describe '案件周りの操作確認', type: :system do
       it 'コメント後、コメントを編集できる' do
         matter = FactoryBot.create(:test1, user_id: 2)
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        find(:xpath, '/html/body/div/span/button').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
+        find(:xpath, '//*[@id="wrapper"]/main/div[2]/span/button').click
         fill_in 'comment', with: 'さすがです'
         click_on 'コメントする'
         find('.fa-edit').click
@@ -186,7 +170,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
       end
       it 'いいねをしたら、通知される' do
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
         find('.fa-thumbs-up').click
         visit matters_path
         click_on 'ログアウト'
@@ -199,8 +183,8 @@ RSpec.describe '案件周りの操作確認', type: :system do
       end
       it 'コメントをしたら、通知される' do
         visit matters_path
-        find(:xpath, '/html/body/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/a').click
-        find(:xpath, '/html/body/div/span/button').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div[6]/div[2]/table/tbody/tr/td[8]/a/i').click
+        find(:xpath, '//*[@id="wrapper"]/main/div[2]/span/button').click
         fill_in 'comment', with: 'さすがです'
         click_on 'コメントする'
         click_on 'ログアウト'

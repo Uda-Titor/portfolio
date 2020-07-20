@@ -1,11 +1,9 @@
 FactoryBot.define do
   factory :test1, class: Matter do
     id { 1 }
-    title { 'test1_title' }
     content { 'test1_content' }
     status { '未着手' }
     priority { 2 }
-    address { 'test_address' }
     latitude { 111 }
     longitude { 112 }
     remark { 'test_remark' }
@@ -15,7 +13,6 @@ FactoryBot.define do
   end
 
   factory :test2, class: Matter do
-    title { 'test2_title' }
     content { 'test2_content' }
     status { '工事中' }
     priority { 0 }
@@ -24,7 +21,6 @@ FactoryBot.define do
   end
 
   factory :test3, class: Matter do
-    title { 'test3_title' }
     content { 'test3_content' }
     status { '工事完了' }
     priority { 1 }
