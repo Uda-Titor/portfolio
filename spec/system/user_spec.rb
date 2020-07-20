@@ -104,7 +104,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         click_on 'user'
-        find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
+        find(:xpath, '//*[@id="edit_user"]').click
         fill_in 'user', with: 'sample'
         click_on 'update'
         expect(page).to have_content 'sample'
@@ -115,7 +115,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         click_on 'user'
-        find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
+        find(:xpath, '//*[@id="edit_user"]').click
         fill_in 'password', with: '09090909'
         fill_in 'password_confirmation', with: '09090909'
         click_on 'update'
@@ -132,7 +132,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
         click_on 'user'
-        find(:xpath, '/html/body/div[1]/div[1]/span/a/i').click
+        find(:xpath, '//*[@id="edit_user"]').click
         click_on 'user_delete'
         sleep 0.5
         page.accept_confirm '本当によろしいですか?'
@@ -213,8 +213,8 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        click_on 'ユーザ一覧'
-        find(:xpath, '/html/body/div/div/div[1]/div[1]/span[2]').click
+        find(:xpath, '//*[@id="navbarNavAltMarkup"]/ul[1]/li[2]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div/div[1]/div[1]/span[2]/a/i').click
         fill_in 'user', with: 'sample'
         click_on '更新する'
         expect(page).to have_content 'sample'
@@ -224,9 +224,9 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        click_on 'ユーザ一覧'
-        find(:xpath, '/html/body/div/div/div[1]/div[1]/span[1]/a').click
-        page.accept_confirm 'Are you sure?'
+        find(:xpath, '//*[@id="navbarNavAltMarkup"]/ul[1]/li[2]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div/div[1]/div[1]/span[1]/a/i').click
+        page.accept_confirm '削除してもよろしいですか?'
         sleep 0.5
         expect(User.count).to eq 1
       end
@@ -235,9 +235,9 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'メール', with: 'admin@example.com'
         fill_in 'パスワード', with: '00000000'
         click_on 'log_in'
-        click_on 'ユーザ一覧'
-        find(:xpath, '/html/body/div/div/div[2]/div[1]/span[1]/a').click
-        page.accept_confirm 'Are you sure?'
+        find(:xpath, '//*[@id="navbarNavAltMarkup"]/ul[1]/li[2]/a').click
+        find(:xpath, '//*[@id="wrapper"]/main/div/div/div[2]/div[1]/span[1]/a/i').click
+        page.accept_confirm '削除してもよろしいですか?'
         expect(User.count).to eq 2
       end
       it 'ログインして、管理者画面に移り、ラベルを作成できる' do
