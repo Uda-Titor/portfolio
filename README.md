@@ -1,15 +1,28 @@
-# README
+# FIX HERE!
+![スクリーンショット 2020-07-21 22 02 00](https://user-images.githubusercontent.com/63101140/88058041-e6296d00-cb9d-11ea-86ff-7381f5066d25.png)
 
-# ここ危険です
+
+#URL
+https://fixhere.work/
 
 ## 概要<br>
-修繕して欲しい箇所の位置、写真、修繕内容について連絡ができるサービス
+修繕して欲しい箇所の位置、写真、修繕内容について連絡ができるサービスです。
 
 ## コンセプト<br>
 住民からの道路の修繕箇所の要望について、グーグルマップを用いた位置図、写真、コメントを添付することができるサービス。
 
 ## バージョン<br>
-Ruby 2.6.5p114 rails5.2.4.3
+- Ruby 2.6.5p114
+- Rails5.2.4.3
+- Rspec
+- jquery
+- Bootstrap4
+- PostgreSQL
+- AWS(VPC, RDS, EC2, S3, ALB, Route53, ACM)
+
+#ER図
+
+#サービス構成図
 
 ## 機能一覧
 - ログイン
