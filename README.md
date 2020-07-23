@@ -1,6 +1,5 @@
-# README
-
 # FIX HERE!
+![ポートフォリオテーブル](https://user-images.githubusercontent.com/63101140/88241549-61d20980-ccc5-11ea-86a9-3da03558b97d.png)
 
 ## 概要<br>
 修繕して欲しい箇所の位置、写真、修繕内容について連絡ができるサービス
