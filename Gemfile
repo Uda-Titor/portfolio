@@ -72,6 +72,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
   gem 'spring'
+  #wheneverテスト
+  gem "shoulda-whenever"
+  gem "whenever-test"
 
   gem 'capistrano', '3.6.0' # capistranoのツール一式
   gem 'capistrano3-unicorn'

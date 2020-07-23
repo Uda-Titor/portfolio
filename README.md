@@ -1,4 +1,12 @@
 # FIX HERE!
+![スクリーンショット 2020-07-21 22 02 00](https://user-images.githubusercontent.com/63101140/88058041-e6296d00-cb9d-11ea-86ff-7381f5066d25.png)
+
+
+#URL
+https://fixhere.work/
+
+## 概要<br>
+修繕して欲しい箇所の位置、写真、修繕内容について連絡ができるサービスです。
 ![スクリーンショット 2020-07-21 22 02 00](https://user-images.githubusercontent.com/63101140/88241605-8d54f400-ccc5-11ea-9c52-cf570291554d.png)
 
 ## 概要<br>
@@ -36,6 +44,19 @@
 ### インタビュー<br>
 ポートフォリオを作成する前に、まずこのサービスについて、何が求められているか調査する必要があったので、ユーザーと管理者に調査を行いました。
 
+
+## バージョン<br>
+- Ruby 2.6.5p114
+- Rails5.2.4.3
+- Rspec
+- jquery
+- Bootstrap4
+- PostgreSQL
+- AWS(VPC, RDS, EC2, S3, ALB, Route53, ACM)
+
+#ER図
+
+#サービス構成図
 <ユーザー側の声>
 - できるだけ最低限の入力で済ませたい
 - 住所がない場所を相手に伝えることができたら便利

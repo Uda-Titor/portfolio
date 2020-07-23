@@ -88,8 +88,12 @@ $('.reset').click(function(){
         <%= form.select :priority, [:高, :中, :低 ], {}, { class: 'form-control' }  %>
       </div>
     </div>
+    <p class="m-0">参考：</p>
+    <p class="m-0">高：今日中にやって欲しい。</p>
+    <p class="m-0">中：１週間以内にやって欲しい。</p>
+    <p class="m-0">低：１ヶ月以内にやって欲しい。</p>
 
-    <p class="font-weight-bold">場所</p>
+    <p class="font-weight-bold mt-3">場所</p>
     <p>※マーカーをドラッグして該当箇所に落としてください</p>
     <div class="form-row">
       <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
