@@ -9,11 +9,7 @@ RSpec.describe Matter, type: :model do
       matter = FactoryBot.build(:test1, user_id: 1)
       expect(matter).to be_valid
     end
-    it 'titleがなければ無効' do
-      matter = FactoryBot.build(:test1, title: nil, user_id: 1)
-      expect(matter).not_to be_valid
-    end
-    it 'titleがなければ無効' do
+    it 'contentがなければ無効' do
       matter = FactoryBot.build(:test1, content: nil, user_id: 1)
       expect(matter).not_to be_valid
     end
