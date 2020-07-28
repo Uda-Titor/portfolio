@@ -16,6 +16,7 @@ https://fixhere.work/
 - Bootstrap4
 - PostgreSQL
 - AWS(VPC, RDS, EC2, S3, ALB, Route53, ACM)
+- Docker/docker-compose
 
 
 ## ER図<br>
