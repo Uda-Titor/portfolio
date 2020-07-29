@@ -3,13 +3,13 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  host: db
-  username: postgres
-  password: password
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
+  host: db
+  username: postgres
+  password: password
   database: portfolio_development
 
 test:
@@ -20,4 +20,5 @@ production:
   <<: *default
   database: portfolio_production
   username: portfolio
+  host: localhost
   password: <%= ENV['PORTFOLIO_DATABASE_PASSWORD'] %>
