@@ -20,5 +20,3 @@ production:
   <<: *default
   database: portfolio_production
   username: portfolio
-  host: localhost
-  password: password
