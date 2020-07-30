@@ -21,4 +21,4 @@ production:
   database: portfolio_production
   username: portfolio
   host: localhost
-  password: <%= ENV['PORTFOLIO_DATABASE_PASSWORD'] %>
+  password: password
