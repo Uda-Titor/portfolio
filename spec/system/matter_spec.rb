@@ -11,7 +11,7 @@ RSpec.describe '案件周りの操作確認', type: :system do
   describe '案件一覧画面' do
     context '案件を作成した場合' do
       it '作成済みの案件が表示される' do
-        new_matter = FactoryBot.create(:test1, user_id: 1)
+        FactoryBot.create(:test1, user_id: 1)
         visit matters_path
         expect(page).to have_content 'test1_content'
       end

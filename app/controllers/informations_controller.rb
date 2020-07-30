@@ -24,7 +24,7 @@ class InformationsController < ApplicationController
   def update
     respond_to do |format|
       if @information.update(information_params)
-        @informations = Information.all.order(created_at: :desc)
+        @informations = Information.latest
         flash.now[:notice] = 'お知らせが編集されました'
         format.js { render :index }
       else
@@ -38,7 +38,7 @@ class InformationsController < ApplicationController
     @information.destroy
     respond_to do |format|
       flash.now[:notice] = 'コメントが削除されました'
-      @informations = Information.all.order(created_at: :desc)
+      @informations = Information.latest
       format.js { render :index }
     end
   end
