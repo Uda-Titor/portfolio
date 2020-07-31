@@ -16,7 +16,6 @@ jobs:
           POSTGRES_USER: "postgres"
           POSTGRES_PASSWORD: "password"
           POSTGRES_DB: portfolio_test
-          port: 5432
     working_directory: ~/repo
 
     steps:
