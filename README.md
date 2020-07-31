@@ -23,8 +23,7 @@ https://fixhere.work/
 ![ポートフォリオテーブル](https://user-images.githubusercontent.com/63101140/88241842-53382200-ccc6-11ea-90de-9bae8d9b6ed5.png)
 
 ## サービス構成図<br>
-![構成図](https://user-images.githubusercontent.com/63101140/88686558-2e163a00-d132-11ea-8d73-3eee85fc86ba.png)
-
+![構成図 (1)](https://user-images.githubusercontent.com/63101140/88991231-16e67080-d31b-11ea-9970-3047129cc8a1.png)
 
 # 当サービスについて<br>
 ## 作成動機<br>
