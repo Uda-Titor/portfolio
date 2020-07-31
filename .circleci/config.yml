@@ -71,7 +71,7 @@ jobs:
       - run:
           name: DBの起動を待つ
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
-      - run: mv .circleci/database.ci.yml config/database.yml 
+      - run: mv config/database.ci.yml config/database.yml 
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       # Rspec
