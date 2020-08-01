@@ -7,7 +7,7 @@ default: &default
 
 test:
   <<: *default
-  host: db
+  host: 127.0.0.1
   username: postgres
   password: password
   database: portfolio_test
