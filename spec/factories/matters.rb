@@ -7,12 +7,13 @@ FactoryBot.define do
     latitude { 111 }
     longitude { 112 }
     remark { 'test_remark' }
-    start_time { '2020_07_15' }
+    start_time { '2020_07_14' }
     end_time { '2020_07_30' }
     user_id { 1 }
   end
 
   factory :test2, class: Matter do
+    id { 2 }
     content { 'test2_content' }
     status { '工事中' }
     priority { 0 }
@@ -21,6 +22,7 @@ FactoryBot.define do
   end
 
   factory :test3, class: Matter do
+    id { 3 }
     content { 'test3_content' }
     status { '工事完了' }
     priority { 1 }
