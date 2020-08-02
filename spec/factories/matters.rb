@@ -7,7 +7,7 @@ FactoryBot.define do
     latitude { 111 }
     longitude { 112 }
     remark { 'test_remark' }
-    start_time { '2020_07_15' }
+    start_time { '2020_07_14' }
     end_time { '2020_07_30' }
     user_id { 1 }
   end
