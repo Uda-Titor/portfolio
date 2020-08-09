@@ -1,0 +1,22 @@
+    <div class="container mt-5">
+      <h2>お問い合わせ一覧</h2>
+      <div class="row mx-a">
+        <% @conversations.each do |conversation| %>
+        <% if conversation.target_user(current_user).present? %>
+          <div class="card col-lg-4 m-3 p-0" style="max-width: 15rem;" >
+            <div class="card-header bg-color p-0 border border-top-0">
+              <%= conversation.target_user(current_user).name %>
+            </div>
+            <%= image_tag set_image(conversation.target_user(current_user).icon, 'default.png'), class: 'icon mx-auto', size: '90x90' %>
+            <div class="card-body mx-auto">
+              <h4 class="card-title">
+              <%= link_to conversation_messages_path(conversation) do %>
+                <i class="fas fa-phone"></i>会話
+              <% end %>
+              </h4>
+            </div>
+          </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>

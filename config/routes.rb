@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
   resources :notifications, only: :index
 
+  resources :conversations do
+    resources :messages
+  end
+
   namespace :admin do
     resources :users, only: %i[index show edit update destroy]
     resources :matters, only: %i[index show edit update destroy]
