@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_022647) do
+ActiveRecord::Schema.define(version: 2020_08_09_001257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2020_07_17_022647) do
     t.bigint "user_id"
     t.index ["matter_id"], name: "index_comments_on_matter_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id", "recipient_id"], name: "index_conversations_on_sender_id_and_recipient_id", unique: true
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -92,6 +102,17 @@ ActiveRecord::Schema.define(version: 2020_07_17_022647) do
     t.index ["user_id"], name: "index_matters_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
@@ -137,4 +158,6 @@ ActiveRecord::Schema.define(version: 2020_07_17_022647) do
   add_foreign_key "labellings", "labels"
   add_foreign_key "labellings", "matters"
   add_foreign_key "matters", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
 end
