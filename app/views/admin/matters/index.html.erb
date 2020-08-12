@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-6">
           <h3 class="text-center">年間の案件数</h3>
-          <%= column_chart Matter.group_by_day(:created_at, format: "%a").count %>
+          <%= line_chart Matter.group_by_day(:created_at).count %>
         </div>
       </div>
     </div>
