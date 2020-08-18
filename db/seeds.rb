@@ -1,4 +1,4 @@
-5.times do |n|
+5.times{
   name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
   password = "password"
@@ -8,7 +8,8 @@
                password_confirmation: password,
                admin: false
               )
-end
+}
+
 
 
 User.all.each do |user|
