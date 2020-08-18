@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'faker'
 gem 'dotenv-rails'
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 gem 'unicorn' # アプリケーションサーバのunicorn
