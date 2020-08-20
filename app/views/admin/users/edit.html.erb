@@ -61,6 +61,11 @@
           <%= form.text_area :remark, class: 'form-control' %>
         </div>
 
+        <div class="field form-group">
+          <%= form.check_box :admin ,{}, "true", "false" %>
+          <%= form.label '管理者登録' %>
+        </div>
+
         <div class="actions">
           <%= form.submit '更新する', class: 'btn btn-primary' %>
         </div>
