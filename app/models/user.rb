@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :email, presence: true
+  validates :phone_number, format: {with: /\A\d{10,11}\z/}
   # 管理者がいなくならないようにコールバック
   before_destroy :check_destroy
   # 画像アップロード
