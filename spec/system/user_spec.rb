@@ -162,7 +162,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_content 'user@example.com'
       end
       it 'ユーザーの電話番号が表示される' do
-        expect(page).to have_content '090-0909-0909'
+        expect(page).to have_content '09009090909'
       end
       it 'ユーザーの住所が表示される' do
         expect(page).to have_content 'ユーザーの住所'
