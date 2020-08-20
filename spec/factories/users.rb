@@ -4,7 +4,7 @@ FactoryBot.define do
     name { 'user' }
     email { 'user@example.com' }
     password { '00000000' }
-    phone_number { '090-0909-0909' }
+    phone_number { "09009090909" }
     user_place { 'ユーザーの住所' }
     remark { '備考です' }
   end
