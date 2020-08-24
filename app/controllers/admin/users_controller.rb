@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
   before_action :if_not_admin
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :check_guest, only: %i[update destroy]
+
 
   def index
     @users = User.all
@@ -36,5 +38,11 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :name, :user_image, :phone_number, :user_place, :remark, :icon, :admin)
+  end
+
+  def check_guest
+    if @user.email == 'guest@example.com'
+      redirect_to admin_users_path, alert: 'ゲストユーザーの変更・削除はできません。'
+    end
   end
 end
